@@ -1076,34 +1076,59 @@ class Ui_Widget(object):
 "")
         self.textEditLetter = QTextEdit(Widget)
         self.textEditLetter.setObjectName(u"textEditLetter")
-        self.textEditLetter.setGeometry(QRect(20, 70, 61, 51))
+        self.textEditLetter.setGeometry(QRect(20, 80, 111, 51))
+        font6 = QFont()
+        font6.setFamilies([u"Digital-7 Mono"])
+        font6.setBold(False)
+        font6.setItalic(False)
+        self.textEditLetter.setFont(font6)
         self.textEditLetter.setStyleSheet(u"QTextEdit {\n"
+"	border-bottom: 2px solid #000000;\n"
+"	border-left: 2px solid #000000;\n"
 "    border-bottom-left-radius: 8px;            \n"
 "    background-color: #a19f9f;     \n"
 "    padding: 5px;                          \n"
 "    color: #333333; \n"
-"	font: \"Digtal-7 Mono\"               \n"
+"	font: \"Digtal-7 Mono\" ;\n"
+"	font-size: 25px;             \n"
 "}")
         self.textEditLetter.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditLetter.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditLetter.setReadOnly(True)
         self.textEditNumber = QTextEdit(Widget)
         self.textEditNumber.setObjectName(u"textEditNumber")
-        self.textEditNumber.setGeometry(QRect(80, 70, 271, 51))
+        self.textEditNumber.setGeometry(QRect(130, 80, 221, 51))
+        font7 = QFont()
+        font7.setFamilies([u"Digtal-7 Mono"])
+        font7.setBold(False)
+        font7.setItalic(False)
+        self.textEditNumber.setFont(font7)
+        self.textEditNumber.setContextMenuPolicy(Qt.NoContextMenu)
+        self.textEditNumber.setLayoutDirection(Qt.RightToLeft)
         self.textEditNumber.setStyleSheet(u"QTextEdit {  \n"
+"	border-right: 2px solid #000000;\n"
+"	border-bottom: 2px solid #000000;\n"
 "	border-bottom-right-radius:8px;          \n"
 "    background-color: #a19f9f;     \n"
 "    padding: 5px;                          \n"
 "    color: #333333; \n"
-"	font: \"Digtal-7 Mono\"               \n"
+"	font-family: \"Digtal-7 Mono\";\n"
+"	font-size: 25px;          \n"
 "}")
+        self.textEditNumber.setInputMethodHints(Qt.ImhNone)
         self.textEditNumber.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditNumber.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditNumber.setReadOnly(True)
+        self.textEditNumber.setOverwriteMode(True)
+        self.textEditNumber.setAcceptRichText(False)
+        self.textEditNumber.setTextInteractionFlags(Qt.TextSelectableByKeyboard)
         self.textEditSetting = QTextEdit(Widget)
         self.textEditSetting.setObjectName(u"textEditSetting")
-        self.textEditSetting.setGeometry(QRect(20, 60, 331, 16))
+        self.textEditSetting.setGeometry(QRect(20, 70, 331, 16))
         self.textEditSetting.setStyleSheet(u"QTextEdit {  \n"
+"	border-top: 2px solid #000000;\n"
+"	border-left: 2px solid #000000;\n"
+"	border-right: 2px solid #000000;\n"
 "    border-top-right-radius: 8px;            \n"
 "	border-top-left-radius: 8px;\n"
 "    background-color: #a19f9f;     \n"
@@ -1276,7 +1301,7 @@ class Ui_Widget(object):
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'Digital-7 Mono'; font-size:25px; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.textEditNumber.setMarkdown("")
         self.textEditNumber.setHtml(QCoreApplication.translate("Widget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -1285,7 +1310,7 @@ class Ui_Widget(object):
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'Digtal-7 Mono'; font-size:25px; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.textEditSetting.setMarkdown("")
         self.textEditSetting.setHtml(QCoreApplication.translate("Widget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"

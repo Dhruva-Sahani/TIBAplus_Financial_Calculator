@@ -56,6 +56,15 @@ class Ui_Widget(object):
 "	font-size: 22px;\n"
 "	padding-bottom: 5px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.addition = QPushButton(Widget)
         self.addition.setObjectName(u"addition")
@@ -71,6 +80,14 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 22px;\n"
 "	padding-bottom: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
 "}\n"
 "")
         self.clearwork = QPushButton(Widget)
@@ -88,6 +105,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 13px\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.equalto = QPushButton(Widget)
         self.equalto.setObjectName(u"equalto")
@@ -104,6 +130,15 @@ class Ui_Widget(object):
 "	font-size: 22px;\n"
 "	padding-bottom: 5px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.subtraction = QPushButton(Widget)
         self.subtraction.setObjectName(u"subtraction")
@@ -119,6 +154,14 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 22px;\n"
 "	padding-bottom: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
 "}\n"
 "")
         self.multiplication = QPushButton(Widget)
@@ -136,6 +179,15 @@ class Ui_Widget(object):
 "	font-size: 22px;\n"
 "	padding-bottom: 5px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.division_2 = QPushButton(Widget)
         self.division_2.setObjectName(u"division_2")
@@ -150,6 +202,14 @@ class Ui_Widget(object):
 "    background-color: #474646;\n"
 "    color: white;\n"
 "	font-size: 13px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
 "}\n"
 "")
         self.division_3 = QPushButton(Widget)
@@ -166,6 +226,14 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 13px;\n"
 "}\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.log = QPushButton(Widget)
         self.log.setObjectName(u"log")
@@ -181,6 +249,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 13px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.division_5 = QPushButton(Widget)
         self.division_5.setObjectName(u"division_5")
@@ -196,6 +273,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 13px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.raisedto = QPushButton(Widget)
         self.raisedto.setObjectName(u"raisedto")
@@ -215,6 +301,15 @@ class Ui_Widget(object):
 "	font-size: 15px;	\n"
 "	padding-bottom: 5px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.reciprocal = QPushButton(Widget)
         self.reciprocal.setObjectName(u"reciprocal")
@@ -230,6 +325,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 16px;	\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.squareroot = QPushButton(Widget)
         self.squareroot.setObjectName(u"squareroot")
@@ -245,6 +349,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 16px;	\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.percent = QPushButton(Widget)
         self.percent.setObjectName(u"percent")
@@ -261,6 +374,15 @@ class Ui_Widget(object):
 "	font-size: 16px;	\n"
 "	font-weight: bold;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.square = QPushButton(Widget)
         self.square.setObjectName(u"square")
@@ -276,6 +398,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size: 16px;	\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.paranthesisleft = QPushButton(Widget)
         self.paranthesisleft.setObjectName(u"paranthesisleft")
@@ -292,6 +423,15 @@ class Ui_Widget(object):
 "	font-size: 18px;	\n"
 "	padding-bottom: 4px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.paranthesisright = QPushButton(Widget)
         self.paranthesisright.setObjectName(u"paranthesisright")
@@ -308,6 +448,15 @@ class Ui_Widget(object):
 "	font-size: 18px;	\n"
 "	padding-bottom: 4px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.presentvalue = QPushButton(Widget)
         self.presentvalue.setObjectName(u"presentvalue")
@@ -322,6 +471,14 @@ class Ui_Widget(object):
 "    background-color: #EFECEC;\n"
 "    color: black;\n"
 "	font-size: 14px\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#c1bbbb;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #a8a2a2;\n"
 "}")
         self.period = QPushButton(Widget)
         self.period.setObjectName(u"period")
@@ -336,7 +493,16 @@ class Ui_Widget(object):
 "    background-color: #EFECEC;\n"
 "    color: black;\n"
 "	font-size: 14px\n"
-"}")
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#c1bbbb;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #a8a2a2;\n"
+"}\n"
+"")
         self.payment = QPushButton(Widget)
         self.payment.setObjectName(u"payment")
         self.payment.setGeometry(QRect(230, 300, 50, 25))
@@ -350,6 +516,14 @@ class Ui_Widget(object):
 "    background-color: #EFECEC;\n"
 "    color: black;\n"
 "	font-size: 14px\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#c1bbbb;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #a8a2a2;\n"
 "}")
         self.interestrate = QPushButton(Widget)
         self.interestrate.setObjectName(u"interestrate")
@@ -364,6 +538,14 @@ class Ui_Widget(object):
 "    background-color: #EFECEC;\n"
 "    color: black;\n"
 "	font-size: 14px\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#c1bbbb;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #a8a2a2;\n"
 "}")
         self.futurevalue = QPushButton(Widget)
         self.futurevalue.setObjectName(u"futurevalue")
@@ -378,6 +560,14 @@ class Ui_Widget(object):
 "    background-color: #EFECEC;\n"
 "    color: black;\n"
 "	font-size: 14px\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#c1bbbb;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #a8a2a2;\n"
 "}")
         self.cashflow = QPushButton(Widget)
         self.cashflow.setObjectName(u"cashflow")
@@ -393,6 +583,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size:14px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.next = QPushButton(Widget)
         self.next.setObjectName(u"next")
@@ -409,6 +608,15 @@ class Ui_Widget(object):
 "	font-size:20px;\n"
 "	padding-bottom:4px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.internalratereturn = QPushButton(Widget)
         self.internalratereturn.setObjectName(u"internalratereturn")
@@ -424,6 +632,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size:14px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.second = QPushButton(Widget)
         self.second.setObjectName(u"second")
@@ -439,6 +656,17 @@ class Ui_Widget(object):
 "    color: black;\n"
 "	font-size:14px;\n"
 "}\n"
+"QPushButton:hover {\n"
+"	background-color:#ddd640;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #beb836;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
 "")
         self.netpresentvalue = QPushButton(Widget)
         self.netpresentvalue.setObjectName(u"netpresentvalue")
@@ -454,6 +682,15 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size:14px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.down = QPushButton(Widget)
         self.down.setObjectName(u"down")
@@ -470,6 +707,15 @@ class Ui_Widget(object):
 "	font-size: 20px;\n"
 "	padding-bottom:4px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.up = QPushButton(Widget)
         self.up.setObjectName(u"up")
@@ -486,6 +732,15 @@ class Ui_Widget(object):
 "	font-size: 20px;\n"
 "	padding-bottom:4px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
+"\n"
 "")
         self.enter = QPushButton(Widget)
         self.enter.setObjectName(u"enter")
@@ -500,6 +755,14 @@ class Ui_Widget(object):
 "    background-color: #474646;\n"
 "    color: white;\n"
 "	font-size:14px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
 "}\n"
 "")
         self.compute = QPushButton(Widget)
@@ -516,6 +779,14 @@ class Ui_Widget(object):
 "    color: white;\n"
 "	font-size:14px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
+"}\n"
 "")
         self.swtich = QPushButton(Widget)
         self.swtich.setObjectName(u"swtich")
@@ -530,6 +801,14 @@ class Ui_Widget(object):
 "    background-color: #474646;\n"
 "    color: white;\n"
 "	font-size: 13px\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #706f6f;\n"
 "}\n"
 "")
         self.label = QLabel(Widget)
@@ -896,6 +1175,14 @@ class Ui_Widget(object):
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
+"}\n"
 "")
         self.number1 = QPushButton(Widget)
         self.number1.setObjectName(u"number1")
@@ -912,6 +1199,14 @@ class Ui_Widget(object):
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
+"}\n"
 "")
         self.number9 = QPushButton(Widget)
         self.number9.setObjectName(u"number9")
@@ -927,6 +1222,14 @@ class Ui_Widget(object):
 "    color: white;\n"
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
 "}\n"
 "")
         self.number9.setAutoRepeat(False)
@@ -945,11 +1248,20 @@ class Ui_Widget(object):
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
+"}\n"
 "")
         self.number8 = QPushButton(Widget)
         self.number8.setObjectName(u"number8")
         self.number8.setGeometry(QRect(160, 450, 51, 41))
         self.number8.setFont(font1)
+        self.number8.setMouseTracking(True)
         self.number8.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
@@ -961,7 +1273,14 @@ class Ui_Widget(object):
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
 "}\n"
-"")
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
+"}")
         self.negative = QPushButton(Widget)
         self.negative.setObjectName(u"negative")
         self.negative.setGeometry(QRect(230, 624, 51, 41))
@@ -977,11 +1296,20 @@ class Ui_Widget(object):
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
+"}\n"
 "")
         self.number7 = QPushButton(Widget)
         self.number7.setObjectName(u"number7")
         self.number7.setGeometry(QRect(90, 450, 51, 41))
         self.number7.setFont(font1)
+        self.number7.setMouseTracking(True)
         self.number7.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
@@ -993,7 +1321,14 @@ class Ui_Widget(object):
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
 "}\n"
-"")
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
+"}")
         self.number5 = QPushButton(Widget)
         self.number5.setObjectName(u"number5")
         self.number5.setGeometry(QRect(160, 508, 51, 41))
@@ -1008,6 +1343,14 @@ class Ui_Widget(object):
 "    color: white;\n"
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
 "}\n"
 "")
         self.point = QPushButton(Widget)
@@ -1025,6 +1368,14 @@ class Ui_Widget(object):
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
+"}\n"
 "")
         self.number6 = QPushButton(Widget)
         self.number6.setObjectName(u"number6")
@@ -1040,6 +1391,14 @@ class Ui_Widget(object):
 "    color: white;\n"
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
 "}\n"
 "")
         self.number2 = QPushButton(Widget)
@@ -1057,6 +1416,14 @@ class Ui_Widget(object):
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
 "}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
+"}\n"
 "")
         self.number4 = QPushButton(Widget)
         self.number4.setObjectName(u"number4")
@@ -1072,6 +1439,14 @@ class Ui_Widget(object):
 "    color: white;\n"
 "    padding: 5px;\n"
 "	font-size: 18px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color:#8a8888;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #6e6d6d;\n"
 "}\n"
 "")
         self.textEditLetter = QTextEdit(Widget)
@@ -1098,11 +1473,7 @@ class Ui_Widget(object):
         self.textEditNumber = QTextEdit(Widget)
         self.textEditNumber.setObjectName(u"textEditNumber")
         self.textEditNumber.setGeometry(QRect(130, 80, 221, 51))
-        font7 = QFont()
-        font7.setFamilies([u"Digtal-7 Mono"])
-        font7.setBold(False)
-        font7.setItalic(False)
-        self.textEditNumber.setFont(font7)
+        self.textEditNumber.setFont(font6)
         self.textEditNumber.setContextMenuPolicy(Qt.NoContextMenu)
         self.textEditNumber.setLayoutDirection(Qt.RightToLeft)
         self.textEditNumber.setStyleSheet(u"QTextEdit {  \n"
@@ -1112,7 +1483,6 @@ class Ui_Widget(object):
 "    background-color: #a19f9f;     \n"
 "    padding: 5px;                          \n"
 "    color: #333333; \n"
-"	font-family: \"Digtal-7 Mono\";\n"
 "	font-size: 25px;          \n"
 "}")
         self.textEditNumber.setInputMethodHints(Qt.ImhNone)
@@ -1125,6 +1495,7 @@ class Ui_Widget(object):
         self.textEditSetting = QTextEdit(Widget)
         self.textEditSetting.setObjectName(u"textEditSetting")
         self.textEditSetting.setGeometry(QRect(20, 70, 331, 16))
+        self.textEditSetting.setFont(font6)
         self.textEditSetting.setStyleSheet(u"QTextEdit {  \n"
 "	border-top: 2px solid #000000;\n"
 "	border-left: 2px solid #000000;\n"
@@ -1132,9 +1503,9 @@ class Ui_Widget(object):
 "    border-top-right-radius: 8px;            \n"
 "	border-top-left-radius: 8px;\n"
 "    background-color: #a19f9f;     \n"
-"    padding: 5px;                          \n"
+"    padding: 2px;                          \n"
 "    color: #333333; \n"
-"	font: \"Digtal-7 Mono\"               \n"
+"	font-size: 10px;         \n"
 "}")
         self.textEditSetting.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditSetting.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -1310,8 +1681,8 @@ class Ui_Widget(object):
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Digtal-7 Mono'; font-size:25px; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
+"</style></head><body style=\" font-family:'Digital-7 Mono'; font-size:25px; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Digtal-7 Mono';\"><br /></p></body></html>", None))
         self.textEditSetting.setMarkdown("")
         self.textEditSetting.setHtml(QCoreApplication.translate("Widget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -1319,7 +1690,7 @@ class Ui_Widget(object):
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'Digital-7 Mono'; font-size:10px; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
     # retranslateUi
 

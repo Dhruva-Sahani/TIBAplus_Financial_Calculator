@@ -16,7 +16,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QLabel, QPushButton, QSizePolicy,
-    QTextEdit, QWidget)
+    QTextEdit, QToolButton, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -189,11 +189,11 @@ class Ui_Widget(object):
 "}\n"
 "\n"
 "")
-        self.division_2 = QPushButton(Widget)
-        self.division_2.setObjectName(u"division_2")
-        self.division_2.setGeometry(QRect(20, 550, 50, 25))
-        self.division_2.setFont(font1)
-        self.division_2.setStyleSheet(u"QPushButton {\n"
+        self.recall = QPushButton(Widget)
+        self.recall.setObjectName(u"recall")
+        self.recall.setGeometry(QRect(20, 550, 50, 25))
+        self.recall.setFont(font1)
+        self.recall.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -212,11 +212,11 @@ class Ui_Widget(object):
 "	background-color: #706f6f;\n"
 "}\n"
 "")
-        self.division_3 = QPushButton(Widget)
-        self.division_3.setObjectName(u"division_3")
-        self.division_3.setGeometry(QRect(20, 500, 50, 25))
-        self.division_3.setFont(font1)
-        self.division_3.setStyleSheet(u"QPushButton {\n"
+        self.store = QPushButton(Widget)
+        self.store.setObjectName(u"store")
+        self.store.setGeometry(QRect(20, 500, 50, 25))
+        self.store.setFont(font1)
+        self.store.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -259,11 +259,11 @@ class Ui_Widget(object):
 "}\n"
 "\n"
 "")
-        self.division_5 = QPushButton(Widget)
-        self.division_5.setObjectName(u"division_5")
-        self.division_5.setGeometry(QRect(20, 400, 50, 25))
-        self.division_5.setFont(font1)
-        self.division_5.setStyleSheet(u"QPushButton {\n"
+        self.inverse = QPushButton(Widget)
+        self.inverse.setObjectName(u"inverse")
+        self.inverse.setGeometry(QRect(20, 400, 50, 25))
+        self.inverse.setFont(font1)
+        self.inverse.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -813,7 +813,7 @@ class Ui_Widget(object):
 "")
         self.label = QLabel(Widget)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(100, 30, 171, 20))
+        self.label.setGeometry(QRect(100, 20, 171, 20))
         font3 = QFont()
         font3.setFamilies([u"Sitka Display"])
         font3.setPointSize(15)
@@ -1451,36 +1451,39 @@ class Ui_Widget(object):
 "")
         self.textEditLetter = QTextEdit(Widget)
         self.textEditLetter.setObjectName(u"textEditLetter")
-        self.textEditLetter.setGeometry(QRect(20, 80, 111, 51))
+        self.textEditLetter.setGeometry(QRect(20, 80, 111, 41))
         font6 = QFont()
         font6.setFamilies([u"Digital-7 Mono"])
         font6.setBold(False)
         font6.setItalic(False)
         self.textEditLetter.setFont(font6)
         self.textEditLetter.setStyleSheet(u"QTextEdit {\n"
-"	border-bottom: 2px solid #000000;\n"
-"	border-left: 2px solid #000000;\n"
+"	border-bottom: 2px solid #f3f3e8;\n"
+"	border-left: 2px solid #f3f3e8;\n"
 "    border-bottom-left-radius: 8px;            \n"
-"    background-color: #a19f9f;     \n"
+"    background-color: #7e8c74;     \n"
 "    padding: 5px;                          \n"
 "    color: #333333; \n"
 "	font: \"Digtal-7 Mono\" ;\n"
 "	font-size: 25px;             \n"
 "}")
+        self.textEditLetter.setInputMethodHints(Qt.ImhNone)
         self.textEditLetter.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditLetter.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditLetter.setReadOnly(True)
+        self.textEditLetter.setTextInteractionFlags(Qt.NoTextInteraction)
         self.textEditNumber = QTextEdit(Widget)
         self.textEditNumber.setObjectName(u"textEditNumber")
-        self.textEditNumber.setGeometry(QRect(130, 80, 221, 51))
+        self.textEditNumber.setGeometry(QRect(130, 80, 221, 41))
         self.textEditNumber.setFont(font6)
-        self.textEditNumber.setContextMenuPolicy(Qt.NoContextMenu)
+        self.textEditNumber.setMouseTracking(True)
+        self.textEditNumber.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.textEditNumber.setLayoutDirection(Qt.RightToLeft)
         self.textEditNumber.setStyleSheet(u"QTextEdit {  \n"
-"	border-right: 2px solid #000000;\n"
-"	border-bottom: 2px solid #000000;\n"
+"	border-right: 2px solid #f3f3e8;\n"
+"	border-bottom: 2px solid #f3f3e8;\n"
 "	border-bottom-right-radius:8px;          \n"
-"    background-color: #a19f9f;     \n"
+"    background-color: #7e8c74;     \n"
 "    padding: 5px;                          \n"
 "    color: #333333; \n"
 "	font-size: 25px;          \n"
@@ -1489,27 +1492,48 @@ class Ui_Widget(object):
         self.textEditNumber.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditNumber.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditNumber.setReadOnly(True)
-        self.textEditNumber.setOverwriteMode(True)
-        self.textEditNumber.setAcceptRichText(False)
-        self.textEditNumber.setTextInteractionFlags(Qt.TextSelectableByKeyboard)
+        self.textEditNumber.setOverwriteMode(False)
+        self.textEditNumber.setAcceptRichText(True)
+        self.textEditNumber.setTextInteractionFlags(Qt.NoTextInteraction)
         self.textEditSetting = QTextEdit(Widget)
         self.textEditSetting.setObjectName(u"textEditSetting")
-        self.textEditSetting.setGeometry(QRect(20, 70, 331, 16))
+        self.textEditSetting.setGeometry(QRect(20, 60, 331, 21))
         self.textEditSetting.setFont(font6)
+        self.textEditSetting.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.textEditSetting.setStyleSheet(u"QTextEdit {  \n"
-"	border-top: 2px solid #000000;\n"
-"	border-left: 2px solid #000000;\n"
-"	border-right: 2px solid #000000;\n"
+"	border-top: 2px solid #f3f3e8;\n"
+"	border-left: 2px solid #f3f3e8;\n"
+"	border-right: 2px solid #f3f3e8;\n"
 "    border-top-right-radius: 8px;            \n"
 "	border-top-left-radius: 8px;\n"
-"    background-color: #a19f9f;     \n"
+"    background-color: #7e8c74;     \n"
 "    padding: 2px;                          \n"
 "    color: #333333; \n"
 "	font-size: 10px;         \n"
 "}")
+        self.textEditSetting.setInputMethodHints(Qt.ImhNone)
         self.textEditSetting.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditSetting.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.textEditSetting.setReadOnly(True)
+        self.textEditSetting.setTextInteractionFlags(Qt.NoTextInteraction)
+        self.toolButton = QToolButton(Widget)
+        self.toolButton.setObjectName(u"toolButton")
+        self.toolButton.setGeometry(QRect(10, 10, 31, 27))
+        self.toolButton.setStyleSheet(u"QToolButton{\n"
+"background-color: #474646;\n"
+"font-size: 13px\n"
+"}\n"
+"\n"
+"QToolButton:hover{\n"
+"background-color:#615f5f;\n"
+"}\n"
+"\n"
+"QToolButton:pressed{\n"
+"background-color: #706f6f;\n"
+"}\n"
+"")
+        self.toolButton.setPopupMode(QToolButton.InstantPopup)
+        self.toolButton.setToolButtonStyle(Qt.ToolButtonFollowStyle)
 
         self.retranslateUi(Widget)
 
@@ -1528,9 +1552,12 @@ class Ui_Widget(object):
 #endif // QT_CONFIG(shortcut)
         self.clearwork.setText(QCoreApplication.translate("Widget", u"CE|C", None))
 #if QT_CONFIG(shortcut)
-        self.clearwork.setShortcut(QCoreApplication.translate("Widget", u"C", None))
+        self.clearwork.setShortcut(QCoreApplication.translate("Widget", u"Space", None))
 #endif // QT_CONFIG(shortcut)
         self.equalto.setText(QCoreApplication.translate("Widget", u"=", None))
+#if QT_CONFIG(shortcut)
+        self.equalto.setShortcut(QCoreApplication.translate("Widget", u"Return", None))
+#endif // QT_CONFIG(shortcut)
         self.subtraction.setText(QCoreApplication.translate("Widget", u"-", None))
 #if QT_CONFIG(shortcut)
         self.subtraction.setShortcut(QCoreApplication.translate("Widget", u"-", None))
@@ -1539,11 +1566,14 @@ class Ui_Widget(object):
 #if QT_CONFIG(shortcut)
         self.multiplication.setShortcut(QCoreApplication.translate("Widget", u"*", None))
 #endif // QT_CONFIG(shortcut)
-        self.division_2.setText(QCoreApplication.translate("Widget", u"RCL", None))
-        self.division_3.setText(QCoreApplication.translate("Widget", u"STO", None))
+        self.recall.setText(QCoreApplication.translate("Widget", u"RCL", None))
+        self.store.setText(QCoreApplication.translate("Widget", u"STO", None))
         self.log.setText(QCoreApplication.translate("Widget", u"LN", None))
-        self.division_5.setText(QCoreApplication.translate("Widget", u"INV", None))
+        self.inverse.setText(QCoreApplication.translate("Widget", u"INV", None))
         self.raisedto.setText(QCoreApplication.translate("Widget", u"y\u1d61", None))
+#if QT_CONFIG(shortcut)
+        self.raisedto.setShortcut(QCoreApplication.translate("Widget", u"^", None))
+#endif // QT_CONFIG(shortcut)
         self.reciprocal.setText(QCoreApplication.translate("Widget", u"1/x", None))
         self.squareroot.setText(QCoreApplication.translate("Widget", u"\u221ax", None))
         self.percent.setText(QCoreApplication.translate("Widget", u"%", None))
@@ -1564,10 +1594,13 @@ class Ui_Widget(object):
         self.cashflow.setText(QCoreApplication.translate("Widget", u"CF", None))
         self.next.setText(QCoreApplication.translate("Widget", u"\u2192", None))
 #if QT_CONFIG(shortcut)
-        self.next.setShortcut(QCoreApplication.translate("Widget", u"Right", None))
+        self.next.setShortcut(QCoreApplication.translate("Widget", u"Backspace", None))
 #endif // QT_CONFIG(shortcut)
         self.internalratereturn.setText(QCoreApplication.translate("Widget", u"IRR", None))
         self.second.setText(QCoreApplication.translate("Widget", u"2ND", None))
+#if QT_CONFIG(shortcut)
+        self.second.setShortcut(QCoreApplication.translate("Widget", u"F2", None))
+#endif // QT_CONFIG(shortcut)
         self.netpresentvalue.setText(QCoreApplication.translate("Widget", u"NPV", None))
         self.down.setText(QCoreApplication.translate("Widget", u"\u2193", None))
 #if QT_CONFIG(shortcut)
@@ -1578,9 +1611,6 @@ class Ui_Widget(object):
         self.up.setShortcut(QCoreApplication.translate("Widget", u"Down", None))
 #endif // QT_CONFIG(shortcut)
         self.enter.setText(QCoreApplication.translate("Widget", u"ENTER", None))
-#if QT_CONFIG(shortcut)
-        self.enter.setShortcut(QCoreApplication.translate("Widget", u"Return", None))
-#endif // QT_CONFIG(shortcut)
         self.compute.setText(QCoreApplication.translate("Widget", u"CPT", None))
         self.swtich.setText(QCoreApplication.translate("Widget", u"ON|OFF", None))
         self.label.setText(QCoreApplication.translate("Widget", u"TI BA II Plus", None))
@@ -1692,5 +1722,6 @@ class Ui_Widget(object):
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Digital-7 Mono'; font-size:10px; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
+        self.toolButton.setText(QCoreApplication.translate("Widget", u"\u2630", None))
     # retranslateUi
 

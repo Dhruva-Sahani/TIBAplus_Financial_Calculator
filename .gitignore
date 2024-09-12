@@ -35,6 +35,7 @@ Thumbs.db
 /.qmake.cache
 /.qmake.stash
 *.docx
+TrialCodes/
 
 
 # qtcreator generated files
@@ -44,6 +45,7 @@ __pycache__/
 .qtcreator/
 *.pyproject
 *.pyproject.user
+
 
 
 # xemacs temporary files
@@ -67,6 +69,7 @@ __pycache__/
 *.vcxproj
 *vcxproj.*
 /tempCodeRunnerFile.py
+/plainwidgetrun.py
 
 # MinGW generated files
 *.Debug

@@ -593,11 +593,11 @@ class Ui_Widget(object):
 "}\n"
 "\n"
 "")
-        self.next = QPushButton(Widget)
-        self.next.setObjectName(u"next")
-        self.next.setGeometry(QRect(300, 250, 50, 25))
-        self.next.setFont(font1)
-        self.next.setStyleSheet(u"QPushButton {\n"
+        self.backspace = QPushButton(Widget)
+        self.backspace.setObjectName(u"backspace")
+        self.backspace.setGeometry(QRect(300, 250, 50, 25))
+        self.backspace.setFont(font1)
+        self.backspace.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -788,11 +788,11 @@ class Ui_Widget(object):
 "	background-color: #706f6f;\n"
 "}\n"
 "")
-        self.swtich = QPushButton(Widget)
-        self.swtich.setObjectName(u"swtich")
-        self.swtich.setGeometry(QRect(300, 200, 50, 25))
-        self.swtich.setFont(font1)
-        self.swtich.setStyleSheet(u"QPushButton {\n"
+        self.switchon = QPushButton(Widget)
+        self.switchon.setObjectName(u"switchon")
+        self.switchon.setGeometry(QRect(300, 200, 50, 25))
+        self.switchon.setFont(font1)
+        self.switchon.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -1184,11 +1184,11 @@ class Ui_Widget(object):
 "	background-color: #6e6d6d;\n"
 "}\n"
 "")
-        self.number1 = QPushButton(Widget)
-        self.number1.setObjectName(u"number1")
-        self.number1.setGeometry(QRect(90, 624, 51, 41))
-        self.number1.setFont(font1)
-        self.number1.setStyleSheet(u"QPushButton {\n"
+        self.number0 = QPushButton(Widget)
+        self.number0.setObjectName(u"number0")
+        self.number0.setGeometry(QRect(90, 624, 51, 41))
+        self.number0.setFont(font1)
+        self.number0.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -1233,11 +1233,11 @@ class Ui_Widget(object):
 "}\n"
 "")
         self.number9.setAutoRepeat(False)
-        self.number0 = QPushButton(Widget)
-        self.number0.setObjectName(u"number0")
-        self.number0.setGeometry(QRect(90, 566, 51, 41))
-        self.number0.setFont(font1)
-        self.number0.setStyleSheet(u"QPushButton {\n"
+        self.number1 = QPushButton(Widget)
+        self.number1.setObjectName(u"number1")
+        self.number1.setGeometry(QRect(90, 566, 51, 41))
+        self.number1.setFont(font1)
+        self.number1.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -1353,11 +1353,11 @@ class Ui_Widget(object):
 "	background-color: #6e6d6d;\n"
 "}\n"
 "")
-        self.point = QPushButton(Widget)
-        self.point.setObjectName(u"point")
-        self.point.setGeometry(QRect(160, 624, 51, 41))
-        self.point.setFont(font1)
-        self.point.setStyleSheet(u"QPushButton {\n"
+        self.decimal = QPushButton(Widget)
+        self.decimal.setObjectName(u"decimal")
+        self.decimal.setGeometry(QRect(160, 624, 51, 41))
+        self.decimal.setFont(font1)
+        self.decimal.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -1592,9 +1592,9 @@ class Ui_Widget(object):
         self.interestrate.setText(QCoreApplication.translate("Widget", u"I/Y", None))
         self.futurevalue.setText(QCoreApplication.translate("Widget", u"FV", None))
         self.cashflow.setText(QCoreApplication.translate("Widget", u"CF", None))
-        self.next.setText(QCoreApplication.translate("Widget", u"\u2192", None))
+        self.backspace.setText(QCoreApplication.translate("Widget", u"\u2192", None))
 #if QT_CONFIG(shortcut)
-        self.next.setShortcut(QCoreApplication.translate("Widget", u"Backspace", None))
+        self.backspace.setShortcut(QCoreApplication.translate("Widget", u"Backspace", None))
 #endif // QT_CONFIG(shortcut)
         self.internalratereturn.setText(QCoreApplication.translate("Widget", u"IRR", None))
         self.second.setText(QCoreApplication.translate("Widget", u"2ND", None))
@@ -1612,7 +1612,7 @@ class Ui_Widget(object):
 #endif // QT_CONFIG(shortcut)
         self.enter.setText(QCoreApplication.translate("Widget", u"ENTER", None))
         self.compute.setText(QCoreApplication.translate("Widget", u"CPT", None))
-        self.swtich.setText(QCoreApplication.translate("Widget", u"ON|OFF", None))
+        self.switchon.setText(QCoreApplication.translate("Widget", u"ON|OFF", None))
         self.label.setText(QCoreApplication.translate("Widget", u"TI BA II Plus", None))
         self.label_2.setText(QCoreApplication.translate("Widget", u"QUIT", None))
         self.label_3.setText(QCoreApplication.translate("Widget", u"SET", None))
@@ -1654,17 +1654,17 @@ class Ui_Widget(object):
 #if QT_CONFIG(shortcut)
         self.number3.setShortcut(QCoreApplication.translate("Widget", u"3", None))
 #endif // QT_CONFIG(shortcut)
-        self.number1.setText(QCoreApplication.translate("Widget", u"0", None))
+        self.number0.setText(QCoreApplication.translate("Widget", u"0", None))
 #if QT_CONFIG(shortcut)
-        self.number1.setShortcut(QCoreApplication.translate("Widget", u"0", None))
+        self.number0.setShortcut(QCoreApplication.translate("Widget", u"0", None))
 #endif // QT_CONFIG(shortcut)
         self.number9.setText(QCoreApplication.translate("Widget", u"9", None))
 #if QT_CONFIG(shortcut)
         self.number9.setShortcut(QCoreApplication.translate("Widget", u"9", None))
 #endif // QT_CONFIG(shortcut)
-        self.number0.setText(QCoreApplication.translate("Widget", u"1", None))
+        self.number1.setText(QCoreApplication.translate("Widget", u"1", None))
 #if QT_CONFIG(shortcut)
-        self.number0.setShortcut(QCoreApplication.translate("Widget", u"1", None))
+        self.number1.setShortcut(QCoreApplication.translate("Widget", u"1", None))
 #endif // QT_CONFIG(shortcut)
         self.number8.setText(QCoreApplication.translate("Widget", u"8", None))
 #if QT_CONFIG(shortcut)
@@ -1679,9 +1679,9 @@ class Ui_Widget(object):
 #if QT_CONFIG(shortcut)
         self.number5.setShortcut(QCoreApplication.translate("Widget", u"5", None))
 #endif // QT_CONFIG(shortcut)
-        self.point.setText(QCoreApplication.translate("Widget", u".", None))
+        self.decimal.setText(QCoreApplication.translate("Widget", u".", None))
 #if QT_CONFIG(shortcut)
-        self.point.setShortcut(QCoreApplication.translate("Widget", u".", None))
+        self.decimal.setShortcut(QCoreApplication.translate("Widget", u".", None))
 #endif // QT_CONFIG(shortcut)
         self.number6.setText(QCoreApplication.translate("Widget", u"6", None))
 #if QT_CONFIG(shortcut)

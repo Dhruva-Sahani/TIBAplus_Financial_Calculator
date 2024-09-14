@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QPushButton, QSizePolicy,
-    QTextEdit, QToolButton, QWidget)
+from PySide6.QtWidgets import (QApplication, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QToolButton, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -34,6 +34,7 @@ class Ui_Widget(object):
         font = QFont()
         font.setPointSize(11)
         Widget.setFont(font)
+        Widget.setLayoutDirection(Qt.RightToLeft)
         Widget.setAutoFillBackground(False)
         Widget.setStyleSheet(u"QWidget{\n"
 "background-color: #2a2a27;\n"
@@ -408,11 +409,11 @@ class Ui_Widget(object):
 "}\n"
 "\n"
 "")
-        self.paranthesisleft = QPushButton(Widget)
-        self.paranthesisleft.setObjectName(u"paranthesisleft")
-        self.paranthesisleft.setGeometry(QRect(90, 400, 50, 25))
-        self.paranthesisleft.setFont(font1)
-        self.paranthesisleft.setStyleSheet(u"QPushButton {\n"
+        self.parenthesisleft = QPushButton(Widget)
+        self.parenthesisleft.setObjectName(u"parenthesisleft")
+        self.parenthesisleft.setGeometry(QRect(90, 400, 50, 25))
+        self.parenthesisleft.setFont(font1)
+        self.parenthesisleft.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -433,11 +434,11 @@ class Ui_Widget(object):
 "}\n"
 "\n"
 "")
-        self.paranthesisright = QPushButton(Widget)
-        self.paranthesisright.setObjectName(u"paranthesisright")
-        self.paranthesisright.setGeometry(QRect(160, 400, 50, 25))
-        self.paranthesisright.setFont(font1)
-        self.paranthesisright.setStyleSheet(u"QPushButton {\n"
+        self.parenthesisright = QPushButton(Widget)
+        self.parenthesisright.setObjectName(u"parenthesisright")
+        self.parenthesisright.setGeometry(QRect(160, 400, 50, 25))
+        self.parenthesisright.setFont(font1)
+        self.parenthesisright.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -1449,73 +1450,6 @@ class Ui_Widget(object):
 "	background-color: #6e6d6d;\n"
 "}\n"
 "")
-        self.textEditLetter = QTextEdit(Widget)
-        self.textEditLetter.setObjectName(u"textEditLetter")
-        self.textEditLetter.setGeometry(QRect(20, 80, 111, 41))
-        font6 = QFont()
-        font6.setFamilies([u"Digital-7 Mono"])
-        font6.setBold(False)
-        font6.setItalic(False)
-        self.textEditLetter.setFont(font6)
-        self.textEditLetter.setStyleSheet(u"QTextEdit {\n"
-"	border-bottom: 2px solid #f3f3e8;\n"
-"	border-left: 2px solid #f3f3e8;\n"
-"    border-bottom-left-radius: 8px;            \n"
-"    background-color: #7e8c74;     \n"
-"    padding: 5px;                          \n"
-"    color: #333333; \n"
-"	font: \"Digtal-7 Mono\" ;\n"
-"	font-size: 25px;             \n"
-"}")
-        self.textEditLetter.setInputMethodHints(Qt.ImhNone)
-        self.textEditLetter.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEditLetter.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEditLetter.setReadOnly(True)
-        self.textEditLetter.setTextInteractionFlags(Qt.NoTextInteraction)
-        self.textEditNumber = QTextEdit(Widget)
-        self.textEditNumber.setObjectName(u"textEditNumber")
-        self.textEditNumber.setGeometry(QRect(130, 80, 221, 41))
-        self.textEditNumber.setFont(font6)
-        self.textEditNumber.setMouseTracking(True)
-        self.textEditNumber.setContextMenuPolicy(Qt.DefaultContextMenu)
-        self.textEditNumber.setLayoutDirection(Qt.RightToLeft)
-        self.textEditNumber.setStyleSheet(u"QTextEdit {  \n"
-"	border-right: 2px solid #f3f3e8;\n"
-"	border-bottom: 2px solid #f3f3e8;\n"
-"	border-bottom-right-radius:8px;          \n"
-"    background-color: #7e8c74;     \n"
-"    padding: 5px;                          \n"
-"    color: #333333; \n"
-"	font-size: 25px;          \n"
-"}")
-        self.textEditNumber.setInputMethodHints(Qt.ImhNone)
-        self.textEditNumber.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEditNumber.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEditNumber.setReadOnly(True)
-        self.textEditNumber.setOverwriteMode(False)
-        self.textEditNumber.setAcceptRichText(True)
-        self.textEditNumber.setTextInteractionFlags(Qt.NoTextInteraction)
-        self.textEditSetting = QTextEdit(Widget)
-        self.textEditSetting.setObjectName(u"textEditSetting")
-        self.textEditSetting.setGeometry(QRect(20, 60, 331, 21))
-        self.textEditSetting.setFont(font6)
-        self.textEditSetting.setContextMenuPolicy(Qt.DefaultContextMenu)
-        self.textEditSetting.setStyleSheet(u"QTextEdit {  \n"
-"	border-top: 2px solid #f3f3e8;\n"
-"	border-left: 2px solid #f3f3e8;\n"
-"	border-right: 2px solid #f3f3e8;\n"
-"    border-top-right-radius: 8px;            \n"
-"	border-top-left-radius: 8px;\n"
-"    background-color: #7e8c74;     \n"
-"    padding: 2px;                          \n"
-"    color: #333333; \n"
-"	font-size: 10px;         \n"
-"}")
-        self.textEditSetting.setInputMethodHints(Qt.ImhNone)
-        self.textEditSetting.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEditSetting.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEditSetting.setReadOnly(True)
-        self.textEditSetting.setTextInteractionFlags(Qt.NoTextInteraction)
         self.toolButton = QToolButton(Widget)
         self.toolButton.setObjectName(u"toolButton")
         self.toolButton.setGeometry(QRect(10, 10, 31, 27))
@@ -1534,6 +1468,53 @@ class Ui_Widget(object):
 "")
         self.toolButton.setPopupMode(QToolButton.InstantPopup)
         self.toolButton.setToolButtonStyle(Qt.ToolButtonFollowStyle)
+        self.screennumber = QLineEdit(Widget)
+        self.screennumber.setObjectName(u"screennumber")
+        self.screennumber.setGeometry(QRect(110, 69, 241, 51))
+        font6 = QFont()
+        font6.setFamilies([u"Digital-7 Mono"])
+        font6.setBold(False)
+        self.screennumber.setFont(font6)
+        self.screennumber.setLayoutDirection(Qt.RightToLeft)
+        self.screennumber.setStyleSheet(u"QLineEdit {  \n"
+"	border-right: 2px solid #f3f3e8;\n"
+"	border-bottom: 2px solid #f3f3e8;\n"
+"	border-bottom-right-radius:8px;          \n"
+"    background-color: #7e8c74;     \n"
+"    padding-left: 5px;\n"
+"    color: #333333; \n"
+"	font-size: 42px;          \n"
+"}")
+        self.screennumber.setMaxLength(12)
+        self.screennumber.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.screenletter = QLineEdit(Widget)
+        self.screenletter.setObjectName(u"screenletter")
+        self.screenletter.setGeometry(QRect(20, 69, 91, 51))
+        self.screenletter.setFont(font6)
+        self.screenletter.setStyleSheet(u"QLineEdit {\n"
+"	border-bottom: 2px solid #f3f3e8;\n"
+"	border-left: 2px solid #f3f3e8;\n"
+"    border-bottom-left-radius: 8px;            \n"
+"    background-color: #7e8c74;     \n"
+"    padding-right: 8px;                       \n"
+"    color: #333333; \n"
+"	font-size: 40px;             \n"
+"}")
+        self.screensetting = QLineEdit(Widget)
+        self.screensetting.setObjectName(u"screensetting")
+        self.screensetting.setGeometry(QRect(20, 54, 331, 16))
+        self.screensetting.setFont(font6)
+        self.screensetting.setStyleSheet(u"QLineEdit {  \n"
+"	border-top: 2px solid #f3f3e8;\n"
+"	border-left: 2px solid #f3f3e8;\n"
+"	border-right: 2px solid #f3f3e8;\n"
+"    border-top-right-radius: 8px;            \n"
+"	border-top-left-radius: 8px;\n"
+"    background-color: #7e8c74;     \n"
+"                        \n"
+"    color: #333333; \n"
+"	font-size: 13px;         \n"
+"}")
 
         self.retranslateUi(Widget)
 
@@ -1578,13 +1559,13 @@ class Ui_Widget(object):
         self.squareroot.setText(QCoreApplication.translate("Widget", u"\u221ax", None))
         self.percent.setText(QCoreApplication.translate("Widget", u"%", None))
         self.square.setText(QCoreApplication.translate("Widget", u"x\u00b2", None))
-        self.paranthesisleft.setText(QCoreApplication.translate("Widget", u"(", None))
+        self.parenthesisleft.setText(QCoreApplication.translate("Widget", u"(", None))
 #if QT_CONFIG(shortcut)
-        self.paranthesisleft.setShortcut(QCoreApplication.translate("Widget", u"(", None))
+        self.parenthesisleft.setShortcut(QCoreApplication.translate("Widget", u"(", None))
 #endif // QT_CONFIG(shortcut)
-        self.paranthesisright.setText(QCoreApplication.translate("Widget", u")", None))
+        self.parenthesisright.setText(QCoreApplication.translate("Widget", u")", None))
 #if QT_CONFIG(shortcut)
-        self.paranthesisright.setShortcut(QCoreApplication.translate("Widget", u")", None))
+        self.parenthesisright.setShortcut(QCoreApplication.translate("Widget", u")", None))
 #endif // QT_CONFIG(shortcut)
         self.presentvalue.setText(QCoreApplication.translate("Widget", u"PV", None))
         self.period.setText(QCoreApplication.translate("Widget", u"N", None))
@@ -1695,33 +1676,9 @@ class Ui_Widget(object):
 #if QT_CONFIG(shortcut)
         self.number4.setShortcut(QCoreApplication.translate("Widget", u"4", None))
 #endif // QT_CONFIG(shortcut)
-        self.textEditLetter.setMarkdown("")
-        self.textEditLetter.setHtml(QCoreApplication.translate("Widget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Digital-7 Mono'; font-size:25px; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.textEditNumber.setMarkdown("")
-        self.textEditNumber.setHtml(QCoreApplication.translate("Widget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Digital-7 Mono'; font-size:25px; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Digtal-7 Mono';\"><br /></p></body></html>", None))
-        self.textEditSetting.setMarkdown("")
-        self.textEditSetting.setHtml(QCoreApplication.translate("Widget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Digital-7 Mono'; font-size:10px; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.toolButton.setText(QCoreApplication.translate("Widget", u"\u2630", None))
+        self.screennumber.setText(QCoreApplication.translate("Widget", u"1234567890.-", None))
+        self.screenletter.setText(QCoreApplication.translate("Widget", u"asd=", None))
+        self.screensetting.setText(QCoreApplication.translate("Widget", u"setting", None))
     # retranslateUi
 

@@ -36,6 +36,7 @@ Thumbs.db
 /.qmake.stash
 *.docx
 TrialCodes/
+Project log.docx
 
 
 # qtcreator generated files
@@ -83,3 +84,7 @@ __pycache__/
 *.dll
 *.exe
 
+*.docx
+Project log.docx
+.vscode/settings.json
+Project log.docx

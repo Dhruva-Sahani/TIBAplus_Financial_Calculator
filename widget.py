@@ -9,15 +9,16 @@ from PySide6.QtCore import Slot, Qt
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
 from ui_form import Ui_Widget 
-from operator_number_logic import DisplayLogic, OperatorLogic
+#from operator_number_logic import DisplayLogic, OperatorLogic
+from operationslogic import operationslogic
 
 class Widget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
-        self.displayn = DisplayLogic(self.ui.screennumber)  # Create an instance of the displayn class
-        self.operator = OperatorLogic(self.ui.screennumber)
+        #self.displayn = DisplayLogic(self.ui.screennumber)  # Create an instance of the displayn class
+        self.operator = operationslogic(self.ui.screennumber)
         
         # Number button routing
         self.ui.number0.clicked.connect(lambda: self.number_clicked(0))
@@ -50,19 +51,15 @@ class Widget(QWidget):
     @Slot()
     
     def number_clicked(self, num):
-        self.displayn.add_number(num)
-        self.operator.enter_number(num)
+        self.operator.add_number(num)
         
     def decimal_clicked(self):
-        self.displayn.add_decimal() 
-        self.operator.enter_decimal()
+        self.operator.add_decimal()
         
     def clearwork_clicked(self):
-        self.displayn.clear_display()
-        self.operator.clear()
+        self.operator.clear_display()
         
     def negative_clicked(self):
-        self.displayn.toggle_sign()
         self.operator.toggle_sign()
         
     def operator_clicked(self, op):

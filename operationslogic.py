@@ -3,10 +3,10 @@ class operationslogic:
         # Display logic attributes
         self.current_value = "0"  # Initial value of the display
         self.decimal_added = False  # Flag to track if a decimal has been added
-        self.display_widget = display_widget  # Reference to the QTextEdit widget
+        self.display_widget = display_widget  # Reference to the qlineedit widget
 
         # Operator logic attributes
-        self.current_number = ""  # The number currently being entered
+        self.current_number = ""  # The number currently being entered. Use this for all on screen number calculation functions eg. exponential, inverse, log etc.
         self.expression = ""      # Full expression being built up
         self.last_result = 0      # Last computed result to display
         self.new_number = True    # Track if we are starting a new number after an operator
@@ -124,9 +124,9 @@ class operationslogic:
         result = self.evaluate_expression(self.expression)
         self.current_value = str(result)  # Update display with final result
 
-        # Reset expression and current number after showing result
+        # Reset expression after showing result
         self.expression = ""
-        self.current_number = ""
+        self.current_number = str(result)  #current number becomes the result or else next equal to or operator press would result in an error. Loop of calculations wont be possible
         self.last_result = result
         self.new_number = True
         self.decimal_added = False

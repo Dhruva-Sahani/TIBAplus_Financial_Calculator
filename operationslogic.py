@@ -11,7 +11,9 @@ class operationslogic:
         self.last_result = 0      # Last computed result to display
         self.new_number = True    # Track if we are starting a new number after an operator
         self.open_parentheses = 0 # Track unbalanced opening parentheses
-    
+        self.last_open_paren_index = None  # Track the index of the last unmatched '('
+        self.last_key_type = None  # Track if last key was numkey or non-numkey
+        
     # Properties to expose current number and result
     @property
     def current_number_value(self):
@@ -36,6 +38,7 @@ class operationslogic:
                 self.current_value += str(num)
         
         self.current_number = self.current_value  # Set current number
+        self.last_key_type = 'number'  # Update the key type as number
         self.update_display()
 
     def add_decimal(self):
@@ -74,21 +77,34 @@ class operationslogic:
     # Operator Logic Methods
     def enter_operator(self, operator):
         """Handles when an operator (+, -, *, /) is typed."""
-        if self.current_number:
-            self.expression += self.current_number
-            self.current_number = ""  # Reset the current number after adding it to expression
+        # if self.current_number:
+        #     self.expression += self.current_number
+        #     self.current_number = ""  # Reset the current number after adding it to expression
 
-        # Display the result based on operator precedence
-        if operator in ("*", "/"):
-            self.last_result = self.evaluate_expression(self.expression)  # Solve multiplication/division first
-        elif operator in ("+", "-"):
-            # Display result for addition/subtraction (considering BODMAS)
-            self.last_result = self.evaluate_lowest_precedence(self.expression)
+        # # Display the result based on operator precedence
+        # if operator in ("*", "/"):
+        #     self.last_result = self.evaluate_expression(self.expression)  # Solve multiplication/division first
+        # elif operator in ("+", "-"):
+        #     # Display result for addition/subtraction (considering BODMAS)
+        #     self.last_result = self.evaluate_lowest_precedence(self.expression)\
+        
+        if self.last_key_type == 'operator':
+            # Replace the last operator with the new one
+            self.expression = self.expression[:-1] + operator
+        else:
+            # Add current number to the expression if it exists
+            if self.current_number:
+                self.expression += self.current_number
+                self.current_number = ""
+                self.last_result = self.evaluate_expression(self.expression)
+                self.current_value = str(self.last_result)  # Update display with result
+            # Append the operator
+            self.expression += operator
 
-        self.expression += operator  # Add operator to expression
-        self.current_value = str(self.last_result)  # Update display with result
+        # self.expression += operator  # Add operator to expression
         self.new_number = True  # The next number should be a new number
         self.decimal_added = False  # Reset decimal flag
+        self.last_key_type = 'operator'
         self.update_display()
 
     def enter_parenthesis(self, parenthesis):
@@ -141,13 +157,13 @@ class operationslogic:
             return "Error"
        
 
-    def evaluate_lowest_precedence(self, expr):
-        """Evaluate only low precedence operators like + and -."""
-        try:
-            # Here we split based on + and - only, ignoring * and /
-            return eval(expr)  # eval handles the order of operations internally
-        except Exception:
-            return "Error"
+    # def evaluate_lowest_precedence(self, expr):
+    #     """Evaluate only low precedence operators like + and -."""
+    #     try:
+    #         # Here we split based on + and - only, ignoring * and /
+    #         return eval(expr)  # eval handles the order of operations internally
+    #     except Exception:
+    #         return "Error"
         
 
     def evaluate_smallest_parenthesis(self, expr):

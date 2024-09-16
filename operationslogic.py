@@ -1,16 +1,16 @@
-class operationslogic:
+class OperationsLogic:
     def __init__(self, display_widget):
         # Display logic attributes
         self.current_value = "0"  # Initial value of the display
         self.decimal_added = False  # Flag to track if a decimal has been added
-        self.display_widget = display_widget  # Reference to the qlineedit widget
+        self.display_widget = display_widget  # Reference to the QTextEdit widget
 
         # Operator logic attributes
-        self.current_number = ""  # The number currently being entered. Use this for all on screen number calculation functions eg. exponential, inverse, log etc.
+        self.current_number = ""  # The number currently being entered
         self.expression = ""      # Full expression being built up
         self.last_result = 0      # Last computed result to display
         self.new_number = True    # Track if we are starting a new number after an operator
-        self.open_parentheses = 0 # Track unbalanced opening parentheses        
+        self.open_parentheses = 0  # Track unbalanced opening parentheses
         self.last_key_type = None  # Track if last key was numkey or non-numkey
         
     # Properties to expose current number and result
@@ -24,22 +24,50 @@ class operationslogic:
         """Provides access to the last computed result."""
         return self.last_result
 
-    # Display Logic Methods
     def add_number(self, num):
         """Adds a number to the current value string or starts a new number."""
         if self.new_number:
             self.current_value = str(num)
-            self.new_number = False  # We are now editing the current number
+            self.new_number = False
         else:
             if self.current_value == "0":
                 self.current_value = str(num)
             else:
                 self.current_value += str(num)
-        
-        self.current_number = self.current_value  # Set current number
-        self.last_key_type = 'number'  # Update the key type as number
+
+        self.current_number = self.current_value
+        self.last_key_type = 'number'
         self.update_display()
 
+    def enter_operator(self, operator):
+        """Handles when an operator (+, -, *, /) is typed."""
+        if self.last_key_type == 'operator':
+            # Replace the last operator with the new one
+            self.expression = self.expression[:-1] + operator
+        else:
+            # Add the current number to the expression
+            if self.current_number:
+                self.expression += self.current_number
+                self.current_number = ""
+
+            # Check if there are unclosed parentheses
+            if self.open_parentheses > 0:
+                # Evaluate only the expression within the unclosed parentheses
+                inside_paren_expr = self.extract_innermost_parenthesis(self.expression)
+                self.last_result = self.evaluate_expression(inside_paren_expr)
+            else:
+                self.last_result = self.evaluate_expression(self.expression)
+
+            self.current_value = str(self.last_result)
+
+            # Append the operator to the expression
+            self.expression += operator
+
+        self.new_number = True
+        self.decimal_added = False
+        self.last_key_type = 'operator'
+        self.update_display()
+        
     def add_decimal(self):
         """Adds a decimal point if not already present."""
         if not self.decimal_added:
@@ -73,29 +101,6 @@ class operationslogic:
         self.last_result = 0
         self.update_display()
 
-    # Operator Logic Methods
-    def enter_operator(self, operator):
-        """Handles when an operator (+, -, *, /) is typed."""
-        
-        if self.last_key_type == 'operator':
-            # Replace the last operator with the new one
-            self.expression = self.expression[:-1] + operator
-        else:
-            # Add current number to the expression if it exists
-            if self.current_number:
-                self.expression += self.current_number
-                self.current_number = ""
-                self.last_result = self.evaluate_expression(self.expression)
-                self.current_value = str(self.last_result)  # Update display with result
-            # Append the operator
-            self.expression += operator
-
-        # self.expression += operator  # Add operator to expression
-        self.new_number = True  # The next number should be a new number
-        self.decimal_added = False  # Reset decimal flag
-        self.last_key_type = 'operator'
-        self.update_display()
-
     def enter_parenthesis(self, parenthesis):
         """Handles when '(' or ')' is typed."""
         if parenthesis == '(':
@@ -116,14 +121,42 @@ class operationslogic:
         if self.open_parentheses == 0 and parenthesis == ')':
             self.last_result = self.evaluate_smallest_parenthesis(self.expression)
             self.current_value = str(self.last_result)
-            self.new_number = True  # After closing a parenthesis, expect new input
-        
+            self.new_number = True
+
         self.update_display()
 
+    def extract_innermost_parenthesis(self, expr):
+        """Extract the innermost unclosed parenthesis for evaluation."""
+        try:
+            open_index = expr.rfind('(')  # Find the last opened '('
+            return expr[open_index + 1:]  # Return everything inside the innermost parentheses
+        except ValueError:
+            return expr
+
+    def evaluate_expression(self, expr):
+        """Evaluate the expression handling BODMAS, return the result."""
+        try:
+            return eval(expr)
+        except Exception:
+            return "Error"
+
+    def evaluate_smallest_parenthesis(self, expr):
+        """Evaluate and return the result of the smallest solvable parenthesis."""
+        try:
+            while '(' in expr and ')' in expr:
+                expr = str(eval(expr))  # Evaluate the innermost parentheses
+            return eval(expr)  # Evaluate the remaining expression
+        except Exception:
+            return "Error"
+        
     def finalize_result(self):
         """Finalize the result when = is pressed."""
         if self.current_number:
-            self.expression += self.current_number  # Add last entered number
+            self.expression += self.current_number  # Add the last entered number
+
+        # Automatically close any unclosed parentheses
+        self.expression += ')' * self.open_parentheses
+        self.open_parentheses = 0  # Reset parentheses count after finalizing
 
         # Evaluate the complete expression
         result = self.evaluate_expression(self.expression)
@@ -131,34 +164,16 @@ class operationslogic:
 
         # Reset expression after showing result
         self.expression = ""
-        self.current_number = str(result)  #current number becomes the result or else next equal to or operator press would result in an error. Loop of calculations wont be possible
+        self.current_number = str(result)  # Current number becomes the result for further calculations
         self.last_result = result
         self.new_number = True
         self.decimal_added = False
 
         self.update_display()
 
-    def evaluate_expression(self, expr):
-        """Evaluate the expression handling BODMAS, return the result."""
-        try:
-            return eval(expr)  # Python's eval handles BODMAS and parentheses automatically
-        except Exception:
-            return "Error"
-        
-
-    def evaluate_smallest_parenthesis(self, expr):
-        """Evaluate and return the result of the smallest solvable parenthesis."""
-        try:
-            # Check if parentheses are balanced
-            if self.open_parentheses == 0:
-                while '(' in expr and ')' in expr:
-                    expr = str(eval(expr))  # Evaluate the innermost parentheses
-                return eval(expr)  # Evaluate the remaining expression
-            else:
-                return self.current_value  # Don't evaluate if parentheses aren't balanced
-        except Exception:
-            return "Error"
 
     def update_display(self):
-        """Updates the QTextEdit with the current display value."""
+        """Updates the display widget with the current value."""
         self.display_widget.setText(self.current_value)
+        
+

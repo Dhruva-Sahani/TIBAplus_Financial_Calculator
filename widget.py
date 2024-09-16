@@ -10,7 +10,7 @@ from PySide6.QtCore import Slot, Qt
 #     pyside2-uic form.ui -o ui_form.py
 from ui_form import Ui_Widget 
 #from operator_number_logic import DisplayLogic, OperatorLogic
-from operationslogic import operationslogic
+from OperationsLogic import OperationsLogic
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -18,7 +18,7 @@ class Widget(QWidget):
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
         #self.displayn = DisplayLogic(self.ui.screennumber)  # Create an instance of the displayn class
-        self.operator = operationslogic(self.ui.screennumber)
+        self.operator = OperationsLogic(self.ui.screennumber)
         
         # Number button routing
         self.ui.number0.clicked.connect(lambda: self.number_clicked(0))

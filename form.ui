@@ -3123,7 +3123,7 @@ background-color: #706f6f;
 }</string>
    </property>
    <property name="text">
-    <string>setting</string>
+    <string>12345678901234567890123456789012345678901234567890</string>
    </property>
   </widget>
  </widget>

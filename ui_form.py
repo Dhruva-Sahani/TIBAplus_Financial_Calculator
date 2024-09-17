@@ -1679,6 +1679,6 @@ class Ui_Widget(object):
         self.toolButton.setText(QCoreApplication.translate("Widget", u"\u2630", None))
         self.screennumber.setText(QCoreApplication.translate("Widget", u"1234567890.-", None))
         self.screenletter.setText(QCoreApplication.translate("Widget", u"asd=", None))
-        self.screensetting.setText(QCoreApplication.translate("Widget", u"setting", None))
+        self.screensetting.setText(QCoreApplication.translate("Widget", u"12345678901234567890123456789012345678901234567890", None))
     # retranslateUi
 

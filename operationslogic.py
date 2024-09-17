@@ -77,7 +77,7 @@ class OperationsLogic:
             # Add the current number to the expression
             if self.current_number:
                 self.expression += self.current_number
-                #self.current_number = ""
+                self.current_number = ""
 
             # Check if there are unclosed parentheses
             if self.open_parentheses > 0:
@@ -123,7 +123,7 @@ class OperationsLogic:
         self.current_value = "0"
         self.decimal_added = False
         self.current_number = "0"
-        self.expression = "0"
+        self.expression = ""
         self.new_number = True
         self.last_result = 0
         self.update_display()

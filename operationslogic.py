@@ -106,8 +106,7 @@ class OperationsLogic:
         self.current_number = self.current_value
         self.update_display()
         # self.display_widget.setText("click")
-        
-        
+            
     def backspace(self):
         """Removes the last digit from the current value if the last key was a number."""
         if self.last_key_type == 'number':  # Only backspace if last key was a number
@@ -198,7 +197,6 @@ class OperationsLogic:
         self.decimal_added = False
 
         self.update_display()
-
 
     def update_display(self):
         """Updates the display widget with the current value."""

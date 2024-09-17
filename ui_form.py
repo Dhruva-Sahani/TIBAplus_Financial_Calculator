@@ -284,14 +284,14 @@ class Ui_Widget(object):
 "}\n"
 "\n"
 "")
-        self.raisedto = QPushButton(Widget)
-        self.raisedto.setObjectName(u"raisedto")
-        self.raisedto.setGeometry(QRect(230, 400, 50, 25))
+        self.power = QPushButton(Widget)
+        self.power.setObjectName(u"power")
+        self.power.setGeometry(QRect(230, 400, 50, 25))
         font2 = QFont()
         font2.setBold(True)
         font2.setKerning(True)
-        self.raisedto.setFont(font2)
-        self.raisedto.setStyleSheet(u"QPushButton {\n"
+        self.power.setFont(font2)
+        self.power.setStyleSheet(u"QPushButton {\n"
 "    border: 2px solid #555;\n"
 "    border-top-left-radius: 10px;    \n"
 "    border-top-right-radius: 10px;   \n"
@@ -1551,9 +1551,9 @@ class Ui_Widget(object):
         self.store.setText(QCoreApplication.translate("Widget", u"STO", None))
         self.log.setText(QCoreApplication.translate("Widget", u"LN", None))
         self.inverse.setText(QCoreApplication.translate("Widget", u"INV", None))
-        self.raisedto.setText(QCoreApplication.translate("Widget", u"y\u1d61", None))
+        self.power.setText(QCoreApplication.translate("Widget", u"y\u1d61", None))
 #if QT_CONFIG(shortcut)
-        self.raisedto.setShortcut(QCoreApplication.translate("Widget", u"^", None))
+        self.power.setShortcut(QCoreApplication.translate("Widget", u"^", None))
 #endif // QT_CONFIG(shortcut)
         self.reciprocal.setText(QCoreApplication.translate("Widget", u"1/x", None))
         self.squareroot.setText(QCoreApplication.translate("Widget", u"\u221ax", None))

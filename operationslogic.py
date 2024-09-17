@@ -1,3 +1,4 @@
+import math
 class OperationsLogic:
     def __init__(self, display_widget):
         # Display logic attributes
@@ -6,7 +7,7 @@ class OperationsLogic:
         self.display_widget = display_widget  # Reference to the QTextEdit widget
 
         # Operator logic attributes
-        self.current_number = ""  # The number currently being entered
+        self.current_number = "0"  # The number currently being entered
         self.expression = ""      # Full expression being built up
         self.last_result = 0      # Last computed result to display
         self.new_number = True    # Track if we are starting a new number after an operator
@@ -18,6 +19,10 @@ class OperationsLogic:
     def current_number_value(self):
         """Provides access to the current number being entered."""
         return self.current_number or self.current_value  # Return current number or value
+    
+        # !!!! when coding for other worksheets, may need to add a condition to choose the string with greater lenght,
+        #  because if there's a toggle sign pressed after operator key, the sign is ignored for the expression, 
+        # but for a worksheet the negative sign is considered. current number and current value are the same until ..... ahh nevermind ignore, need to confirm this later.    
 
     @property
     def last_result_value(self):
@@ -38,6 +43,30 @@ class OperationsLogic:
         self.current_number = self.current_value
         self.last_key_type = 'number'
         self.update_display()
+        
+    def add_decimal(self):
+        """Adds a decimal point if not already present."""
+        if not self.decimal_added:
+            if self.new_number:
+                self.current_value = "0."  # Start new number with 0.
+                self.new_number = False
+            else:
+                self.current_value += "."
+            self.decimal_added = True
+        self.current_number = self.current_value
+        self.last_key_type = 'number'
+        self.update_display()
+        
+    def toggle_sign(self):
+        """Toggles the sign of the current value between positive and negative."""
+        if self.current_value.startswith("-"):
+            self.current_value = self.current_value[1:]  # Remove the negative sign
+        else:
+            # Avoid adding a negative sign if the value is zero
+            if self.current_value != "0":
+                self.current_value = "-" + self.current_value
+        self.current_number = self.current_value
+        self.update_display()
 
     def enter_operator(self, operator):
         """Handles when an operator (+, -, *, /) is typed."""
@@ -48,7 +77,7 @@ class OperationsLogic:
             # Add the current number to the expression
             if self.current_number:
                 self.expression += self.current_number
-                self.current_number = ""
+                #self.current_number = ""
 
             # Check if there are unclosed parentheses
             if self.open_parentheses > 0:
@@ -68,35 +97,34 @@ class OperationsLogic:
         self.last_key_type = 'operator'
         self.update_display()
         
-    def add_decimal(self):
-        """Adds a decimal point if not already present."""
-        if not self.decimal_added:
-            if self.new_number:
-                self.current_value = "0."  # Start new number with 0.
-                self.new_number = False
-            else:
-                self.current_value += "."
-            self.decimal_added = True
-        self.current_number = self.current_value
-        self.update_display()
-
-    def toggle_sign(self):
-        """Toggles the sign of the current value between positive and negative."""
-        if self.current_value.startswith("-"):
-            self.current_value = self.current_value[1:]  # Remove the negative sign
+    def enter_instant_operator(self, instant_operator):
+        if instant_operator == "log":
+            self.current_value = str(eval("math.log({num})".format(num=self.current_value)))
+            
         else:
-            # Avoid adding a negative sign if the value is zero
-            if self.current_value != "0":
-                self.current_value = "-" + self.current_value
+            self.current_value = str(eval("{num}{op}".format(num=self.current_value, op=instant_operator)))
         self.current_number = self.current_value
         self.update_display()
+        # self.display_widget.setText("click")
+        
+        
+    def backspace(self):
+        """Removes the last digit from the current value if the last key was a number."""
+        if self.last_key_type == 'number':  # Only backspace if last key was a number
+            if len(self.current_value) > 1:
+                self.current_value = self.current_value[:-1]  # Remove last character
+            else:
+                self.current_value = "0"  # If only one digit left, reset to 0
+
+            self.current_number = self.current_value  # Update the current number
+            self.update_display()  # Update the display
 
     def clear_display(self):
         """Clears the display to 0 and resets the decimal flag."""
         self.current_value = "0"
         self.decimal_added = False
-        self.current_number = ""
-        self.expression = ""
+        self.current_number = "0"
+        self.expression = "0"
         self.new_number = True
         self.last_result = 0
         self.update_display()
@@ -177,3 +205,4 @@ class OperationsLogic:
         self.display_widget.setText(self.current_value)
         
 
+        

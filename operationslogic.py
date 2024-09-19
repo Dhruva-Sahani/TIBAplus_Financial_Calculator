@@ -1,4 +1,5 @@
 import math
+import random
 class OperationsLogic:
     def __init__(self, display_widget):
         # Display logic attributes
@@ -99,13 +100,20 @@ class OperationsLogic:
         
     def enter_instant_operator(self, instant_operator):
         if instant_operator == "log":
-            self.current_value = str(eval("math.log({num})".format(num=self.current_value)))
-            
+            self.current_value = str(math.log(int(self.current_value))  )  
+        elif instant_operator == "e**x":
+            self.current_value = str(math.exp(int(self.current_value)))
+        elif instant_operator == "rand":
+            self.current_value = str(random.uniform(0, 1))
+        elif instant_operator == "factorial":
+            if float(self.current_value)>= 0 and float(self.current_value)<=69:
+                self.current_value = str(math.factorial(int(self.current_value)))
+            else:
+                self.current_value = "Error"   
         else:
             self.current_value = str(eval("{num}{op}".format(num=self.current_value, op=instant_operator)))
         self.current_number = self.current_value
         self.update_display()
-        # self.display_widget.setText("click")
             
     def backspace(self):
         """Removes the last digit from the current value if the last key was a number."""
@@ -201,6 +209,4 @@ class OperationsLogic:
     def update_display(self):
         """Updates the display widget with the current value."""
         self.display_widget.setText(self.current_value)
-        
-
         

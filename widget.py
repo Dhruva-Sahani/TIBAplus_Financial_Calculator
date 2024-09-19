@@ -108,10 +108,18 @@ class Widget(QWidget):
         self.operator.enter_operator('-')
         
     def multiplication_clicked(self):
-        self.operator.enter_operator('*')
+        if self.secondflag:
+            self.operator.enter_instant_operator("factorial")
+            self.secondflag = False
+        else:
+            self.operator.enter_operator('*')
         
     def division_clicked(self):
-        self.operator.enter_operator('/')
+        if self.secondflag:
+            self.operator.enter_instant_operator("rand")
+            self.secondflag = False
+        else:
+            self.operator.enter_operator('/')
         
     def power_clicked(self):
         self.operator.enter_operator('**')
@@ -129,7 +137,11 @@ class Widget(QWidget):
         self.operator.enter_instant_operator('*0.01')
         
     def log_clicked(self):
-        self.operator.enter_instant_operator('log')
+        if self.secondflag:
+            self.operator.enter_instant_operator("e**x")
+            self.secondflag = False
+        else:
+            self.operator.enter_instant_operator('log')
         
     def paranthesis_clicked(self, parenthesis):
         self.operator.enter_parenthesis(parenthesis)

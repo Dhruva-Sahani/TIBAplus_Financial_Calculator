@@ -35,6 +35,7 @@ class Widget(QWidget):
         self.ui.negative.clicked.connect(lambda: self.negative_clicked())
         self.ui.backspace.clicked.connect(lambda: self.backspace_clicked())
         #endregion
+        
         #region operator buttons routing
         self.ui.addition.clicked.connect(lambda: self.addition_clicked())
         self.ui.subtraction.clicked.connect(lambda: self.subtraction_clicked())
@@ -49,10 +50,12 @@ class Widget(QWidget):
         self.ui.parenthesisleft.clicked.connect(lambda: self.paranthesis_clicked('('))
         self.ui.parenthesisright.clicked.connect(lambda: self.paranthesis_clicked(')'))
         #endregion
+        
         #region Refresh buttons routing
         self.ui.clearwork.clicked.connect(lambda: self.clearwork_clicked())
         self.ui.equalto.clicked.connect(lambda: self.equalto_clicked())
         #endregion
+        
         #region High level buttons routing
         self.ui.second.clicked.connect(lambda: self.second_clicked())
         #endregion
@@ -60,6 +63,7 @@ class Widget(QWidget):
     """ Slots for all the buttons are defined below. 
     Buttons without a second functions and similar funcionality may have a mutual functions."""  
     @Slot()
+    
     #region number
     def number0_clicked(self):
         self.operator.add_number(0)
@@ -100,6 +104,7 @@ class Widget(QWidget):
     def backspace_clicked(self):
         self.operator.backspace()
     #endregion
+    
     #region operators    
     def addition_clicked(self):
         self.operator.enter_operator('+')
@@ -146,6 +151,7 @@ class Widget(QWidget):
     def paranthesis_clicked(self, parenthesis):
         self.operator.enter_parenthesis(parenthesis)
     #endregion
+    
     #region refresh    
     def clearwork_clicked(self):
         self.operator.clear_display()
@@ -153,6 +159,7 @@ class Widget(QWidget):
     def equalto_clicked(self):
         self.operator.finalize_result()
     #endregion
+    
     #region highlevel   
     def second_clicked(self):
         self.secondflag = True

@@ -32,6 +32,7 @@ class OperationsLogic:
         """Provides access to the last computed result."""
         return self.last_result
 
+    #region number edits
     def add_number(self, num):
         """Adds a number to the current value string or starts a new number."""
         if self.new_number:
@@ -70,7 +71,20 @@ class OperationsLogic:
                 self.current_value = "-" + self.current_value
         self.current_number = self.current_value
         self.update_display()
+    
+    def backspace(self):
+        """Removes the last digit from the current value if the last key was a number."""
+        if self.last_key_type == 'number':  # Only backspace if last key was a number
+            if len(self.current_value) > 1:
+                self.current_value = self.current_value[:-1]  # Remove last character
+            else:
+                self.current_value = "0"  # If only one digit left, reset to 0
 
+            self.current_number = self.current_value  # Update the current number
+            self.update_display()  # Update the display
+    #endregion 
+    
+    #region operators
     def enter_operator(self, operator):
         """Handles when an operator (+, -, *, /) is typed."""
         if self.last_key_type == 'operator':
@@ -82,15 +96,15 @@ class OperationsLogic:
                 self.expression += self.current_number
                 self.current_number = ""
 
-            # Check if there are unclosed parentheses
+            # Evaluate only the expression inside parentheses if parentheses are open
             if self.open_parentheses > 0:
-                # Evaluate only the expression within the unclosed parentheses
                 inside_paren_expr = self.extract_innermost_parenthesis(self.expression)
                 self.last_result = self.evaluate_expression(inside_paren_expr)
+                self.current_value = str(self.last_result)
             else:
+                # Evaluate the expression outside parentheses
                 self.last_result = self.evaluate_expression(self.expression)
-
-            self.current_value = str(self.last_result)
+                self.current_value = str(self.last_result)
 
             # Append the operator to the expression
             self.expression += operator
@@ -116,28 +130,9 @@ class OperationsLogic:
             self.current_value = str(eval("{num}{op}".format(num=self.current_value, op=instant_operator)))
         self.current_number = self.current_value
         self.update_display()
-            
-    def backspace(self):
-        """Removes the last digit from the current value if the last key was a number."""
-        if self.last_key_type == 'number':  # Only backspace if last key was a number
-            if len(self.current_value) > 1:
-                self.current_value = self.current_value[:-1]  # Remove last character
-            else:
-                self.current_value = "0"  # If only one digit left, reset to 0
+    #endregion    
 
-            self.current_number = self.current_value  # Update the current number
-            self.update_display()  # Update the display
-
-    def clear_display(self):
-        """Clears the display to 0 and resets the decimal flag."""
-        self.current_value = "0"
-        self.decimal_added = False
-        self.current_number = "0"
-        self.expression = ""
-        self.new_number = True
-        self.last_result = 0
-        self.update_display()
-
+    #region parenthesis behavious
     def enter_parenthesis(self, parenthesis):
         """Handles when '(' or ')' is typed."""
         if parenthesis == '(':
@@ -147,6 +142,7 @@ class OperationsLogic:
                 return  # Ignore if closing parenthesis is unmatched
             self.open_parentheses -= 1
 
+        # Append current number to expression if there is one
         if self.current_number:
             self.expression += self.current_number
             self.current_number = ""
@@ -154,23 +150,27 @@ class OperationsLogic:
         # Add the parenthesis to the expression
         self.expression += parenthesis
 
-        # Only evaluate when parentheses are balanced
-        if self.open_parentheses == 0 and parenthesis == ')':
-            self.last_result = self.evaluate_smallest_parenthesis(self.expression)
+        # Only evaluate when parentheses are balanced and a closing parenthesis is typed
+        if parenthesis == ')' and self.open_parentheses == 0:
+            # Extract and evaluate the expression within parentheses
+            inside_paren_expr = self.extract_innermost_parenthesis(self.expression)
+            self.last_result = self.evaluate_expression(inside_paren_expr)
             self.current_value = str(self.last_result)
             self.new_number = True
 
         self.update_display()
-        
-    
 
     def extract_innermost_parenthesis(self, expr):
         """Extract the innermost unclosed parenthesis for evaluation."""
         try:
             open_index = expr.rfind('(')  # Find the last opened '('
-            return expr[open_index + 1:]  # Return everything inside the innermost parentheses
+            close_index = expr.find(')', open_index)  # Find the corresponding closing ')'
+            if close_index == -1:
+                # Handle the case where there's no closing parenthesis yet
+                return expr[open_index + 1:]
+            return expr[open_index + 1:close_index]  # Return everything inside the innermost parentheses
         except ValueError:
-            return expr
+            return expr  # If no parentheses, return the whole expression
         
     def evaluate_smallest_parenthesis(self, expr):
         """Evaluate and return the result of the smallest solvable parenthesis."""
@@ -180,11 +180,13 @@ class OperationsLogic:
             return eval(expr)  # Evaluate the remaining expression
         except Exception:
             return "Error small"
-
+    #endregion
+    
+    #region evaluation
     def evaluate_expression(self, expr):
         """Evaluate the expression based on the selected method in settings."""
         #method = self.settings.get('calculation_method', 'algebraic')  # Get the method from settings
-        method = 'chain_value'
+        method = 'algebraic'
         if method == 'algebraic':
             return self.evaluate_algebraic(expr)
         elif method == 'chain_value':
@@ -247,6 +249,18 @@ class OperationsLogic:
         
         except Exception as e:
             return f"Error: {str(e)}"
+    #endregion
+    
+    #region cleanscreen
+    def clear_display(self):
+        """Clears the display to 0 and resets the decimal flag."""
+        self.current_value = "0"
+        self.decimal_added = False
+        self.current_number = "0"
+        self.expression = ""
+        self.new_number = True
+        self.last_result = 0
+        self.update_display()
         
     def finalize_result(self):
         """Finalize the result when = is pressed."""
@@ -269,8 +283,11 @@ class OperationsLogic:
         self.decimal_added = False
 
         self.update_display()
+    #endregion
 
+    #region display
     def update_display(self):
         """Updates the display widget with the current value."""
         self.display_widget.setText(self.current_value)
-        
+    #endregion
+    

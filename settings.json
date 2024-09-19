@@ -1,0 +1,7 @@
+{
+    "number_of_decimal_places": 2,
+    "angle_unit": "degrees",  
+    "dates": "DD/MM/YYYY",  
+    "number_separators": "comma",  
+    "calculation_method": "algebraic"  
+}

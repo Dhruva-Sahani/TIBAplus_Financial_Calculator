@@ -1,5 +1,7 @@
 import math
 import random
+import re
+
 class OperationsLogic:
     def __init__(self, display_widget):
         # Display logic attributes
@@ -159,6 +161,8 @@ class OperationsLogic:
             self.new_number = True
 
         self.update_display()
+        
+    
 
     def extract_innermost_parenthesis(self, expr):
         """Extract the innermost unclosed parenthesis for evaluation."""
@@ -167,14 +171,7 @@ class OperationsLogic:
             return expr[open_index + 1:]  # Return everything inside the innermost parentheses
         except ValueError:
             return expr
-
-    def evaluate_expression(self, expr):
-        """Evaluate the expression handling BODMAS, return the result."""
-        try:
-            return eval(expr)
-        except Exception:
-            return "Error"
-
+        
     def evaluate_smallest_parenthesis(self, expr):
         """Evaluate and return the result of the smallest solvable parenthesis."""
         try:
@@ -182,7 +179,74 @@ class OperationsLogic:
                 expr = str(eval(expr))  # Evaluate the innermost parentheses
             return eval(expr)  # Evaluate the remaining expression
         except Exception:
-            return "Error"
+            return "Error small"
+
+    def evaluate_expression(self, expr):
+        """Evaluate the expression based on the selected method in settings."""
+        #method = self.settings.get('calculation_method', 'algebraic')  # Get the method from settings
+        method = 'chain_value'
+        if method == 'algebraic':
+            return self.evaluate_algebraic(expr)
+        elif method == 'chain_value':
+            return self.evaluate_chain_value(expr)
+
+    def evaluate_algebraic(self, expr):
+        """Evaluate the expression using BODMAS (default algebraic)."""
+        try:
+            return eval(expr)  # Default BODMAS handling
+        except Exception:
+            return "Error evalag"
+
+    def evaluate_chain_value(self, expr):
+        """Evaluate the expression in chain-value method (left-to-right, no precedence) while handling parentheses."""
+        try:
+            # Ensure parentheses are balanced
+            if expr.count('(') != expr.count(')'):
+                return "Error: Unbalanced parentheses"
+
+            # First, handle parentheses: evaluate innermost parentheses first
+            while '(' in expr:
+                # Find the innermost parenthesis
+                open_index = expr.rfind('(')
+                close_index = expr.find(')', open_index)
+                
+                if close_index == -1:
+                    return "Error: Unbalanced parentheses"
+                
+                # Extract the expression inside the innermost parenthesis
+                inner_expr = expr[open_index + 1:close_index]
+                
+                # Recursively evaluate the expression inside the parentheses
+                inner_result = self.evaluate_chain_value(inner_expr)
+                
+                # Replace the parenthesized part with its result
+                expr = expr[:open_index] + str(inner_result) + expr[close_index + 1:]
+            
+            # Now, we are left with an expression without parentheses, so split and calculate left to right
+            tokens = re.split(r'(\D)', expr)  # Split by any non-digit character (operator)
+            
+            # Initialize result with the first number
+            result = float(tokens.pop(0))
+            
+            # Iterate through the remaining tokens and apply operators left-to-right
+            while tokens:
+                operator = tokens.pop(0)
+                if tokens:
+                    next_number = float(tokens.pop(0))
+                    
+                    if operator == '+':
+                        result += next_number
+                    elif operator == '-':
+                        result -= next_number
+                    elif operator == '*':
+                        result *= next_number
+                    elif operator == '/':
+                        result /= next_number  # Handle division by zero if necessary
+
+            return result
+        
+        except Exception as e:
+            return f"Error: {str(e)}"
         
     def finalize_result(self):
         """Finalize the result when = is pressed."""

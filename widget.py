@@ -1,6 +1,5 @@
 # This Python file uses the following encoding: utf-8
 import sys
-from PySide6.QtGui import QPalette
 from PySide6.QtWidgets import QApplication, QWidget
 from PySide6.QtCore import Slot, Qt
 
@@ -99,6 +98,9 @@ class Widget(QWidget):
         self.operator.add_decimal()
     
     def negative_clicked(self):
+        if self.secondflag:
+            
+            self.secondflag = False
         self.operator.toggle_sign()
         
     def backspace_clicked(self):

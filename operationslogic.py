@@ -1,9 +1,13 @@
 import math
 import random
 import re
+from BehaviorNavigation import Settings
+
 
 class OperationsLogic:
     def __init__(self, display_widget):
+        self.settings= Settings() #Creating instance of settings class
+        
         # Display logic attributes
         self.current_value = "0"  # Initial value of the display
         self.decimal_added = False  # Flag to track if a decimal has been added
@@ -132,7 +136,7 @@ class OperationsLogic:
         self.update_display()
     #endregion    
 
-    #region parenthesis behavious
+    #region parenthesis behaviors
     def enter_parenthesis(self, parenthesis):
         """Handles when '(' or ')' is typed."""
         if parenthesis == '(':
@@ -172,24 +176,23 @@ class OperationsLogic:
         except ValueError:
             return expr  # If no parentheses, return the whole expression
         
-    def evaluate_smallest_parenthesis(self, expr):
-        """Evaluate and return the result of the smallest solvable parenthesis."""
-        try:
-            while '(' in expr and ')' in expr:
-                expr = str(eval(expr))  # Evaluate the innermost parentheses
-            return eval(expr)  # Evaluate the remaining expression
-        except Exception:
-            return "Error small"
+    # def evaluate_smallest_parenthesis(self, expr):
+    #     """Evaluate and return the result of the smallest solvable parenthesis."""
+    #     try:
+    #         while '(' in expr and ')' in expr:
+    #             expr = str(eval(expr))  # Evaluate the innermost parentheses
+    #         return eval(expr)  # Evaluate the remaining expression
+    #     except Exception:
+    #         return "Error small"
     #endregion
     
     #region evaluation
     def evaluate_expression(self, expr):
         """Evaluate the expression based on the selected method in settings."""
-        #method = self.settings.get('calculation_method', 'algebraic')  # Get the method from settings
-        method = 'algebraic'
-        if method == 'algebraic':
+        method = self.settings.read_setting("calculation_method")
+        if method == 'AoS':
             return self.evaluate_algebraic(expr)
-        elif method == 'chain_value':
+        elif method == 'Chn':
             return self.evaluate_chain_value(expr)
 
     def evaluate_algebraic(self, expr):

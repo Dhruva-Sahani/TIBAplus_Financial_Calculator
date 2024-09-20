@@ -1,7 +1,7 @@
 {
-    "number_of_decimal_places": 2,
-    "angle_unit": "degrees",  
-    "dates": "DD/MM/YYYY",  
-    "number_separators": "comma",  
-    "calculation_method": "algebraic"  
+    "decimal_places": 2,
+    "angle_unit": "DEG",
+    "date_format": "US",
+    "number_separators": "US",
+    "calculation_method": "Chn"
 }

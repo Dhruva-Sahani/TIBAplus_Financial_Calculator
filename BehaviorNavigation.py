@@ -41,7 +41,3 @@ class Settings:
         self.settings = self.default_settings.copy()
         self.save_settings()
         
-        
-settings=Settings()  
-calc_method = settings.read_setting("calculation_method")
-print("Calculation Method:", calc_method)

@@ -98,9 +98,9 @@ class Widget(QWidget):
         self.operator.add_decimal()
     
     def negative_clicked(self):
-        if self.secondflag:
+        # if self.secondflag:
             
-            self.secondflag = False
+        #     self.secondflag = False
         self.operator.toggle_sign()
         
     def backspace_clicked(self):
@@ -128,8 +128,8 @@ class Widget(QWidget):
         else:
             self.operator.enter_operator('/')
         
-    def power_clicked(self):
-        self.operator.enter_operator('**')
+    #def power_clicked(self):
+        #self.operator.enter_operator('**')
         
     def reciprocal_clicked(self):
         self.operator.enter_instant_operator('**-1')

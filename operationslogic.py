@@ -107,9 +107,9 @@ class OperationsLogic:
                 self.current_value = str(self.last_result)
             else:
                 # Evaluate based on operator precedence
-                if operator in ['*', '/']:
+                if operator in ['**','*', '/']:
                     # For *, /: show partial result only for the * / expression part
-                    last_high_precedence_expr = self.extract_last_high_precedence_expression(self.expression)
+                    last_high_precedence_expr = self.extract_last_high_precedence_expression(self.expression, operator)
                     self.last_result = self.evaluate_expression(last_high_precedence_expr)
                     self.current_value = str(self.last_result)
                 elif operator in ['+', '-']:
@@ -126,22 +126,35 @@ class OperationsLogic:
         self.update_display()
 
 
-    def extract_last_high_precedence_expression(self, expr):
+    def extract_last_high_precedence_expression(self, expr, operator):
         """
         Extracts the last segment of the expression involving only higher precedence operators (* or /),
         stopping at the last occurrence of + or -.
         """
-        try:
-            # Find the last index of + or - to split the expression
-            last_low_precedence_index = max(expr.rfind('+'), expr.rfind('-'))
-            if last_low_precedence_index == -1:
-                # If no + or - found, return the entire expression
-                return expr
-            else:
-                # Return only the part after the last + or - (to handle * /)
-                return expr[last_low_precedence_index + 1:]
-        except ValueError:
-            return expr  # In case of error, return the whole expression
+        if operator == "**":
+            try:
+                # Find the last index of + or - to split the expression
+                last_low_precedence_index = max(expr.rfind('*'), expr.rfind('/'),expr.rfind('+'), expr.rfind('-'))
+                if last_low_precedence_index == -1:
+                    # If no + or - found, return the entire expression
+                    return expr
+                else:
+                    # Return only the part after the last + or - (to handle * /)
+                    return expr[last_low_precedence_index + 1:]
+            except ValueError:
+                return expr  # In case of error, return the whole expression
+        elif operator == "*" or operator== '/':
+            try:
+                # Find the last index of + or - to split the expression
+                last_low_precedence_index = max(expr.rfind('+'), expr.rfind('-'))
+                if last_low_precedence_index == -1:
+                    # If no + or - found, return the entire expression
+                    return expr
+                else:
+                    # Return only the part after the last + or - (to handle * /)
+                    return expr[last_low_precedence_index + 1:]
+            except ValueError:
+                return expr  # In case of error, return the whole expression
         
     def enter_instant_operator(self, instant_operator):
         if instant_operator == "log":

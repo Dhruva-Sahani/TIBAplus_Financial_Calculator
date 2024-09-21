@@ -128,8 +128,8 @@ class Widget(QWidget):
         else:
             self.operator.enter_operator('/')
         
-    #def power_clicked(self):
-        #self.operator.enter_operator('**')
+    def power_clicked(self):
+        self.operator.enter_operator('**')
         
     def reciprocal_clicked(self):
         self.operator.enter_instant_operator('**-1')

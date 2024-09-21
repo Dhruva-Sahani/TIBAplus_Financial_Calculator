@@ -3,5 +3,5 @@
     "angle_unit": "DEG",
     "date_format": "US",
     "number_separators": "US",
-    "calculation_method": "Chn"
+    "calculation_method": "AoS"
 }

@@ -20,6 +20,7 @@ class OperationsLogic:
         self.new_number = True    # Track if we are starting a new number after an operator
         self.open_parentheses = 0  # Track unbalanced opening parentheses
         self.last_key_type = None  # Track if last key was numkey or non-numkey
+        self.percomb_flag= False # Flag for permuation combination logic
         
     # Properties to expose current number and result
     @property
@@ -90,7 +91,9 @@ class OperationsLogic:
     
     #region operators
     def enter_operator(self, operator):
+        self.percomb_evaluation()
         """Handles when an operator (+, -, *, /) is typed."""
+            
         if self.last_key_type == 'operator':
             # Replace the last operator with the new one
             self.expression = self.expression[:-1] + operator
@@ -172,6 +175,27 @@ class OperationsLogic:
             self.current_value = str(eval("{num}{op}".format(num=self.current_value, op=instant_operator)))
         self.current_number = self.current_value
         self.update_display()
+    
+    def percomb_operation(self,operation):
+        self.percomb_flag = True
+        
+        if operation == 'perm':
+            self.percomb_str = "math.perm({num},".format(num=self.current_number)
+        elif operation == 'comb':
+            self.percomb_str = "math.comb({num},".format(num=self.current_number)
+            
+        self.new_number = True
+        self.decimal_added = False
+        
+    def percomb_evaluation(self):
+        if self.percomb_flag and self.new_number==False:
+            self.percomb_str= "{halfexp}{num})".format(halfexp=self.percomb_str, num=self.current_number)
+            self.current_number= str(eval(self.percomb_str))
+            #self.current_number=self.current_value
+            self.percomb_flag= False
+            self.new_number = False
+        
+    
     #endregion    
 
     #region parenthesis behaviors
@@ -213,15 +237,6 @@ class OperationsLogic:
             return expr[open_index + 1:close_index]  # Return everything inside the innermost parentheses
         except ValueError:
             return expr  # If no parentheses, return the whole expression
-        
-    # def evaluate_smallest_parenthesis(self, expr):
-    #     """Evaluate and return the result of the smallest solvable parenthesis."""
-    #     try:
-    #         while '(' in expr and ')' in expr:
-    #             expr = str(eval(expr))  # Evaluate the innermost parentheses
-    #         return eval(expr)  # Evaluate the remaining expression
-    #     except Exception:
-    #         return "Error small"
     #endregion
     
     #region evaluation
@@ -301,10 +316,12 @@ class OperationsLogic:
         self.expression = ""
         self.new_number = True
         self.last_result = 0
+        self.percomb_flag = False
         self.update_display()
         
     def finalize_result(self):
         """Finalize the result when = is pressed."""
+        self.percomb_evaluation()
         if self.current_number:
             self.expression += self.current_number  # Add the last entered number
 

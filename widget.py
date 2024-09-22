@@ -109,10 +109,18 @@ class Widget(QWidget):
     
     #region operators    
     def addition_clicked(self):
-        self.operator.enter_operator('+')
+        if self.secondflag:
+            self.operator.percomb_operation('comb')  
+            self.secondflag = False
+        else:  
+            self.operator.enter_operator('+')
         
     def subtraction_clicked(self):
-        self.operator.enter_operator('-')
+        if self.secondflag:
+            self.operator.percomb_operation('perm')
+            self.secondflag = False
+        else:
+            self.operator.enter_operator('-')
         
     def multiplication_clicked(self):
         if self.secondflag:

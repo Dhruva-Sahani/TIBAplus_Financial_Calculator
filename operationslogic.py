@@ -21,6 +21,8 @@ class OperationsLogic:
         self.open_parentheses = 0  # Track unbalanced opening parentheses
         self.last_key_type = None  # Track if last key was numkey or non-numkey
         self.percomb_flag= False # Flag for permuation combination logic
+        self.hypflag = False
+        self.invflag = False
         
     # Properties to expose current number and result
     @property
@@ -92,14 +94,15 @@ class OperationsLogic:
     #region operators
     def enter_operator(self, operator):
         self.percomb_evaluation()
+        
         """Handles when an operator (+, -, *, /) is typed."""
-            
         if self.last_key_type == 'operator':
             # Replace the last operator with the new one
             self.expression = self.expression[:-1] + operator
         else:
             # Add the current number to the expression
-            if self.current_number:
+            if self.current_number or self.last_key_type == 'percomb': 
+                self.percomb_flag = False #Prioirity given to the operator key if pressed immediately after percomb
                 self.expression += self.current_number
                 self.current_number = ""
 
@@ -127,7 +130,6 @@ class OperationsLogic:
         self.decimal_added = False
         self.last_key_type = 'operator'
         self.update_display()
-
 
     def extract_last_high_precedence_expression(self, expr, operator):
         """
@@ -160,8 +162,67 @@ class OperationsLogic:
                 return expr  # In case of error, return the whole expression
         
     def enter_instant_operator(self, instant_operator):
-        if instant_operator == "log":
-            self.current_value = str(math.log(int(self.current_value))  )  
+        unit = self.settings.read_setting("angle_unit")
+        
+        if instant_operator == "sin":
+            if unit == "DEG":
+                self.angle = str(math.radians(float(self.current_value)))
+            else:
+                self.angle = self.current_value
+
+            if self.hypflag:
+                self.current_value = str(math.sinh(float(self.current_value)))
+                self.hypflag = False
+            elif self.invflag:
+                self.current_value = math.asin(float(self.current_value))  # Compute inverse sine
+                if unit == "DEG":
+                    self.current_value = str(math.degrees(self.current_value))  # Convert result to degrees
+                else:
+                    self.current_value = str(self.current_value)
+                self.invflag = False
+            else:
+                self.current_value = str(math.sin(float(self.angle)))
+                
+        elif instant_operator == "cos":
+            if unit == "DEG":
+                self.angle = str(math.radians(float(self.current_value)))
+            else:
+                self.angle = self.current_value
+                
+            if self.hypflag:
+                self.current_value = str(math.cosh(float(self.angle)))
+                self.hypflag = False
+            elif self.invflag:
+                self.current_value = math.acos(float(self.current_value))  # Compute inverse sine
+                if unit == "DEG":
+                    self.current_value = str(math.degrees(self.current_value))  # Convert result to degrees
+                else:
+                    self.current_value = str(self.current_value)
+                    self.invflag = False
+            else:
+                self.current_value = str(math.cos(float(self.angle)))
+                   
+        elif instant_operator == "tan":
+            if unit == "DEG":
+                self.angle = str(math.radians(float(self.current_value)))
+            else:
+                self.angle = self.current_value
+
+            if self.hypflag:
+                self.current_value = str(math.tanh(float(self.angle)))
+                self.hypflag = False
+            elif self.invflag:
+                self.current_value = math.atan(float(self.current_value))  # Compute inverse sine
+                if unit == "DEG":
+                    self.current_value = str(math.degrees(self.current_value))  # Convert result to degrees
+                else:
+                    self.current_value = str(self.current_value)
+                self.invflag = False
+            else:
+                self.current_value = str(math.tan(float(self.angle)))
+            
+        elif instant_operator == "log":
+            self.current_value = str(math.log(int(self.current_value)))  
         elif instant_operator == "e**x":
             self.current_value = str(math.exp(int(self.current_value)))
         elif instant_operator == "rand":
@@ -175,15 +236,26 @@ class OperationsLogic:
             self.current_value = str(eval("{num}{op}".format(num=self.current_value, op=instant_operator)))
         self.current_number = self.current_value
         self.update_display()
+        
+    def inv (self, function):
+        if function == 'hyp':
+            self.hypflag = True
+        elif function == 'inv':
+            self.invflag = True     
     
     def percomb_operation(self,operation):
+        if self.percomb_flag:
+            self.percomb_evaluation()
+            self.current_value = self.current_number
+            self.update_display()
         self.percomb_flag = True
         
         if operation == 'perm':
             self.percomb_str = "math.perm({num},".format(num=self.current_number)
         elif operation == 'comb':
             self.percomb_str = "math.comb({num},".format(num=self.current_number)
-            
+        
+        self.last_key_type = 'percomb'   
         self.new_number = True
         self.decimal_added = False
         
@@ -195,7 +267,6 @@ class OperationsLogic:
             self.percomb_flag= False
             self.new_number = False
         
-    
     #endregion    
 
     #region parenthesis behaviors
@@ -316,7 +387,11 @@ class OperationsLogic:
         self.expression = ""
         self.new_number = True
         self.last_result = 0
+        self.open_parentheses = 0 
         self.percomb_flag = False
+        self.last_key_type = None
+        self.hypflag = False
+        self.invflag = False
         self.update_display()
         
     def finalize_result(self):

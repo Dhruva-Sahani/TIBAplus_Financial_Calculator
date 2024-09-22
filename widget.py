@@ -46,8 +46,9 @@ class Widget(QWidget):
         self.ui.squareroot.clicked.connect(lambda: self.squareroot_clicked())
         self.ui.percent.clicked.connect(lambda: self.percent_clicked())
         self.ui.log.clicked.connect(lambda: self.log_clicked())
-        self.ui.parenthesisleft.clicked.connect(lambda: self.paranthesis_clicked('('))
-        self.ui.parenthesisright.clicked.connect(lambda: self.paranthesis_clicked(')'))
+        self.ui.parenthesisleft.clicked.connect(lambda: self.left_parenthesis_clicked())
+        self.ui.parenthesisright.clicked.connect(lambda: self.right_parenthesis_clicked())
+        self.ui.inverse.clicked.connect(lambda: self.inv_clicked())
         #endregion
         
         #region Refresh buttons routing
@@ -137,7 +138,11 @@ class Widget(QWidget):
             self.operator.enter_operator('/')
         
     def power_clicked(self):
-        self.operator.enter_operator('**')
+        if self.secondflag:
+            self.operator.enter_instant_operator('tan')
+            self.secondflag = False
+        else:
+            self.operator.enter_operator('**')
         
     def reciprocal_clicked(self):
         self.operator.enter_instant_operator('**-1')
@@ -157,9 +162,28 @@ class Widget(QWidget):
             self.secondflag = False
         else:
             self.operator.enter_instant_operator('log')
+            
+    def inv_clicked(self):
+        if self.secondflag:
+            self.operator.inv("hyp")
+            self.secondflag = False
+        else:
+            self.operator.inv("inv")
         
-    def paranthesis_clicked(self, parenthesis):
-        self.operator.enter_parenthesis(parenthesis)
+    def left_parenthesis_clicked(self):
+        if self.secondflag:
+            self.operator.enter_instant_operator('sin')
+            self.secondflag = False
+        else:
+            self.operator.enter_parenthesis("(")
+            
+    def right_parenthesis_clicked(self):
+        if self.secondflag:
+            self.operator.enter_instant_operator('cos')
+            self.secondflag = False
+        else:
+            self.operator.enter_parenthesis(")")
+        
     #endregion
     
     #region refresh    

@@ -1,17 +1,17 @@
 import math
 import random
 import re
-from BehaviorNavigation import Settings
+from Format import Settings
 
 
 class OperationsLogic:
-    def __init__(self, display_widget):
-        self.settings= Settings() #Creating instance of settings class
+    def __init__(self, display1):
+        self.settings= Settings("", "") #Creating instance of settings class
         
         # Display logic attributes
         self.current_value = "0"  # Initial value of the display
         self.decimal_added = False  # Flag to track if a decimal has been added
-        self.display_widget = display_widget  # Reference to the QTextEdit widget
+        self.display1 = display1  # Reference to the QTextEdit widget
 
         # Operator logic attributes
         self.current_number = "0"  # The number currently being entered
@@ -28,7 +28,7 @@ class OperationsLogic:
     @property
     def current_number_value(self):
         """Provides access to the current number being entered."""
-        return self.current_number or self.current_value  # Return current number or value
+        return self.current_value  # Return current number or value
     
         # !!!! when coding for other worksheets, may need to add a condition to choose the string with greater lenght,
         #  because if there's a toggle sign pressed after operator key, the sign is ignored for the expression, 
@@ -162,7 +162,7 @@ class OperationsLogic:
                 return expr  # In case of error, return the whole expression
         
     def enter_instant_operator(self, instant_operator):
-        unit = self.settings.read_setting("angle_unit")
+        unit = self.settings.read("Angle_unit")
         
         if instant_operator == "sin":
             if unit == "DEG":
@@ -313,7 +313,7 @@ class OperationsLogic:
     #region evaluation
     def evaluate_expression(self, expr):
         """Evaluate the expression based on the selected method in settings."""
-        method = self.settings.read_setting("calculation_method")
+        method = self.settings.read("Calculation_method")
         if method == 'AoS':
             return self.evaluate_algebraic(expr)
         elif method == 'Chn':
@@ -381,17 +381,18 @@ class OperationsLogic:
     #region cleanscreen
     def clear_display(self):
         """Clears the display to 0 and resets the decimal flag."""
-        self.current_value = "0"
-        self.decimal_added = False
-        self.current_number = "0"
-        self.expression = ""
-        self.new_number = True
-        self.last_result = 0
-        self.open_parentheses = 0 
-        self.percomb_flag = False
-        self.last_key_type = None
-        self.hypflag = False
-        self.invflag = False
+        # self.current_value = "0"
+        # self.decimal_added = False
+        # self.current_number = "0"
+        # self.expression = ""
+        # self.new_number = True
+        # self.last_result = 0
+        # self.open_parentheses = 0 
+        # self.percomb_flag = False
+        # self.last_key_type = None
+        # self.hypflag = False
+        # self.invflag = False
+        self.__init__(self.display1)
         self.update_display()
         
     def finalize_result(self):
@@ -421,6 +422,6 @@ class OperationsLogic:
     #region display
     def update_display(self):
         """Updates the display widget with the current value."""
-        self.display_widget.setText(self.current_value)
+        self.display1.setText(self.current_value)
     #endregion
     

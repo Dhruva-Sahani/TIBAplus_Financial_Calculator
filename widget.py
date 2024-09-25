@@ -10,6 +10,7 @@ from PySide6.QtCore import Slot, Qt
 from ui_form import Ui_Widget 
 #from operator_number_logic import DisplayLogic, OperatorLogic
 from OperationsLogic import OperationsLogic
+from Format import Settings
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -17,6 +18,8 @@ class Widget(QWidget):
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
         self.operator = OperationsLogic(self.ui.screennumber) #Create an instance of operationslogic class
+        self.setting = Settings(self.ui.screennumber, self.ui.screenletter)
+        self.worksheetflag = None
         self.secondflag = False
         
         #region Number buttons routing
@@ -58,6 +61,10 @@ class Widget(QWidget):
         
         #region High level buttons routing
         self.ui.second.clicked.connect(lambda: self.second_clicked())
+        self.ui.up.clicked.connect(lambda: self.up_clicked())
+        self.ui.down.clicked.connect(lambda: self.down_clicked())
+        self.ui.enter.clicked.connect(lambda: self.enter_clicked())
+        self.ui.compute.clicked.connect(lambda: self.compute_clicked())
         #endregion
 
     """ Slots for all the buttons are defined below. 
@@ -96,13 +103,20 @@ class Widget(QWidget):
         self.operator.add_number(9)
     
     def decimal_clicked(self):
-        self.operator.add_decimal()
+        if self.secondflag:
+            self.worksheetflag = self.setting
+            self.setting.display_current_key()
+            self.secondflag = False
+        else:
+            self.operator.add_decimal()
     
     def negative_clicked(self):
-        # if self.secondflag:
-            
-        #     self.secondflag = False
-        self.operator.toggle_sign()
+        if self.secondflag:
+            self.worksheetflag = self.setting
+            self.setting.reset_activate()
+            self.secondflag = False
+        else:
+            self.operator.toggle_sign()
         
     def backspace_clicked(self):
         self.operator.backspace()
@@ -197,6 +211,33 @@ class Widget(QWidget):
     #region highlevel   
     def second_clicked(self):
         self.secondflag = True
+        
+    def up_clicked(self):
+        if self.worksheetflag!= None:
+            self.worksheetflag.move_up()
+            
+    def down_clicked(self):
+        if self.worksheetflag!= None:
+            self.worksheetflag.move_down()
+            
+    def enter_clicked(self):
+        self.thenumber =  self.operator.current_number_value
+        if self.secondflag:
+            if self.worksheetflag != None:
+                self.worksheetflag.set()
+            self.secondflag = False
+        else: 
+            if self.worksheetflag != None:
+                self.worksheetflag.enter(self.thenumber)
+                
+    def compute_clicked(self):
+        if self.secondflag:
+            self.operator.clear_display()
+            self.ui.screenletter.setText("")
+            self.worksheetflag = None
+            self.secondflag = False
+            self.setting.__init__(self.ui.screennumber, self.ui.screenletter)
+            
     #endregion
         
 

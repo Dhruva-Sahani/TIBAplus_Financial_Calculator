@@ -1,7 +1,64 @@
 {
-    "decimal_places": 2,
-    "angle_unit": "DEG",
-    "date_format": "US",
-    "number_separators": "US",
-    "calculation_method": "AoS"
+    "Number_of_decimal_places": {
+        "type": "input",
+        "range": [
+            0,
+            9
+        ],
+        "display_key": "DEC=",
+        "current_value": 2,
+        "default_value": 2
+    },
+    "Angle_unit": {
+        "type": "switch",
+        "options": [
+            "DEG",
+            "RAD"
+        ],
+        "options_example": [
+            "",
+            ""
+        ],
+        "current_value": "DEG",
+        "default_value": "DEG"
+    },
+    "Dates": {
+        "type": "switch",
+        "options": [
+            "US",
+            "Eur"
+        ],
+        "options_example": [
+            "12-31-1990",
+            "31-12-1990"
+        ],
+        "current_value": "US",
+        "default_value": "US"
+    },
+    "Number_separators": {
+        "type": "switch",
+        "options": [
+            "US",
+            "Eur"
+        ],
+        "options_example": [
+            "1,000",
+            "1.000"
+        ],
+        "current_value": "US",
+        "default_value": "US"
+    },
+    "Calculation_method": {
+        "type": "switch",
+        "options": [
+            "Chn",
+            "AoS"
+        ],
+        "options_example": [
+            "",
+            ""
+        ],
+        "current_value": "Chn",
+        "default_value": "Chn"
+    }
 }

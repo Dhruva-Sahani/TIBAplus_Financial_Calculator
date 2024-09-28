@@ -425,25 +425,3 @@ class OperationsLogic:
         self.display1.setText(self.current_value)
     #endregion
     
-
-class Display: 
-    def __inti_(self, displaynum, displaylet, displayset):
-        self.displaynum = displaynum
-        self.displaylet = displaylet
-        self.displayset = displayset
-        
-    def displaynumber(self, numstring):
-        self.numstring = numstring
-        self.displaynum.setText(self.numstring)
-        
-    def displayletter(self, letters):
-        self.letters = letters
-        self.displaylet.setText(self.letters)
-        
-    def displaysetting(self, setting):
-        self.setting = setting
-        self.displayset.setText(self.setting)
-        
-    def cleardisplay(self, display):
-        self.display = display
-        self.display.setText("")

@@ -23,7 +23,11 @@ class Widget(QWidget):
         self.timevalueofmoney = TimeValueOfMoney(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
-        self.tvmflag = False
+        #self.tvmflag = False
+        self.clrdisplay2flag = False
+        
+        """ Slot and signals for all buttons implemented below"""
+        """ Avoid passing any argument while calling a slot"""
         
         #region Number buttons routing
         self.ui.number0.clicked.connect(lambda: self.number0_clicked())
@@ -78,40 +82,51 @@ class Widget(QWidget):
         self.ui.futurevalue.clicked.connect(lambda: self.futurevalue_clicked())
         #endregion
 
-    """ Slots for all the buttons are defined below. 
-    Buttons without a second functions and similar funcionality may have a mutual functions."""  
+    """ Slots for all the buttons are defined below. """
+    """ Buttons without a second functions and similar funcionality may have a mutual functions."""  
+    
     @Slot()
     
     #region number
     def number0_clicked(self):
         self.operator.add_number(0)
+        self.display2clear()
     
     def number1_clicked(self):
         self.operator.add_number(1)
+        self.display2clear()
         
     def number2_clicked(self):
         self.operator.add_number(2)
+        self.display2clear()
         
     def number3_clicked(self):
         self.operator.add_number(3)
+        self.display2clear()
         
     def number4_clicked(self):
         self.operator.add_number(4)
+        self.display2clear()
         
     def number5_clicked(self):
         self.operator.add_number(5)
+        self.display2clear()
         
     def number6_clicked(self):
         self.operator.add_number(6)
+        self.display2clear()
         
     def number7_clicked(self):
         self.operator.add_number(7)
+        self.display2clear()
         
     def number8_clicked(self):
         self.operator.add_number(8)
+        self.display2clear()
         
     def number9_clicked(self):
         self.operator.add_number(9)
+        self.display2clear()
     
     def decimal_clicked(self):
         if self.secondflag:
@@ -120,6 +135,7 @@ class Widget(QWidget):
             self.secondflag = False
         else:
             self.operator.add_decimal()
+            self.display2clear()
     
     def negative_clicked(self):
         if self.secondflag:
@@ -128,6 +144,7 @@ class Widget(QWidget):
             self.secondflag = False
         else:
             self.operator.toggle_sign()
+            self.display2clear()
         
     def backspace_clicked(self):
         self.operator.backspace()
@@ -137,56 +154,72 @@ class Widget(QWidget):
     def addition_clicked(self):
         if self.secondflag:
             self.operator.percomb_operation('comb')  
+            self.display2clear()
             self.secondflag = False
         else:  
             self.operator.enter_operator('+')
+            self.display2clear()
         
     def subtraction_clicked(self):
         if self.secondflag:
             self.operator.percomb_operation('perm')
+            self.display2clear()
             self.secondflag = False
         else:
             self.operator.enter_operator('-')
+            self.display2clear()
         
     def multiplication_clicked(self):
         if self.secondflag:
             self.operator.enter_instant_operator("factorial")
+            self.display2clear()
             self.secondflag = False
         else:
             self.operator.enter_operator('*')
+            self.display2clear()
         
     def division_clicked(self):
         if self.secondflag:
             self.operator.enter_instant_operator("rand")
+            self.display2clear()
             self.secondflag = False
         else:
             self.operator.enter_operator('/')
+            self.display2clear()
         
     def power_clicked(self):
         if self.secondflag:
             self.operator.enter_instant_operator('tan')
+            self.display2clear()
             self.secondflag = False
         else:
             self.operator.enter_operator('**')
+            self.display2clear()
         
     def reciprocal_clicked(self):
         self.operator.enter_instant_operator('**-1')
+        self.display2clear()
         
     def square_clicked(self):
         self.operator.enter_instant_operator('**2')
+        self.display2clear()
         
     def squareroot_clicked(self):
         self.operator.enter_instant_operator('**0.5')
+        self.display2clear()
         
     def percent_clicked(self):
         self.operator.enter_instant_operator('*0.01')
+        self.display2clear()
         
     def log_clicked(self):
         if self.secondflag:
             self.operator.enter_instant_operator("e**x")
+            self.display2clear()
             self.secondflag = False
         else:
             self.operator.enter_instant_operator('log')
+            self.display2clear()
             
     def inv_clicked(self):
         if self.secondflag:
@@ -198,25 +231,31 @@ class Widget(QWidget):
     def left_parenthesis_clicked(self):
         if self.secondflag:
             self.operator.enter_instant_operator('sin')
+            self.display2clear()
             self.secondflag = False
         else:
             self.operator.enter_parenthesis("(")
+            self.display2clear()
             
     def right_parenthesis_clicked(self):
         if self.secondflag:
             self.operator.enter_instant_operator('cos')
+            self.display2clear()
             self.secondflag = False
         else:
             self.operator.enter_parenthesis(")")
+            self.display2clear()
         
     #endregion
     
     #region refresh    
     def clearwork_clicked(self):
         self.operator.clear_display()
+        self.display2clear()
         
     def equalto_clicked(self):
         self.operator.finalize_result()
+        self.display2clear()
     #endregion
     
     #region highlevel   
@@ -226,10 +265,12 @@ class Widget(QWidget):
     def up_clicked(self):
         if self.worksheetflag!= None:
             self.worksheetflag.move_up()
+            self.operator.new_number = True
             
     def down_clicked(self):
         if self.worksheetflag!= None:
             self.worksheetflag.move_down()
+            self.operator.new_number = True
             
     def enter_clicked(self):
         self.thenumber =  self.operator.current_number_value
@@ -240,6 +281,7 @@ class Widget(QWidget):
         else: 
             if self.worksheetflag != None:
                 self.worksheetflag.enter(self.thenumber)
+                self.operator.new_number = True
                 
     def compute_clicked(self):
         if self.secondflag:
@@ -254,29 +296,39 @@ class Widget(QWidget):
     #region timevalueofmoney
     def period_clicked(self):
         self.timevalueofmoney.tvm('N', self.operator.current_number_value)
-        self.operator.__init__(self.ui.screennumber)
+        self.operator.new_number = True
         
     def interestrate_clicked(self):
-        self.timevalueofmoney.tvm('I/Y', self.operator.current_number_value)
-        self.operator.__init__(self.ui.screennumber)
+        if self.secondflag:
+            self.timevalueofmoney.paymentperyear()
+            self.worksheetflag = self.timevalueofmoney
+            self.secondflag = False
+        else:
+            self.timevalueofmoney.tvm('I/Y', self.operator.current_number_value)
+            self.operator.new_number = True
         
     def presentvalue_clicked(self):
         self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
-        self.operator.__init__(self.ui.screennumber)
+        self.operator.new_number = True
         
     def payment_clicked(self):
-        self.timevalueofmoney.tvm('PMT', self.operator.current_number_value)
-        self.operator.__init__(self.ui.screennumber)
+        if self.secondflag:
+            self.timevalueofmoney.payment_mode()
+            self.worksheetflag = self.timevalueofmoney
+            self.secondflag = False
+        else:
+            self.timevalueofmoney.tvm('PMT', self.operator.current_number_value)
+            self.operator.new_number = True
         
     def futurevalue_clicked(self):
         self.timevalueofmoney.tvm('FV', self.operator.current_number_value)
-        self.operator.__init__(self.ui.screennumber)
+        self.operator.new_number = True
     #endregion
     
-    def screenletterclear(self):
-        if self.tvmflag:
+    def display2clear(self):
+        if self.clrdisplay2flag:
             self.ui.screenletter.setText('')
-            self.tvmflag = False
+            self.clrdisplay2flag = False
         
 
 if __name__ == "__main__":

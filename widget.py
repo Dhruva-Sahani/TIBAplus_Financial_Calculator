@@ -11,6 +11,7 @@ from ui_form import Ui_Widget
 #from operator_number_logic import DisplayLogic, OperatorLogic
 from OperationsLogic import OperationsLogic
 from Format import Settings
+from TimeValueOfMoney import TimeValueOfMoney
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -19,8 +20,10 @@ class Widget(QWidget):
         self.ui.setupUi(self)
         self.operator = OperationsLogic(self.ui.screennumber) #Create an instance of operationslogic class
         self.setting = Settings(self.ui.screennumber, self.ui.screenletter)
+        self.timevalueofmoney = TimeValueOfMoney(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
+        self.tvmflag = False
         
         #region Number buttons routing
         self.ui.number0.clicked.connect(lambda: self.number0_clicked())
@@ -65,6 +68,14 @@ class Widget(QWidget):
         self.ui.down.clicked.connect(lambda: self.down_clicked())
         self.ui.enter.clicked.connect(lambda: self.enter_clicked())
         self.ui.compute.clicked.connect(lambda: self.compute_clicked())
+        #endregion
+        
+        #region time value of money buttons routing
+        self.ui.period.clicked.connect(lambda: self.period_clicked())
+        self.ui.interestrate.clicked.connect(lambda: self.interestrate_clicked())
+        self.ui.presentvalue.clicked.connect(lambda: self.presentvalue_clicked())
+        self.ui.payment.clicked.connect(lambda: self.payment_clicked())
+        self.ui.futurevalue.clicked.connect(lambda: self.futurevalue_clicked())
         #endregion
 
     """ Slots for all the buttons are defined below. 
@@ -239,6 +250,33 @@ class Widget(QWidget):
             self.setting.__init__(self.ui.screennumber, self.ui.screenletter)
             
     #endregion
+    
+    #region timevalueofmoney
+    def period_clicked(self):
+        self.timevalueofmoney.tvm('N', self.operator.current_number_value)
+        self.operator.__init__(self.ui.screennumber)
+        
+    def interestrate_clicked(self):
+        self.timevalueofmoney.tvm('I/Y', self.operator.current_number_value)
+        self.operator.__init__(self.ui.screennumber)
+        
+    def presentvalue_clicked(self):
+        self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
+        self.operator.__init__(self.ui.screennumber)
+        
+    def payment_clicked(self):
+        self.timevalueofmoney.tvm('PMT', self.operator.current_number_value)
+        self.operator.__init__(self.ui.screennumber)
+        
+    def futurevalue_clicked(self):
+        self.timevalueofmoney.tvm('FV', self.operator.current_number_value)
+        self.operator.__init__(self.ui.screennumber)
+    #endregion
+    
+    def screenletterclear(self):
+        if self.tvmflag:
+            self.ui.screenletter.setText('')
+            self.tvmflag = False
         
 
 if __name__ == "__main__":

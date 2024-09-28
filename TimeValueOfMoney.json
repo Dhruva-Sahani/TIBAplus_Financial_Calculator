@@ -1,0 +1,59 @@
+{
+    "N": {
+        "key": "N",
+        "key_type": "Enter and Compute",
+        "current_value": 6,
+        "default_value": 0
+    },
+    "I/Y": {
+        "key": "I/Y",
+        "key_type": "Enter and Compute",
+        "current_value": 20,
+        "default_value": 0
+    },
+    "PV": {
+        "key": "PV",
+        "key_type": "Enter and Compute",
+        "current_value": 2052,
+        "default_value": 0
+    },
+    "PMT": {
+        "key": "PMT",
+        "key_type": "Enter and Compute",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "FV": {
+        "key": "FV",
+        "key_type": "Enter and Compute",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "Periods Per Year": {
+        "key": "Periods Per Year",
+        "key_type": "Enter",
+        "current_value": {
+            "P/Y": 1,
+            "C/Y": 1
+        },
+        "default_value": {
+            "P/Y": 1,
+            "C/Y": 1
+        },
+        "current_mode": "P/Y",
+        "options": [
+            "P/Y",
+            "C/Y"
+        ]
+    },
+    "Payment Mode": {
+        "key": "Payment Mode",
+        "key_type": "Setting",
+        "current_value": "END",
+        "default_value": "END",
+        "options": [
+            "END",
+            "BGN"
+        ]
+    }
+}

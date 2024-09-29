@@ -23,7 +23,7 @@ class Widget(QWidget):
         self.timevalueofmoney = TimeValueOfMoney(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
-        #self.tvmflag = False
+        self.activekeyclass = None
         self.clrdisplay2flag = False
         
         """ Slot and signals for all buttons implemented below"""
@@ -132,6 +132,7 @@ class Widget(QWidget):
         if self.secondflag:
             self.worksheetflag = self.setting
             self.setting.display_current_key()
+            self.activekeyclass = "Setting"
             self.secondflag = False
         else:
             self.operator.add_decimal()
@@ -250,8 +251,13 @@ class Widget(QWidget):
     
     #region refresh    
     def clearwork_clicked(self):
-        self.operator.clear_display()
-        self.display2clear()
+        if self.secondflag:
+            self.worksheetflag.clear_work(self.activekeyclass)
+            self.secondflag = False
+        else:
+            self.operator.clear_display()
+            self.ui.screenletter.setText("")
+            self.display2clear
         
     def equalto_clicked(self):
         self.operator.finalize_result()
@@ -297,32 +303,45 @@ class Widget(QWidget):
     def period_clicked(self):
         self.timevalueofmoney.tvm('N', self.operator.current_number_value)
         self.operator.new_number = True
+        self.activekeyclass = 'TVM'
         
     def interestrate_clicked(self):
         if self.secondflag:
             self.timevalueofmoney.paymentperyear()
             self.worksheetflag = self.timevalueofmoney
+            self.activekeyclass = 'P/Y'
             self.secondflag = False
         else:
             self.timevalueofmoney.tvm('I/Y', self.operator.current_number_value)
             self.operator.new_number = True
+            self.activekeyclass = 'TVM'
         
     def presentvalue_clicked(self):
         self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
         self.operator.new_number = True
+        self.activekeyclass = 'TVM'
         
     def payment_clicked(self):
         if self.secondflag:
             self.timevalueofmoney.payment_mode()
             self.worksheetflag = self.timevalueofmoney
+            self.activekeyclass = 'Payment_Mode'
             self.secondflag = False
         else:
             self.timevalueofmoney.tvm('PMT', self.operator.current_number_value)
             self.operator.new_number = True
+            self.activekeyclass = 'TVM'
         
     def futurevalue_clicked(self):
-        self.timevalueofmoney.tvm('FV', self.operator.current_number_value)
-        self.operator.new_number = True
+        if self.secondflag:
+            self.timevalueofmoney.clear_tvm()
+            if self.activekeyclass == 'TVM':
+                self.ui.screenletter.setText("")
+            self.secondflag = False
+        else:
+            self.timevalueofmoney.tvm('FV', self.operator.current_number_value)
+            self.operator.new_number = True
+            self.activekeyclass = 'TVM'
     #endregion
     
     def display2clear(self):

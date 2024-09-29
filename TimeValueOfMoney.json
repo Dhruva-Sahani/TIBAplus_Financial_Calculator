@@ -2,19 +2,19 @@
     "N": {
         "key": "N",
         "key_type": "Enter and Compute",
-        "current_value": 5,
+        "current_value": 0,
         "default_value": 0
     },
     "I/Y": {
         "key": "I/Y",
         "key_type": "Enter and Compute",
-        "current_value": 6,
+        "current_value": 0,
         "default_value": 0
     },
     "PV": {
         "key": "PV",
         "key_type": "Enter and Compute",
-        "current_value": 2052,
+        "current_value": 0,
         "default_value": 0
     },
     "PMT": {
@@ -31,7 +31,7 @@
     },
     "P/Y": {
         "type": "input",
-        "current_value": 4,
+        "current_value": 1,
         "default_value": 1,
         "display_key": "P/Y"
     },
@@ -44,7 +44,7 @@
     "Payment Mode": {
         "key": "Payment Mode",
         "key_type": "Setting",
-        "current_value": "BGN",
+        "current_value": "END",
         "default_value": "END",
         "options": [
             "END",

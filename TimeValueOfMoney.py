@@ -126,3 +126,36 @@ class TimeValueOfMoney:
         self.display1.setText("")
         
         
+    def clear_tvm(self):
+        # List of keys to reset
+        keys_to_reset = ["N", "I/Y", "PV", "PMT", "FV"]
+
+        # Reset each key to its default value
+        for key in keys_to_reset:
+            if key in self.data:
+                self.data[key]['current_value'] = self.data[key]['default_value']
+
+        # Save the changes to the JSON file
+        self.save_time_value_of_money()
+        
+        
+    def clear_work(self, worksheet_type):
+        """
+        Clears the values for P/Y and C/Y or Payment Mode based on the argument passed.
+        :param work_type: A string, either "P/Y_C/Y" or "Payment_Mode".
+        """
+        if worksheet_type == "P/Y":
+            # Reset P/Y and C/Y to their default values
+            self.data["P/Y"]["current_value"] = self.data["P/Y"]["default_value"]
+            self.data["C/Y"]["current_value"] = self.data["C/Y"]["default_value"]
+            self.save_time_value_of_money()
+            self.display_current_key()
+        
+        elif worksheet_type == "Payment_Mode":
+            # Reset Payment Mode to its default value
+            self.data["Payment Mode"]["current_value"] = self.data["Payment Mode"]["default_value"]
+            self.save_time_value_of_money()
+            self.display_payment_mode()
+            
+            
+        

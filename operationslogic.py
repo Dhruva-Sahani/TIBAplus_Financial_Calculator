@@ -1,7 +1,7 @@
 import math
 import random
 import re
-from Format import Settings
+from Settings import Settings
 
 
 class OperationsLogic:

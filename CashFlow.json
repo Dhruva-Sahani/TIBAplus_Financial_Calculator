@@ -1,0 +1,247 @@
+{
+    "Cf0": {
+        "key": "Cf0",
+        "current_value": 8,
+        "default_value": 0
+    },
+    "C01": {
+        "key": "C01",
+        "current_value": 2,
+        "default_value": 0
+    },
+    "F01": {
+        "key": "F01",
+        "current_value": 2,
+        "default_value": 0
+    },
+    "C02": {
+        "key": "C02",
+        "current_value": 5,
+        "default_value": 0
+    },
+    "F02": {
+        "key": "F02",
+        "current_value": 8,
+        "default_value": 0
+    },
+    "C03": {
+        "key": "C03",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F03": {
+        "key": "F03",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C04": {
+        "key": "C04",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F04": {
+        "key": "F04",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C05": {
+        "key": "C05",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F05": {
+        "key": "F05",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C06": {
+        "key": "C06",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F06": {
+        "key": "F06",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C07": {
+        "key": "C07",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F07": {
+        "key": "F07",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C08": {
+        "key": "C08",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F08": {
+        "key": "F08",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C09": {
+        "key": "C09",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F09": {
+        "key": "F09",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C10": {
+        "key": "C10",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F10": {
+        "key": "F10",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C11": {
+        "key": "C11",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F11": {
+        "key": "F11",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C12": {
+        "key": "C12",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F12": {
+        "key": "F12",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C13": {
+        "key": "C13",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F13": {
+        "key": "F13",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C14": {
+        "key": "C14",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F14": {
+        "key": "F14",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C15": {
+        "key": "C15",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F15": {
+        "key": "F15",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C16": {
+        "key": "C16",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F16": {
+        "key": "F16",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C17": {
+        "key": "C17",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F17": {
+        "key": "F17",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C18": {
+        "key": "C18",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F18": {
+        "key": "F18",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C19": {
+        "key": "C19",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F19": {
+        "key": "F19",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C20": {
+        "key": "C20",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F20": {
+        "key": "F20",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C21": {
+        "key": "C21",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F21": {
+        "key": "F21",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C22": {
+        "key": "C22",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F22": {
+        "key": "F22",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C23": {
+        "key": "C23",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F23": {
+        "key": "F23",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "C24": {
+        "key": "C24",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "F24": {
+        "key": "F24",
+        "current_value": 0,
+        "default_value": 0
+    }
+}

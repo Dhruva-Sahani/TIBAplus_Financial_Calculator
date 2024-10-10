@@ -1,0 +1,20 @@
+{
+    "I": {
+        "key": "I",
+        "type": "entry",
+        "current_value": 5.0,
+        "default_value": 0
+    },
+    "NPV": {
+        "key": "NPV",
+        "type": "compute",
+        "current_value": 0,
+        "default_value": 0
+    },
+    "IRR": {
+        "key": "IRR",
+        "type": "compute",
+        "current_value": 0,
+        "default_value": 0
+    }
+}

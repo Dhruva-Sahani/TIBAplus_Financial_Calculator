@@ -8,10 +8,11 @@ from PySide6.QtCore import Slot, Qt
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
 from ui_form import Ui_Widget 
-#from operator_number_logic import DisplayLogic, OperatorLogic
+# importing all the classes for the different worksheets
 from OperationsLogic import OperationsLogic
-from Format import Settings
+from Settings import Settings
 from TimeValueOfMoney import TimeValueOfMoney
+from CashFlow import CashFlow, CashFlowReturns
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -21,10 +22,13 @@ class Widget(QWidget):
         self.operator = OperationsLogic(self.ui.screennumber) #Create an instance of operationslogic class
         self.setting = Settings(self.ui.screennumber, self.ui.screenletter)
         self.timevalueofmoney = TimeValueOfMoney(self.ui.screennumber, self.ui.screenletter)
+        self.cashflow = CashFlow(self.ui.screennumber, self.ui.screenletter)
+        self.cashflowreturns = CashFlowReturns(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
         self.activekeyclass = None
         self.clrdisplay2flag = False
+        self.compute_flag = False
         
         """ Slot and signals for all buttons implemented below"""
         """ Avoid passing any argument while calling a slot"""
@@ -81,6 +85,11 @@ class Widget(QWidget):
         self.ui.payment.clicked.connect(lambda: self.payment_clicked())
         self.ui.futurevalue.clicked.connect(lambda: self.futurevalue_clicked())
         #endregion
+        
+        #region cashflow buttons routing
+        self.ui.cashflow.clicked.connect(lambda: self.cashflow_clicked())
+        self.ui.netpresentvalue.clicked.connect(lambda: self.netpresentvalue_clicked())
+        self.ui.internalratereturn.clicked.connect(lambda: self.internalratereturn_clicked())
 
     """ Slots for all the buttons are defined below. """
     """ Buttons without a second functions and similar funcionality may have a mutual functions."""  
@@ -296,14 +305,22 @@ class Widget(QWidget):
             self.worksheetflag = None
             self.secondflag = False
             self.setting.__init__(self.ui.screennumber, self.ui.screenletter)
+        else:
+            self.compute_flag = True
             
     #endregion
     
     #region timevalueofmoney
     def period_clicked(self):
-        self.timevalueofmoney.tvm('N', self.operator.current_number_value)
-        self.operator.new_number = True
-        self.activekeyclass = 'TVM'
+        if self.compute_flag:
+            self.timevalueofmoney.calculation('N')
+            self.worksheetflag = self.timevalueofmoney
+            self.compute_flag = False
+        else:
+            self.timevalueofmoney.tvm('N', self.operator.current_number_value)
+            self.operator.new_number = True
+            self.worksheetflag = self.timevalueofmoney
+            self.activekeyclass = 'TVM'
         
     def interestrate_clicked(self):
         if self.secondflag:
@@ -314,12 +331,19 @@ class Widget(QWidget):
         else:
             self.timevalueofmoney.tvm('I/Y', self.operator.current_number_value)
             self.operator.new_number = True
+            self.worksheetflag = self.timevalueofmoney
             self.activekeyclass = 'TVM'
         
     def presentvalue_clicked(self):
-        self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
-        self.operator.new_number = True
-        self.activekeyclass = 'TVM'
+        if self.compute_flag:
+            self.timevalueofmoney.calculation('PV')
+            self.worksheetflag = self.timevalueofmoney
+            self.compute_flag = False
+        else:
+            self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
+            self.worksheetflag = self.timevalueofmoney
+            self.operator.new_number = True
+            self.activekeyclass = 'TVM'
         
     def payment_clicked(self):
         if self.secondflag:
@@ -328,9 +352,15 @@ class Widget(QWidget):
             self.activekeyclass = 'Payment_Mode'
             self.secondflag = False
         else:
-            self.timevalueofmoney.tvm('PMT', self.operator.current_number_value)
-            self.operator.new_number = True
-            self.activekeyclass = 'TVM'
+            if self.compute_flag:
+                self.timevalueofmoney.calculation('PMT')
+                self.worksheetflag = self.timevalueofmoney
+                self.compute_flag = False
+            else:
+                self.timevalueofmoney.tvm('PMT', self.operator.current_number_value)
+                self.worksheetflag = self.timevalueofmoney
+                self.operator.new_number = True
+                self.activekeyclass = 'TVM'
         
     def futurevalue_clicked(self):
         if self.secondflag:
@@ -339,11 +369,33 @@ class Widget(QWidget):
                 self.ui.screenletter.setText("")
             self.secondflag = False
         else:
-            self.timevalueofmoney.tvm('FV', self.operator.current_number_value)
-            self.operator.new_number = True
-            self.activekeyclass = 'TVM'
+            if self.compute_flag:
+                self.timevalueofmoney.calculation('FV')
+                self.worksheetflag = self.timevalueofmoney
+                self.compute_flag = False
+            else:
+                self.timevalueofmoney.tvm('FV', self.operator.current_number_value)
+                self.worksheetflag = self.timevalueofmoney
+                self.operator.new_number = True
+                self.activekeyclass = 'TVM'
     #endregion
     
+    #region cashflow
+    def cashflow_clicked(self):
+        self.cashflow.cashflow()
+        self.worksheetflag = self.cashflow
+        
+    def netpresentvalue_clicked(self):
+        self.cashflowreturns.npv()
+        self.worksheetflag = self.cashflowreturns
+        
+    def internalratereturn_clicked(self):
+        self.cashflowreturns.irr()
+        self.worksheetflag = self.cashflowreturns
+       
+    #endregion
+       
+        
     def display2clear(self):
         if self.clrdisplay2flag:
             self.ui.screenletter.setText('')

@@ -326,13 +326,18 @@ class Widget(QWidget):
         if self.secondflag:
             self.timevalueofmoney.paymentperyear()
             self.worksheetflag = self.timevalueofmoney
-            self.activekeyclass = 'P/Y'
+            self.activekeyclass = 'P_Y'
             self.secondflag = False
         else:
-            self.timevalueofmoney.tvm('I/Y', self.operator.current_number_value)
-            self.operator.new_number = True
-            self.worksheetflag = self.timevalueofmoney
-            self.activekeyclass = 'TVM'
+            if self.compute_flag:
+                self.timevalueofmoney.calculation('I_Y')
+                self.worksheetflag = self.timevalueofmoney
+                self.compute_flag = False
+            else:
+                self.timevalueofmoney.tvm('I_Y', self.operator.current_number_value)
+                self.worksheetflag = self.timevalueofmoney
+                self.operator.new_number = True
+                self.activekeyclass = 'TVM'
         
     def presentvalue_clicked(self):
         if self.compute_flag:

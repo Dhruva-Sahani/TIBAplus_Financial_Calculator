@@ -2,42 +2,42 @@
     "N": {
         "key": "N",
         "key_type": "Enter and Compute",
-        "current_value": 60.0,
+        "current_value": 0.0,
         "default_value": 0.0
     },
-    "I/Y": {
+    "I_Y": {
         "key": "I/Y",
         "key_type": "Enter and Compute",
-        "current_value": 3.2,
+        "current_value": 0.0,
         "default_value": 0.0
     },
     "PV": {
         "key": "PV",
         "key_type": "Enter and Compute",
-        "current_value": 0.0,
+        "current_value": 20.0,
         "default_value": 0.0
     },
     "PMT": {
         "key": "PMT",
         "key_type": "Enter and Compute",
-        "current_value": -400.0,
+        "current_value": 30.0,
         "default_value": 0.0
     },
     "FV": {
         "key": "FV",
         "key_type": "Enter and Compute",
-        "current_value": 25989.148918493476,
+        "current_value": 0.0,
         "default_value": 0.0
     },
-    "P/Y": {
+    "P_Y": {
         "type": "input",
-        "current_value": 12.0,
+        "current_value": 1.0,
         "default_value": 1.0,
         "display_key": "P/Y"
     },
-    "C/Y": {
+    "C_Y": {
         "type": "input",
-        "current_value": 12.0,
+        "current_value": 1.0,
         "default_value": 1.0,
         "display_key": "C/Y"
     },

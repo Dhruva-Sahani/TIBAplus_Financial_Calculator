@@ -92,6 +92,7 @@ class Widget(QWidget):
         self.ui.internalratereturn.clicked.connect(lambda: self.internalratereturn_clicked())
 
     """ Slots for all the buttons are defined below. """
+    """ Functions are named and categorised according to the primary action of the buttons """
     """ Buttons without a second functions and similar funcionality may have a mutual functions."""  
     
     @Slot()
@@ -297,7 +298,7 @@ class Widget(QWidget):
             if self.worksheetflag != None:
                 self.worksheetflag.enter(self.thenumber)
                 self.operator.new_number = True
-                
+            
     def compute_clicked(self):
         if self.secondflag:
             self.operator.clear_display()
@@ -306,7 +307,10 @@ class Widget(QWidget):
             self.secondflag = False
             self.setting.__init__(self.ui.screennumber, self.ui.screenletter)
         else:
-            self.compute_flag = True
+            if hasattr(self.worksheetflag, 'calculate_instant'):
+                self.worksheetflag.calculate_instant()
+            else:
+                self.compute_flag = True
             
     #endregion
     
@@ -319,6 +323,7 @@ class Widget(QWidget):
         else:
             self.timevalueofmoney.tvm('N', self.operator.current_number_value)
             self.operator.new_number = True
+            self.clrdisplay2flag = True
             self.worksheetflag = self.timevalueofmoney
             self.activekeyclass = 'TVM'
         
@@ -333,10 +338,12 @@ class Widget(QWidget):
                 self.timevalueofmoney.calculation('I_Y')
                 self.worksheetflag = self.timevalueofmoney
                 self.compute_flag = False
+                self.clrdisplay2flag = True
             else:
                 self.timevalueofmoney.tvm('I_Y', self.operator.current_number_value)
                 self.worksheetflag = self.timevalueofmoney
                 self.operator.new_number = True
+                self.clrdisplay2flag = True
                 self.activekeyclass = 'TVM'
         
     def presentvalue_clicked(self):
@@ -344,10 +351,12 @@ class Widget(QWidget):
             self.timevalueofmoney.calculation('PV')
             self.worksheetflag = self.timevalueofmoney
             self.compute_flag = False
+            self.clrdisplay2flag = True
         else:
             self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
             self.worksheetflag = self.timevalueofmoney
             self.operator.new_number = True
+            self.clrdisplay2flag = True
             self.activekeyclass = 'TVM'
         
     def payment_clicked(self):
@@ -361,10 +370,12 @@ class Widget(QWidget):
                 self.timevalueofmoney.calculation('PMT')
                 self.worksheetflag = self.timevalueofmoney
                 self.compute_flag = False
+                self.clrdisplay2flag = True
             else:
                 self.timevalueofmoney.tvm('PMT', self.operator.current_number_value)
                 self.worksheetflag = self.timevalueofmoney
                 self.operator.new_number = True
+                self.clrdisplay2flag = True
                 self.activekeyclass = 'TVM'
         
     def futurevalue_clicked(self):
@@ -377,11 +388,13 @@ class Widget(QWidget):
             if self.compute_flag:
                 self.timevalueofmoney.calculation('FV')
                 self.worksheetflag = self.timevalueofmoney
+                self.clrdisplay2flag = True
                 self.compute_flag = False
             else:
                 self.timevalueofmoney.tvm('FV', self.operator.current_number_value)
                 self.worksheetflag = self.timevalueofmoney
                 self.operator.new_number = True
+                self.clrdisplay2flag = True
                 self.activekeyclass = 'TVM'
     #endregion
     

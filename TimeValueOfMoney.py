@@ -244,28 +244,49 @@ class Compute:
             return term2_prime + term3_prime
         
         # Initial guess for 'i'
-        i = initial_guess
+        # i = initial_guess
         
-        # Iterate using the Newton-Raphson method
-        for iteration in range(max_iterations):
+        # # Iterate using the Newton-Raphson method
+        # for iteration in range(max_iterations):
+        #     f_val = f_i3(i)
+        #     f_prime_val = f_prime_i3(i)
+            
+        #     # Prevent division by zero
+        #     if f_prime_val == 0:
+        #         raise ValueError("Derivative is zero, Newton-Raphson method fails.")
+            
+        #     # Update 'i' using Newton-Raphson step
+        #     i_new = i - (f_val / f_prime_val)
+            
+        #     # Check for convergence
+        #     if abs(i_new - i) < tolerance:
+        #         self.i = i_new  # Save the solved interest rate in the class
+        #         return i_new  # Return the solved interest rate
+            
+        #     # Update 'i' for the next iteration
+        #     i = i_new
+            
+        i = initial_guess  # Replace 'initial_guess' with your initial guess
+
+        while True:
             f_val = f_i3(i)
             f_prime_val = f_prime_i3(i)
-            
+
             # Prevent division by zero
             if f_prime_val == 0:
                 raise ValueError("Derivative is zero, Newton-Raphson method fails.")
-            
+
             # Update 'i' using Newton-Raphson step
             i_new = i - (f_val / f_prime_val)
-            
+
             # Check for convergence
             if abs(i_new - i) < tolerance:
                 self.i = i_new  # Save the solved interest rate in the class
                 return i_new  # Return the solved interest rate
-            
+
             # Update 'i' for the next iteration
             i = i_new
-        
+            
         # If it doesn't converge within max_iterations, raise an error
         raise ValueError("Solution did not converge after the maximum number of iterations.")
 

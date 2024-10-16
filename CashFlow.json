@@ -1,27 +1,27 @@
 {
     "Cf0": {
         "key": "Cf0",
-        "current_value": 8,
+        "current_value": -200,
         "default_value": 0
     },
     "C01": {
         "key": "C01",
-        "current_value": 2,
+        "current_value": 100,
         "default_value": 0
     },
     "F01": {
         "key": "F01",
-        "current_value": 2,
+        "current_value": 1,
         "default_value": 0
     },
     "C02": {
         "key": "C02",
-        "current_value": 5,
+        "current_value": 50,
         "default_value": 0
     },
     "F02": {
         "key": "F02",
-        "current_value": 8,
+        "current_value": 1,
         "default_value": 0
     },
     "C03": {

@@ -8,19 +8,19 @@
     "I_Y": {
         "key": "I/Y",
         "key_type": "Enter and Compute",
-        "current_value": 0.0,
+        "current_value": 5.0,
         "default_value": 0.0
     },
     "PV": {
         "key": "PV",
         "key_type": "Enter and Compute",
-        "current_value": 0.0,
+        "current_value": 10000.0,
         "default_value": 0.0
     },
     "PMT": {
         "key": "PMT",
         "key_type": "Enter and Compute",
-        "current_value": 0.0,
+        "current_value": -700.0,
         "default_value": 0.0
     },
     "FV": {

@@ -13,6 +13,7 @@ from OperationsLogic import OperationsLogic
 from Settings import Settings
 from TimeValueOfMoney import TimeValueOfMoney
 from CashFlow import CashFlow, CashFlowReturns
+from Amortization import Amortization
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -24,6 +25,7 @@ class Widget(QWidget):
         self.timevalueofmoney = TimeValueOfMoney(self.ui.screennumber, self.ui.screenletter)
         self.cashflow = CashFlow(self.ui.screennumber, self.ui.screenletter)
         self.cashflowreturns = CashFlowReturns(self.ui.screennumber, self.ui.screenletter)
+        self.amortization = Amortization(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
         self.activekeyclass = None
@@ -347,17 +349,22 @@ class Widget(QWidget):
                 self.activekeyclass = 'TVM'
         
     def presentvalue_clicked(self):
-        if self.compute_flag:
-            self.timevalueofmoney.calculation('PV')
-            self.worksheetflag = self.timevalueofmoney
-            self.compute_flag = False
-            self.clrdisplay2flag = True
+        if self.secondflag:
+            self.amortization.amortization()
+            self.worksheetflag = self.amortization
+            self.secondflag = False
         else:
-            self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
-            self.worksheetflag = self.timevalueofmoney
-            self.operator.new_number = True
-            self.clrdisplay2flag = True
-            self.activekeyclass = 'TVM'
+            if self.compute_flag:
+                self.timevalueofmoney.calculation('PV')
+                self.worksheetflag = self.timevalueofmoney
+                self.compute_flag = False
+                self.clrdisplay2flag = True
+            else:
+                self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
+                self.worksheetflag = self.timevalueofmoney
+                self.operator.new_number = True
+                self.clrdisplay2flag = True
+                self.activekeyclass = 'TVM'
         
     def payment_clicked(self):
         if self.secondflag:

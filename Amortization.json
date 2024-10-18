@@ -1,0 +1,27 @@
+{
+    "P1": {
+        "key": "P1",
+        "current_value": 5,
+        "default_value": 0
+    },
+    "P2": {
+        "key": "P2",
+        "current_value": 6,
+        "default_value": 0
+    },
+    "BAL": {
+        "key": "BAL",
+        "current_value": 8639.62,
+        "default_value": 0
+    },
+    "PRN": {
+        "key": "PRN",
+        "current_value": -498.35999999999876,
+        "default_value": 0
+    },
+    "INT": {
+        "key": "INT",
+        "current_value": -901.6400000000012,
+        "default_value": 0
+    }
+}

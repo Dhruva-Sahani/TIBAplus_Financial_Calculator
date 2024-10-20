@@ -50,7 +50,7 @@ class TimeValueOfMoney:
                     # Save the updated value in the JSON file
                     self.save_time_value_of_money()
                     
-    def calculation(self, keytype):
+    def calculation(self, keytype, instance):
         if keytype in self.data:
             key_data = self.data[keytype]
             self.computation = Compute()
@@ -60,6 +60,8 @@ class TimeValueOfMoney:
             self.save_time_value_of_money()
             self.display2.setText(f"{key_data['key']}=")
             self.display1.setText(str(key_data['current_value']))
+            instance.current_number = str(key_data['current_value'])
+            
         
         
     def paymentperyear(self):
@@ -293,7 +295,6 @@ class Compute:
 
     def calculate_N(self):
         """Calculate N based on the two cases."""
-        print("called")
         if self.I_Y != 0:
             # Case 1: I/Y != 0
             i = self.calculate_i_method_1()

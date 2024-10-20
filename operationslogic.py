@@ -5,7 +5,7 @@ from Settings import Settings
 
 
 class OperationsLogic:
-    def __init__(self, display1):
+    def __init__(self, display1 = None):
         self.settings= Settings("", "") #Creating instance of settings class
         
         # Display logic attributes

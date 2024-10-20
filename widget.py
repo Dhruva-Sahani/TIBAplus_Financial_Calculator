@@ -14,6 +14,7 @@ from Settings import Settings
 from TimeValueOfMoney import TimeValueOfMoney
 from CashFlow import CashFlow, CashFlowReturns
 from Amortization import Amortization
+from Memory import Memory
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -26,6 +27,7 @@ class Widget(QWidget):
         self.cashflow = CashFlow(self.ui.screennumber, self.ui.screenletter)
         self.cashflowreturns = CashFlowReturns(self.ui.screennumber, self.ui.screenletter)
         self.amortization = Amortization(self.ui.screennumber, self.ui.screenletter)
+        self.memory = Memory(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
         self.activekeyclass = None
@@ -78,6 +80,7 @@ class Widget(QWidget):
         self.ui.down.clicked.connect(lambda: self.down_clicked())
         self.ui.enter.clicked.connect(lambda: self.enter_clicked())
         self.ui.compute.clicked.connect(lambda: self.compute_clicked())
+        self.ui.recall.clicked.connect(lambda: self.recall_clicked())
         #endregion
         
         #region time value of money buttons routing
@@ -101,44 +104,78 @@ class Widget(QWidget):
     
     #region number
     def number0_clicked(self):
-        self.operator.add_number(0)
-        self.display2clear()
+        if self.secondflag:
+            self.memory.memory()
+            self.worksheetflag = self.memory
+            self.secondflag = False
+        elif self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 0)
+        else:
+            self.operator.add_number(0)
+            self.display2clear()
     
     def number1_clicked(self):
-        self.operator.add_number(1)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 1)
+        else:
+            self.operator.add_number(1)
+            self.display2clear()
         
     def number2_clicked(self):
-        self.operator.add_number(2)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 2)
+        else:
+            self.operator.add_number(2)
+            self.display2clear()
         
     def number3_clicked(self):
-        self.operator.add_number(3)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 3)
+        else:
+            self.operator.add_number(3)
+            self.display2clear()
         
     def number4_clicked(self):
-        self.operator.add_number(4)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 4)
+        else:
+            self.operator.add_number(4)
+            self.display2clear()
         
     def number5_clicked(self):
-        self.operator.add_number(5)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 5)
+        else:
+            self.operator.add_number(5)
+            self.display2clear()
         
     def number6_clicked(self):
-        self.operator.add_number(6)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 6)
+        else:
+            self.operator.add_number(6)
+            self.display2clear()
         
     def number7_clicked(self):
-        self.operator.add_number(7)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 7)
+        else:
+            self.operator.add_number(7)
+            self.display2clear()
         
     def number8_clicked(self):
-        self.operator.add_number(8)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 8)
+        else:
+            self.operator.add_number(8)
+            self.display2clear()
         
     def number9_clicked(self):
-        self.operator.add_number(9)
-        self.display2clear()
+        if self.memory.recall_flag:
+            self.memory.recall_num(self.operator, 9)
+        else:
+            self.operator.add_number(9)
+            self.display2clear()
     
     def decimal_clicked(self):
         if self.secondflag:
@@ -309,19 +346,24 @@ class Widget(QWidget):
             self.secondflag = False
             self.setting.__init__(self.ui.screennumber, self.ui.screenletter)
         else:
-            if hasattr(self.worksheetflag, 'calculate_instant'):
+            if hasattr(self.worksheetflag, 'calculate_instant'):  # Condition if compute button instantly calculates a value
                 self.worksheetflag.calculate_instant()
             else:
-                self.compute_flag = True
+                self.compute_flag = True  # If another button is to be pressed after compute to specifiy a parameter
+                
+    def recall_clicked(self):
+        self.memory.recall_active()
             
     #endregion
     
     #region timevalueofmoney
     def period_clicked(self):
         if self.compute_flag:
-            self.timevalueofmoney.calculation('N')
+            self.timevalueofmoney.calculation('N', self.operator)
             self.worksheetflag = self.timevalueofmoney
             self.compute_flag = False
+        elif self.memory.recall_flag:
+                self.memory.recall_tvm(self.timevalueofmoney, self.operator, 'N')
         else:
             self.timevalueofmoney.tvm('N', self.operator.current_number_value)
             self.operator.new_number = True
@@ -337,10 +379,12 @@ class Widget(QWidget):
             self.secondflag = False
         else:
             if self.compute_flag:
-                self.timevalueofmoney.calculation('I_Y')
+                self.timevalueofmoney.calculation('I_Y', self.operator)
                 self.worksheetflag = self.timevalueofmoney
                 self.compute_flag = False
                 self.clrdisplay2flag = True
+            elif self.memory.recall_flag:
+                self.memory.recall_tvm(self.timevalueofmoney, self.operator, 'I_Y')
             else:
                 self.timevalueofmoney.tvm('I_Y', self.operator.current_number_value)
                 self.worksheetflag = self.timevalueofmoney
@@ -355,10 +399,12 @@ class Widget(QWidget):
             self.secondflag = False
         else:
             if self.compute_flag:
-                self.timevalueofmoney.calculation('PV')
+                self.timevalueofmoney.calculation('PV', self.operator)
                 self.worksheetflag = self.timevalueofmoney
                 self.compute_flag = False
                 self.clrdisplay2flag = True
+            elif self.memory.recall_flag:
+                self.memory.recall_tvm(self.timevalueofmoney, self.operator, 'PV')
             else:
                 self.timevalueofmoney.tvm('PV', self.operator.current_number_value)
                 self.worksheetflag = self.timevalueofmoney
@@ -374,10 +420,12 @@ class Widget(QWidget):
             self.secondflag = False
         else:
             if self.compute_flag:
-                self.timevalueofmoney.calculation('PMT')
+                self.timevalueofmoney.calculation('PMT', self.operator)
                 self.worksheetflag = self.timevalueofmoney
                 self.compute_flag = False
                 self.clrdisplay2flag = True
+            elif self.memory.recall_flag:
+                self.memory.recall_tvm(self.timevalueofmoney, self.operator, 'PMT')
             else:
                 self.timevalueofmoney.tvm('PMT', self.operator.current_number_value)
                 self.worksheetflag = self.timevalueofmoney
@@ -393,10 +441,12 @@ class Widget(QWidget):
             self.secondflag = False
         else:
             if self.compute_flag:
-                self.timevalueofmoney.calculation('FV')
+                self.timevalueofmoney.calculation('FV', self.operator)
                 self.worksheetflag = self.timevalueofmoney
                 self.clrdisplay2flag = True
                 self.compute_flag = False
+            elif self.memory.recall_flag:
+                self.memory.recall_tvm(self.timevalueofmoney, self.operator, 'FV')
             else:
                 self.timevalueofmoney.tvm('FV', self.operator.current_number_value)
                 self.worksheetflag = self.timevalueofmoney

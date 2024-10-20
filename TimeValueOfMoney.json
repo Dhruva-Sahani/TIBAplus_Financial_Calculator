@@ -2,7 +2,7 @@
     "N": {
         "key": "N",
         "key_type": "Enter and Compute",
-        "current_value": 0.0,
+        "current_value": 26.0,
         "default_value": 0.0
     },
     "I_Y": {
@@ -26,7 +26,7 @@
     "FV": {
         "key": "FV",
         "key_type": "Enter and Compute",
-        "current_value": 0.0,
+        "current_value": 15.0,
         "default_value": 0.0
     },
     "P_Y": {

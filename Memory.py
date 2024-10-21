@@ -8,6 +8,7 @@ class Memory:
         self.display2 = display2
         self.current_index = 0 #setting current display to 1
         self.recall_flag = False
+        self.store_flag = False
         self.memory_data = {}
         self.load_memory()
 

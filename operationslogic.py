@@ -222,18 +222,26 @@ class OperationsLogic:
                 self.current_value = str(math.tan(float(self.angle)))
             
         elif instant_operator == "log":
-            self.current_value = str(math.log(int(self.current_value)))  
+            try:
+                self.current_value = str(math.log(float(self.current_value)))  
+            except ValueError:
+                self.current_value = "Error 2    "
         elif instant_operator == "e**x":
-            self.current_value = str(math.exp(int(self.current_value)))
+            self.current_value = str(math.exp(float(self.current_value)))
         elif instant_operator == "rand":
             self.current_value = str(random.uniform(0, 1))
         elif instant_operator == "factorial":
             if float(self.current_value)>= 0 and float(self.current_value)<=69:
-                self.current_value = str(math.factorial(int(self.current_value)))
+                self.current_value = str(math.factorial(float(self.current_value)))
             else:
-                self.current_value = "Error"   
+                self.current_value = "Error 2    "   
         else:
-            self.current_value = str(eval("{num}{op}".format(num=self.current_value, op=instant_operator)))
+            try:
+                self.current_value = str(eval("{num}{op}".format(num=self.current_value, op=instant_operator)))
+            except ZeroDivisionError:
+                self.current_value = "Error 1    "
+            except ValueError:
+                self.current_value = "Error 2    "
         self.current_number = self.current_value
         self.update_display()
         
@@ -323,6 +331,8 @@ class OperationsLogic:
         """Evaluate the expression using BODMAS (default algebraic)."""
         try:
             return eval(expr)  # Default BODMAS handling
+        except ZeroDivisionError:
+            return "Error 1    "
         except Exception:
             return "Error evalag"
 
@@ -370,12 +380,19 @@ class OperationsLogic:
                     elif operator == '*':
                         result *= next_number
                     elif operator == '/':
-                        result /= next_number  # Handle division by zero if necessary
+                        result /= next_number   # Handle division by zero if necessary
+                    elif operator == '**':
+                        result **= next_number 
+                       
 
             return result
+        except ZeroDivisionError:
+            return "Error 1    "
         
+        
+    
         except Exception as e:
-            return f"Error: {str(e)}"
+            return f"Unexpected error: {e}"
     #endregion
     
     #region cleanscreen

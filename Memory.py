@@ -19,7 +19,7 @@ class Memory:
         except FileNotFoundError:
             print("Memory file not found, loading defaults.")
             self.memory_data = {
-                str(i): {"key": f"M{i}", "current_value": 0, "default_value": 0}
+                str(i): {"key": f"M{i}", "current_value": 0.0, "default_value": 0.0}
                 for i in range(10)
             }
 
@@ -47,7 +47,7 @@ class Memory:
         self.display2.setText(f"{current_key}=")  # Displaying the key followed by '=' in display2
         
     def memory(self):
-        self.current_index = 0
+        self.current_index = 0 # Initiating the worksheet
         self.display_current_key()
         
     def enter(self, new_value):
@@ -61,26 +61,39 @@ class Memory:
         
     def clear_work(self, null):
         for key, data in self.memory_data.items():
-            data['current_value'] = data['default_value']
+            data['current_value'] = data['default_value'] #Setting all values to default
         self.save_memory()
         self.display_current_key()
         
     def recall_active(self):
-        self.recall_flag = True
+        self.recall_flag = True 
         
     def recall_deactive(self):
         self.recall_flag = False
         
     def recall_num(self, instance, num):
+        """For recalling numbers stored in memory"""
         instance.current_number = str(self.memory_data[str(num)]['current_value']) 
         self.display1.setText(instance.current_number)
         self.recall_deactive()
         
     def recall_tvm(self, instancetvm, instanceop, para):
+        """For recalling TVM values stored in TVM sheet"""
         instanceop.current_number = str(instancetvm.data[para]['current_value'])
         self.display2.setText(f"{instancetvm.data[para]['key']}=")
         self.display1.setText(str(instancetvm.data[para]['current_value']))
         self.recall_deactive()
+        
+    def store_active(self):
+        self.store_flag = True
+        
+    def store_deactive(self):
+        self.store_flag = False
+
+    def store_num(self, num, memory):
+        self.memory_data[str(memory)]['current_value'] = float(num)
+        self.save_memory()
+        self.store_deactive()
         
     
         

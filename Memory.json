@@ -1,52 +1,52 @@
 {
     "0": {
         "key": "M0",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "1": {
         "key": "M1",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "2": {
         "key": "M2",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "3": {
         "key": "M3",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "4": {
         "key": "M4",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "5": {
         "key": "M5",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "6": {
         "key": "M6",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "7": {
         "key": "M7",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "8": {
         "key": "M8",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     },
     "9": {
         "key": "M9",
-        "current_value": 0,
-        "default_value": 0
+        "current_value": 0.0,
+        "default_value": 0.0
     }
 }

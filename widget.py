@@ -80,7 +80,11 @@ class Widget(QWidget):
         self.ui.down.clicked.connect(lambda: self.down_clicked())
         self.ui.enter.clicked.connect(lambda: self.enter_clicked())
         self.ui.compute.clicked.connect(lambda: self.compute_clicked())
+        #endregion
+        
+        #region Memory buttons routing
         self.ui.recall.clicked.connect(lambda: self.recall_clicked())
+        self.ui.store.clicked.connect(lambda: self.store_clicked())
         #endregion
         
         #region time value of money buttons routing
@@ -110,6 +114,8 @@ class Widget(QWidget):
             self.secondflag = False
         elif self.memory.recall_flag:
             self.memory.recall_num(self.operator, 0)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 0)
         else:
             self.operator.add_number(0)
             self.display2clear()
@@ -117,6 +123,8 @@ class Widget(QWidget):
     def number1_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 1)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 1)
         else:
             self.operator.add_number(1)
             self.display2clear()
@@ -124,6 +132,8 @@ class Widget(QWidget):
     def number2_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 2)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 2)
         else:
             self.operator.add_number(2)
             self.display2clear()
@@ -131,6 +141,8 @@ class Widget(QWidget):
     def number3_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 3)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 3)
         else:
             self.operator.add_number(3)
             self.display2clear()
@@ -138,6 +150,8 @@ class Widget(QWidget):
     def number4_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 4)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 4)
         else:
             self.operator.add_number(4)
             self.display2clear()
@@ -145,6 +159,8 @@ class Widget(QWidget):
     def number5_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 5)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 5)
         else:
             self.operator.add_number(5)
             self.display2clear()
@@ -152,6 +168,8 @@ class Widget(QWidget):
     def number6_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 6)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 6)
         else:
             self.operator.add_number(6)
             self.display2clear()
@@ -159,6 +177,8 @@ class Widget(QWidget):
     def number7_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 7)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 7)
         else:
             self.operator.add_number(7)
             self.display2clear()
@@ -166,6 +186,8 @@ class Widget(QWidget):
     def number8_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 8)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 8)
         else:
             self.operator.add_number(8)
             self.display2clear()
@@ -173,6 +195,8 @@ class Widget(QWidget):
     def number9_clicked(self):
         if self.memory.recall_flag:
             self.memory.recall_num(self.operator, 9)
+        elif self.memory.store_flag:
+            self.memory.store_num(self.operator.current_number_value, 9)
         else:
             self.operator.add_number(9)
             self.display2clear()
@@ -316,16 +340,24 @@ class Widget(QWidget):
     #region highlevel   
     def second_clicked(self):
         self.secondflag = True
+        self.memory.store_deactive()
+        self.memory.recall_deactive()
         
     def up_clicked(self):
         if self.worksheetflag!= None:
             self.worksheetflag.move_up()
             self.operator.new_number = True
+            self.memory.store_deactive()
+            self.memory.recall_deactive()
+            self.secondflag = False
             
     def down_clicked(self):
         if self.worksheetflag!= None:
             self.worksheetflag.move_down()
             self.operator.new_number = True
+            self.memory.store_deactive()
+            self.memory.recall_deactive()
+            self.secondflag = False
             
     def enter_clicked(self):
         self.thenumber =  self.operator.current_number_value
@@ -350,11 +382,16 @@ class Widget(QWidget):
                 self.worksheetflag.calculate_instant()
             else:
                 self.compute_flag = True  # If another button is to be pressed after compute to specifiy a parameter
-                
-    def recall_clicked(self):
-        self.memory.recall_active()
             
     #endregion
+    
+    #region memory
+    def recall_clicked(self):
+        self.memory.recall_active()
+        
+    def store_clicked(self):
+        self.memory.store_active()
+        
     
     #region timevalueofmoney
     def period_clicked(self):
@@ -459,14 +496,23 @@ class Widget(QWidget):
     def cashflow_clicked(self):
         self.cashflow.cashflow()
         self.worksheetflag = self.cashflow
+        self.memory.store_deactive()
+        self.memory.recall_deactive()
+        self.secondflag = False
         
     def netpresentvalue_clicked(self):
         self.cashflowreturns.npv()
         self.worksheetflag = self.cashflowreturns
+        self.memory.store_deactive()
+        self.memory.recall_deactive()
+        self.secondflag = False
         
     def internalratereturn_clicked(self):
         self.cashflowreturns.irr()
         self.worksheetflag = self.cashflowreturns
+        self.memory.store_deactive()
+        self.memory.recall_deactive()
+        self.secondflag = False
        
     #endregion
        

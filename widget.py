@@ -15,6 +15,7 @@ from TimeValueOfMoney import TimeValueOfMoney
 from CashFlow import CashFlow, CashFlowReturns
 from Amortization import Amortization
 from Memory import Memory
+from Bond import Bond
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -28,6 +29,7 @@ class Widget(QWidget):
         self.cashflowreturns = CashFlowReturns(self.ui.screennumber, self.ui.screenletter)
         self.amortization = Amortization(self.ui.screennumber, self.ui.screenletter)
         self.memory = Memory(self.ui.screennumber, self.ui.screenletter)
+        self.bond = Bond(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
         self.activekeyclass = None
@@ -193,7 +195,11 @@ class Widget(QWidget):
             self.display2clear()
         
     def number9_clicked(self):
-        if self.memory.recall_flag:
+        if self.secondflag:
+            self.bond.bond()
+            self.worksheetflag = self.bond
+            self.secondflag = False
+        elif self.memory.recall_flag:
             self.memory.recall_num(self.operator, 9)
         elif self.memory.store_flag:
             self.memory.store_num(self.operator.current_number_value, 9)

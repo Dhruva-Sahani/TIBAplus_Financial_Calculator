@@ -1,0 +1,60 @@
+{
+    "Settlement date": {
+        "type": "enterdate",
+        "key": "SDT",
+        "current_value": "10-29-2006",
+        "default_value": "12-31-1990"
+    },
+    "Annual coupon rate %": {
+        "type": "enter",
+        "key": "CPN",
+        "current_value": 25.0,
+        "default_value": 0.0
+    },
+    "Redemption date": {
+        "type": "enterdate",
+        "key": "RDT",
+        "current_value": "12-31-1990",
+        "default_value": "12-31-1990"
+    },
+    "Redemption value": {
+        "type": "enter",
+        "key": "RV",
+        "current_value": 100.0,
+        "default_value": 100.0
+    },
+    "Day count method": {
+        "type": "switch",
+        "options": [
+            "ACT",
+            "360"
+        ],
+        "current_value": "ACT",
+        "default_value": "ACT"
+    },
+    "Coupons per year": {
+        "type": "switch",
+        "options": [
+            "2/Y",
+            "1/Y"
+        ],
+        "key": "2/Y",
+        "default_value": "2/Y"
+    },
+    "Yield to redemption": {
+        "type": "entercomp",
+        "key": "YLD",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "Dollar price": {
+        "type": "entercomp",
+        "key": "PRI",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "Accrued interet": {
+        "type": "compute",
+        "key": "AI"
+    }
+}

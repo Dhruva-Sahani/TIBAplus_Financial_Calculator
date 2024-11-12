@@ -1,7 +1,7 @@
 import json
 
 class Settings:
-    def __init__(self, display1, display2):
+    def __init__(self, display1= None, display2= None):
         # Load settings from the JSON file
         self.display1= display1
         self.display2 = display2

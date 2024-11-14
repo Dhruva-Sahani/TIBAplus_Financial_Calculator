@@ -134,5 +134,144 @@ class Bond:
         self.data[current_key] = key_data
         self.save_bond()
         self.display_current_key()
+        
+        
+    def set(self):
+        """
+        Cycle the 'key' of the current 'switch' type to the next option.
+        """
+        current_key = self.keys[self.current_index]
+        key_data = self.data[current_key]
+
+        # Check if the type is "switch"
+        if key_data["type"] == "switch":
+            options = key_data["options"]
+            current_option = key_data["current_value"]
+
+            # Find the index of the current option and move to the next one
+            if current_option in options:
+                current_index = options.index(current_option)
+                next_index = (current_index + 1) % len(options)  # Wrap around to the start if at the end
+                key_data["current_value"] = options[next_index]  # Update key to the next option
+
+            # Save the updated data and refresh the display
+            self.save_bond()
+            self.display_current_key()
+            
+            
+            
+
+
+class Compute:
+    def __init__(self, filename="Bond.json"):
+        self.filename = filename
+        
+        # Initialize variables for bond attributes (short forms)
+        self.SDT = None  # Settlement Date
+        self.CPN = None  # Annual Coupon Rate %
+        self.RDT = None  # Redemption Date
+        self.RV = None   # Redemption Value
+        self.DCM = None  # Day Count Method
+        self.CPY = None  # Coupons per Year
+        self.YLD = None  # Yield to Redemption
+        self.PRI = None  # Dollar Price
+        self.AI = None   # Accrued Interest
+        
+        self.load_and_set()
+
+    def load_and_set(self):
+        """Load current values from the JSON file into class variables."""
+        try:
+            with open(self.filename, 'r') as file:
+                data = json.load(file)
+
+            # Map JSON keys to the short variable names
+            self.SDT = data["Settlement date"]["current_value"]
+            self.CPN = data["Annual coupon rate %"]["current_value"]
+            self.RDT = data["Redemption date"]["current_value"]
+            self.RV = data["Redemption value"]["current_value"]
+            self.DCM = data["Day count method"]["current_value"]
+            self.CPY = data["Coupons per year"]["current_value"]
+            self.YLD = data["Yield to redemption"]["current_value"]
+            self.PRI = data["Dollar price"]["current_value"]
+            self.AI = data["Accrued interet"]["current_value"]
+            self.Day = self.daycount()
+
+            print("Bond data loaded into Compute class variables successfully.")
+        
+        except FileNotFoundError:
+            print(f"Error: File {self.filename} not found.")
+        except json.JSONDecodeError:
+            print("Error: Invalid JSON format in the file.")
+        except KeyError as e:
+            print(f"Error: Missing key in JSON data: {e}")
+
+
+    def daycount(self):
+        """Calculate the number of days between the settlement date and redemption date."""
+        
+        # Get date format setting
+        self.settings = Settings()
+        date_format = self.settings.read("Dates")
+        
+        # Choose date parsing format based on date_format setting
+        if date_format == "US":
+            date_format_str = "%m-%d-%Y"  # mm-dd-yyyy
+        elif date_format == "Eur":
+            date_format_str = "%d-%m-%Y"  # dd-mm-yyyy
+        else:
+            raise ValueError("Error: Unsupported date format setting.")
+        
+        if self.DCM == "ACT":
+            try:
+                # Convert SDT and RDT strings to datetime objects
+                settlement_date = datetime.strptime(self.SDT, date_format_str)
+                redemption_date = datetime.strptime(self.RDT, date_format_str)
+                
+                # Check that the redemption date is not before the settlement date
+                if redemption_date <= settlement_date:
+                    raise ValueError("Error: Redemption date cannot be before or on the settlement date.")
+                
+                # Calculate the number of days (excluding redemption date)
+                days_between = (redemption_date - settlement_date).days
+
+                print(f"Days between settlement and redemption: {days_between}")
+                return days_between
+
+            except ValueError as e:
+                print(f"Error: {e}")
+                return f"Error: {e}"
+            
+        elif self.DCM == "360":
+            try:
+                # Convert SDT and RDT strings to datetime objects
+                settlement_date = datetime.strptime(self.SDT, date_format_str)
+                redemption_date = datetime.strptime(self.RDT, date_format_str)
+                
+                # Extract year, month, and day components
+                Y1, M1, DT1 = settlement_date.year, settlement_date.month, settlement_date.day
+                Y2, M2, DT2 = redemption_date.year, redemption_date.month, redemption_date.day
+                
+                # Apply day adjustment rules
+                if DT1 == 31:
+                    DT1 = 30
+                if DT2 == 31 and (DT1 == 30 or DT1 == 31):
+                    DT2 = 30
+                
+                # Calculate DBD using the 30/360 convention
+                days_between = (Y2 - Y1) * 360 + (M2 - M1) * 30 + (DT2 - DT1)
+                
+                print(f"Days between (30/360 convention): {days_between}")
+                return days_between
+
+            except ValueError as e:
+                print(f"Error: {e}")
+                return f"Error: {e}"
+            
+            
+            
+            
+compute = Compute()
+
 
        

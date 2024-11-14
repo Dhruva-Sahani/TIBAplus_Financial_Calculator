@@ -2,7 +2,7 @@
     "Settlement date": {
         "type": "enterdate",
         "key": "SDT",
-        "current_value": "10-29-2006",
+        "current_value": "12-06-2006",
         "default_value": "12-31-1990"
     },
     "Annual coupon rate %": {
@@ -14,7 +14,7 @@
     "Redemption date": {
         "type": "enterdate",
         "key": "RDT",
-        "current_value": "12-31-1990",
+        "current_value": "12-31-2006",
         "default_value": "12-31-1990"
     },
     "Redemption value": {
@@ -29,7 +29,7 @@
             "ACT",
             "360"
         ],
-        "current_value": "ACT",
+        "current_value": "360",
         "default_value": "ACT"
     },
     "Coupons per year": {
@@ -38,7 +38,7 @@
             "2/Y",
             "1/Y"
         ],
-        "key": "2/Y",
+        "current_value": "2/Y",
         "default_value": "2/Y"
     },
     "Yield to redemption": {
@@ -55,6 +55,8 @@
     },
     "Accrued interet": {
         "type": "compute",
-        "key": "AI"
+        "key": "AI",
+        "current_value": "",
+        "default_value": ""
     }
 }

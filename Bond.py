@@ -51,6 +51,36 @@ class Bond:
         if key_data["type"] == "switch":
             self.display2.setText(str(key_data["current_value"]))  # Show current value directly for "switch" type
             self.display1.setText("")
+        elif key_data["type"] == "date":
+            try:
+                day = key_data["current_value"]["day"]
+                month = key_data["current_value"]["month"]
+                year = key_data["current_value"]["year"]
+
+                # Check the date format setting
+                self.settings = Settings()
+                date_format = self.settings.read("Dates")
+
+                # Create a datetime object
+                date_obj = datetime(year, month, day)
+
+                # Format date based on the date format setting
+                if date_format == "US":
+                    # mm-dd-yyyy format
+                    formatted_date = date_obj.strftime("%m-%d-%Y")
+                elif date_format == "Eur":
+                    # dd-mm-yyyy format
+                    formatted_date = date_obj.strftime("%d-%m-%Y")
+                else:
+                    raise ValueError("Invalid date format setting")
+
+            except (KeyError, ValueError, TypeError) as e:
+                print("Error: Invalid date data.")
+                return "Error: Invalid date data."
+            
+            self.display2.setText(str(key_data["key"])) 
+            self.display1.setText(str(formatted_date))
+            
         else:
             self.display2.setText(str(key_data["key"])) 
             self.display1.setText(str(current_value))
@@ -76,10 +106,12 @@ class Bond:
             # Parse day, month, and year parts
             day_or_month, month_or_day_and_year = parts
             if dateformat == "US":
+                # Assume MM.DDYY or MM.DD format
                 mm = int(day_or_month)
                 dd = int(month_or_day_and_year[:2]) if len(month_or_day_and_year) >= 2 else 1
                 yy = int(month_or_day_and_year[2:]) if len(month_or_day_and_year) > 2 else 0
             elif dateformat == "Eur":
+                # Assume DD.MMYY or DD.MM format
                 dd = int(day_or_month)
                 mm = int(month_or_day_and_year[:2]) if len(month_or_day_and_year) >= 2 else 1
                 yy = int(month_or_day_and_year[2:]) if len(month_or_day_and_year) > 2 else 0
@@ -94,12 +126,11 @@ class Bond:
             else:
                 raise ValueError("Year out of valid range")
             
-            # Validate and format the date
-            date = datetime(year, mm, dd)
-            if dateformat == "US":
-                return date.strftime("%m-%d-%Y")
-            elif dateformat == "Eur":
-                return date.strftime("%d-%m-%Y")
+            # Validate the date
+            date = datetime(year, mm, dd)  # This will raise an error if the date is invalid
+            
+            # Return the date in the new format (dictionary with day, month, year keys)
+            return {"day": dd, "month": mm, "year": year}
         
         except (ValueError, IndexError):
             return "Error: Invalid date input"
@@ -123,13 +154,17 @@ class Bond:
                 print("Error: Invalid number format.")
                 return "Error: Invalid number format."
 
-        elif key_data["type"] == "enterdate":
+        elif key_data["type"] == "date":
             # Use convert_date method for date conversion
             converted_date = self.convert_date(new_value)
             if "Error" in converted_date:
                 print("Error: Invalid date format.")
                 return "Error: Invalid date format."
-            key_data["current_value"] = converted_date
+            
+            # Extract day, month, and year from converted_date and store them in current_value
+            key_data["current_value"]["day"] = int(converted_date["day"])
+            key_data["current_value"]["month"] = int(converted_date["month"])
+            key_data["current_value"]["year"] = int(converted_date["year"])
             
         self.data[current_key] = key_data
         self.save_bond()
@@ -269,9 +304,6 @@ class Compute:
                 return f"Error: {e}"
             
             
-            
-            
-compute = Compute()
 
 
        

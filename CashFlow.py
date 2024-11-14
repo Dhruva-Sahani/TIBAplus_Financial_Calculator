@@ -80,7 +80,7 @@ class CashFlow:
         # If current key is F type, apply conditions for decimal and negative values
         if current_key.startswith('F'):
             try:
-                new_value = int(new_value)
+                new_value = float(new_value)
                 if new_value < 0:
                     print("Negative values are not allowed for F type keys.")
                     return
@@ -91,7 +91,7 @@ class CashFlow:
         else:
             # Update the current value of C type keys
             try:
-                new_value = int(new_value)
+                new_value = float(new_value)
             except ValueError:
                 print("Invalid input. Please enter a valid number.")
                 return
@@ -102,7 +102,7 @@ class CashFlow:
                 self.cashflows[frequency_key]["current_value"] = 1
 
         # Update the current value of the key
-        self.cashflows[current_key]["current_value"] = int(new_value)
+        self.cashflows[current_key]["current_value"] = float(new_value)
         
         # Update display1 and display2
         self.display1.setText(str(new_value))  # Show the new value in display1

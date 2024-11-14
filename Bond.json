@@ -1,9 +1,17 @@
 {
     "Settlement date": {
-        "type": "enterdate",
+        "type": "date",
         "key": "SDT",
-        "current_value": "12-06-2006",
-        "default_value": "12-31-1990"
+        "current_value": {
+            "day": 15,
+            "month": 2,
+            "year": 2001
+        },
+        "default_value": {
+            "day": 31,
+            "month": 12,
+            "year": 1990
+        }
     },
     "Annual coupon rate %": {
         "type": "enter",
@@ -12,10 +20,18 @@
         "default_value": 0.0
     },
     "Redemption date": {
-        "type": "enterdate",
+        "type": "date",
         "key": "RDT",
-        "current_value": "12-31-2006",
-        "default_value": "12-31-1990"
+        "current_value": {
+            "day": 12,
+            "month": 6,
+            "year": 2006
+        },
+        "default_value": {
+            "day": 31,
+            "month": 12,
+            "year": 1990
+        }
     },
     "Redemption value": {
         "type": "enter",

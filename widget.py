@@ -101,7 +101,7 @@ class Widget(QWidget):
         self.ui.cashflow.clicked.connect(lambda: self.cashflow_clicked())
         self.ui.netpresentvalue.clicked.connect(lambda: self.netpresentvalue_clicked())
         self.ui.internalratereturn.clicked.connect(lambda: self.internalratereturn_clicked())
-
+        #endregion
     """ Slots for all the buttons are defined below. """
     """ Functions are named and categorised according to the primary action of the buttons """
     """ Buttons without a second functions and similar funcionality may have a mutual functions."""  
@@ -375,6 +375,7 @@ class Widget(QWidget):
             if self.worksheetflag != None:
                 self.worksheetflag.enter(self.thenumber)
                 self.operator.new_number = True
+                self.operator.decimal_added = False
             
     def compute_clicked(self):
         if self.secondflag:
@@ -397,7 +398,7 @@ class Widget(QWidget):
         
     def store_clicked(self):
         self.memory.store_active()
-        
+    #endregion   
     
     #region timevalueofmoney
     def period_clicked(self):

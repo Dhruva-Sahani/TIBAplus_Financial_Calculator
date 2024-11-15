@@ -19,7 +19,7 @@
             "",
             ""
         ],
-        "current_value": "DEG",
+        "current_value": "RAD",
         "default_value": "DEG"
     },
     "Dates": {

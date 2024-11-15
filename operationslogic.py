@@ -231,10 +231,13 @@ class OperationsLogic:
         elif instant_operator == "rand":
             self.current_value = str(random.uniform(0, 1))
         elif instant_operator == "factorial":
-            if float(self.current_value)>= 0 and float(self.current_value)<=69:
-                self.current_value = str(math.factorial(float(self.current_value)))
-            else:
-                self.current_value = "Error 2    "   
+            try:
+                if float(self.current_value)>= 0 and float(self.current_value)<=69:
+                    self.current_value = str(math.factorial(int(self.current_value)))
+                else:
+                    self.current_value = "Error 2    "
+            except ValueError: 
+                self.current_value = "Error 2    "
         else:
             try:
                 self.current_value = str(eval("{num}{op}".format(num=self.current_value, op=instant_operator)))

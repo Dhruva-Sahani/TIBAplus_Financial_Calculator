@@ -242,7 +242,7 @@ class Compute:
             print(f"Error: Missing key in JSON data: {e}")
 
 
-    def daycount(self):
+    def daycount(self, day1, day2):
         """Calculate the number of days between the settlement date and redemption date."""
         
         # Get date format setting
@@ -260,15 +260,15 @@ class Compute:
         if self.DCM == "ACT":
             try:
                 # Convert SDT and RDT strings to datetime objects
-                settlement_date = datetime.strptime(self.SDT, date_format_str)
-                redemption_date = datetime.strptime(self.RDT, date_format_str)
+                date1 = datetime.strptime(day1, date_format_str)
+                date2 = datetime.strptime(day2, date_format_str)
                 
                 # Check that the redemption date is not before the settlement date
-                if redemption_date <= settlement_date:
+                if date2 <= date1:
                     raise ValueError("Error: Redemption date cannot be before or on the settlement date.")
                 
                 # Calculate the number of days (excluding redemption date)
-                days_between = (redemption_date - settlement_date).days
+                days_between = (date2 - date1).days
 
                 print(f"Days between settlement and redemption: {days_between}")
                 return days_between
@@ -280,12 +280,12 @@ class Compute:
         elif self.DCM == "360":
             try:
                 # Convert SDT and RDT strings to datetime objects
-                settlement_date = datetime.strptime(self.SDT, date_format_str)
-                redemption_date = datetime.strptime(self.RDT, date_format_str)
+                date1 = datetime.strptime(day1, date_format_str)
+                date2 = datetime.strptime(day2, date_format_str)
                 
                 # Extract year, month, and day components
-                Y1, M1, DT1 = settlement_date.year, settlement_date.month, settlement_date.day
-                Y2, M2, DT2 = redemption_date.year, redemption_date.month, redemption_date.day
+                Y1, M1, DT1 = date1.year, date1.month, date1.day
+                Y2, M2, DT2 = date2.year, date2.month, date2.day
                 
                 # Apply day adjustment rules
                 if DT1 == 31:

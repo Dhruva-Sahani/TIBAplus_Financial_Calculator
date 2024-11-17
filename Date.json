@@ -1,0 +1,45 @@
+{
+    "Date1": {
+        "type": "dates",
+        "key": "DT1",
+        "current_value": {
+            "day": 11,
+            "month": 1,
+            "year": 2001
+        },
+        "default_value": {
+            "day": 31,
+            "month": 12,
+            "year": 1990
+        }
+    },
+    "Date2": {
+        "type": "dates",
+        "key": "DT2",
+        "current_value": {
+            "day": 21,
+            "month": 5,
+            "year": 2009
+        },
+        "default_value": {
+            "day": 31,
+            "month": 12,
+            "year": 1990
+        }
+    },
+    "DayBetweenDate": {
+        "type": "entercompute",
+        "key": "DBD",
+        "current_value": 3010,
+        "default_value": 0.0
+    },
+    "Day count method": {
+        "type": "switch",
+        "options": [
+            "ACT",
+            "360"
+        ],
+        "current_value": "360",
+        "default_value": "ACT"
+    }
+}

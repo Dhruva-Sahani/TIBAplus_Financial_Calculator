@@ -2,6 +2,7 @@ import json
 from Settings import Settings
 from datetime import datetime
 
+
 class Bond:
     def __init__(self, display1, display2 ):
         self.filename = "Bond.json"
@@ -10,9 +11,9 @@ class Bond:
         self.current_index = 0
         self.keys = []
         self.data = {}  # Dictionary to hold Bond data
-        self.load_bond()
+        self.load()
         
-    def load_bond(self):
+    def load(self):
         """Load data from Bond.json."""
         try:
             with open(self.filename, 'r') as file:
@@ -23,7 +24,7 @@ class Bond:
         except json.JSONDecodeError:
             print("Error decoding JSON. Please check the file format.")
     
-    def save_bond(self):
+    def save(self):
         """Save current data to Bond.json."""
         try:
             with open(self.filename, 'w') as file:
@@ -167,7 +168,7 @@ class Bond:
             key_data["current_value"]["year"] = int(converted_date["year"])
             
         self.data[current_key] = key_data
-        self.save_bond()
+        self.save()
         self.display_current_key()
         
         
@@ -190,7 +191,7 @@ class Bond:
                 key_data["current_value"] = options[next_index]  # Update key to the next option
 
             # Save the updated data and refresh the display
-            self.save_bond()
+            self.save()
             self.display_current_key()
             
             
@@ -222,17 +223,31 @@ class Compute:
 
             # Map JSON keys to the short variable names
             self.SDT = data["Settlement date"]["current_value"]
-            self.CPN = data["Annual coupon rate %"]["current_value"]
+            self.R = data["Annual coupon rate %"]["current_value"] / 100.0
             self.RDT = data["Redemption date"]["current_value"]
             self.RV = data["Redemption value"]["current_value"]
             self.DCM = data["Day count method"]["current_value"]
             self.CPY = data["Coupons per year"]["current_value"]
-            self.YLD = data["Yield to redemption"]["current_value"]
+            self.Y = data["Yield to redemption"]["current_value"] / 100.0
             self.PRI = data["Dollar price"]["current_value"]
             self.AI = data["Accrued interet"]["current_value"]
-            self.Day = self.daycount()
-
+            
+            #Variables for formulas
+            self.M = float(self.CPY[0])
+            self.DSR = self.daycount(self.SDT, self.RDT)
+            self.P1, self.P2 = self.coupon_dates()
+            self.E = self.daycount(self.P1, self.P2)
+            self.A = self.daycount(self.P1, self.SDT)
+            
+            
+            
             print("Bond data loaded into Compute class variables successfully.")
+            print(self.SDT)
+            print(self.RDT)
+            print(self.P1)
+            print(self.P2)
+            print(self.DSR)
+            print(self.A)
         
         except FileNotFoundError:
             print(f"Error: File {self.filename} not found.")
@@ -241,69 +256,182 @@ class Compute:
         except KeyError as e:
             print(f"Error: Missing key in JSON data: {e}")
 
+    def save_bond_data(self):
+        """
+        Save bond data back to the Bond.json file.
+        """
+        # Create a dictionary structure to match the JSON format
+        bond_data = {
+            "Settlement date": {"current_value": self.SDT},
+            "Annual coupon rate %": {"current_value": self.R * 100.0},  # Convert back to percentage
+            "Redemption date": {"current_value": self.RDT},
+            "Redemption value": {"current_value": self.RV},
+            "Day count method": {"current_value": self.DCM},
+            "Coupons per year": {"current_value": self.CPY},
+            "Yield to redemption": {"current_value": self.Y * 100.0},  # Convert back to percentage
+            "Dollar price": {"current_value": self.PRI},
+            "Accrued interet": {"current_value": self.AI},
+        }
 
-    def daycount(self, day1, day2):
-        """Calculate the number of days between the settlement date and redemption date."""
+        # Define the JSON file path
+        file_path = "Bond.json"
+
+        try:
+            # Open the file and save the updated data
+            with open(file_path, "w") as json_file:
+                json.dump(bond_data, json_file, indent=4)
+            print(f"Bond data successfully saved to {file_path}.")
+        except Exception as e:
+            print(f"Error saving bond data: {e}")
+
+    def daycount(self, day1_data, day2_data):
+        """Calculate the number of days between the settlement date and redemption date using the structured JSON format."""
         
-        # Get date format setting
-        self.settings = Settings()
-        date_format = self.settings.read("Dates")
+        # # Get date format setting
+        # self.settings = Settings()
+        # date_format = self.settings.read("Dates")
         
-        # Choose date parsing format based on date_format setting
-        if date_format == "US":
-            date_format_str = "%m-%d-%Y"  # mm-dd-yyyy
-        elif date_format == "Eur":
-            date_format_str = "%d-%m-%Y"  # dd-mm-yyyy
-        else:
-            raise ValueError("Error: Unsupported date format setting.")
+        # # Choose date output format based on date_format setting (for display purposes)
+        # if date_format == "US":
+        #     date_format_str = "%m-%d-%Y"  # mm-dd-yyyy
+        # elif date_format == "Eur":
+        #     date_format_str = "%d-%m-%Y"  # dd-mm-yyyy
+        # else:
+        #     raise ValueError("Error: Unsupported date format setting.")
         
-        if self.DCM == "ACT":
-            try:
-                # Convert SDT and RDT strings to datetime objects
-                date1 = datetime.strptime(day1, date_format_str)
-                date2 = datetime.strptime(day2, date_format_str)
-                
+        try:
+            # Extract day, month, and year from the JSON format for both dates
+            day1 = day1_data["day"]
+            month1 = day1_data["month"]
+            year1 = day1_data["year"]
+            
+            day2 = day2_data["day"]
+            month2 = day2_data["month"]
+            year2 = day2_data["year"]
+            
+            # Create datetime objects from the extracted values
+            date1 = datetime(year1, month1, day1)
+            date2 = datetime(year2, month2, day2)
+            
+            # Check if we are using the "ACT" or "360" day count convention
+            if self.DCM == "ACT":
                 # Check that the redemption date is not before the settlement date
                 if date2 <= date1:
                     raise ValueError("Error: Redemption date cannot be before or on the settlement date.")
                 
                 # Calculate the number of days (excluding redemption date)
                 days_between = (date2 - date1).days
-
                 print(f"Days between settlement and redemption: {days_between}")
                 return days_between
 
-            except ValueError as e:
-                print(f"Error: {e}")
-                return f"Error: {e}"
-            
-        elif self.DCM == "360":
-            try:
-                # Convert SDT and RDT strings to datetime objects
-                date1 = datetime.strptime(day1, date_format_str)
-                date2 = datetime.strptime(day2, date_format_str)
-                
-                # Extract year, month, and day components
+            elif self.DCM == "360":
+                # Extract year, month, and day components for 30/360 convention calculation
                 Y1, M1, DT1 = date1.year, date1.month, date1.day
                 Y2, M2, DT2 = date2.year, date2.month, date2.day
                 
-                # Apply day adjustment rules
+                # Apply day adjustment rules according to the 30/360 convention
                 if DT1 == 31:
                     DT1 = 30
                 if DT2 == 31 and (DT1 == 30 or DT1 == 31):
                     DT2 = 30
                 
-                # Calculate DBD using the 30/360 convention
+                # Calculate days between using the 30/360 convention
                 days_between = (Y2 - Y1) * 360 + (M2 - M1) * 30 + (DT2 - DT1)
-                
                 print(f"Days between (30/360 convention): {days_between}")
                 return days_between
 
-            except ValueError as e:
-                print(f"Error: {e}")
-                return f"Error: {e}"
+        except (ValueError, KeyError) as e:
+            print(f"Error: {e}")
+            return f"Error: {e}"
+        
+        
+    def coupon_dates(self):
+        """
+        Identify the coupon dates just before and after the settlement date (SDT).
+        The coupon dates are calculated based on the day and month of RDT, with years assigned to ensure SDT falls between them.
+
+        :return: Dictionary containing `coupon1` and `coupon2` with their respective `day`, `month`, and `year`.
+        """
+        # Extract SDT and RDT information
+        sdt_day = self.SDT["day"]
+        sdt_month = self.SDT["month"]
+        sdt_year = self.SDT["year"]
+        rdt_day = self.RDT["day"]
+        rdt_month = self.RDT["month"]
+
+        # Determine the two coupon months based on CPY
+        if self.CPY == "1/Y":
+            # Both coupon dates have the same day and month as RDT
+            coupon_months = [rdt_month, rdt_month]
+        elif self.CPY == "2/Y":
+            # One coupon date is 6 months apart from the other
+            other_month = (rdt_month + 6 - 1) % 12 + 1  # Ensure month stays in range 1-12
+            coupon_months = sorted([rdt_month, other_month])  # Ensure chronological order
+
+        # Define the coupon dates (only day and month for now)
+        coupons = [{"day": rdt_day, "month": month} for month in coupon_months]
+
+        # Logic for year assignment
+        for coupon in coupons:
+            coupon["year"] = sdt_year  # Initialize with SDT's year
+
+        if self.CPY == "2/Y":
+            # Case 1: Both coupons are larger than SDT
+            if all((coupon["month"], coupon["day"]) > (sdt_month, sdt_day) for coupon in coupons):
+                coupons[0]["year"] = sdt_year  # Smaller one gets SDT's year
+                coupons[1]["year"] = sdt_year - 1  # Larger one gets previous year
+            # Case 2: Both coupons are smaller than SDT
+            elif all((coupon["month"], coupon["day"]) < (sdt_month, sdt_day) for coupon in coupons):
+                coupons[0]["year"] = sdt_year + 1  # Smaller one gets next year
+                coupons[1]["year"] = sdt_year  # Larger one gets SDT's year
+            # Case 3: One coupon is smaller and one larger than SDT
+            else:
+                if (coupons[0]["month"], coupons[0]["day"]) == (sdt_month, sdt_day):
+                    coupons[0]["year"] = sdt_year
+                    coupons[1]["year"] = sdt_year
+                elif (coupons[1]["month"], coupons[1]["day"]) == (sdt_month, sdt_day):
+                    coupons[0]["year"] = sdt_year + 1
+                    coupons[1]["year"] = sdt_year
+
+        elif self.CPY == "1/Y":
+            # Both coupons are the same; only one needs year adjustment
+            if (rdt_month, rdt_day) > (sdt_month, sdt_day):
+                coupons[0]["year"] = sdt_year  # One gets SDT's year
+                coupons[1]["year"] = sdt_year - 1  # Other gets previous year
+            else:
+                coupons[0]["year"] = sdt_year + 1  # One gets next year
+                coupons[1]["year"] = sdt_year  # Other gets SDT's year
+
+        # Sort coupons into `coupon1` (before) and `coupon2` (after)
+        coupons = sorted(coupons, key=lambda x: (x["year"], x["month"], x["day"]))
+        coupon1 = {"day": coupons[0]["day"], "month": coupons[0]["month"], "year": coupons[0]["year"]}
+        coupon2 = {"day": coupons[1]["day"], "month": coupons[1]["month"], "year": coupons[1]["year"]}
+
+        # Return the results
+        return coupon1,  coupon2
+    
+    def calculate_PRI(self):
+        if self.DSR <= self.E:
+            """
+            Calculate PRI using the provided formula and variables.
             
+            Formula:
+            PRI = [ (RV + 100 * R / M) / (1 + (DOY / B) * Y / M) ] - [ (A / B) * (100 * R / M) ]
+            """
+            # First term of the formula
+            first_term = (
+                (self.RV + (100 * self.R / self.M))
+                / (1 + (self.DSR / self.E) * (self.Y / self.M))
+            )
+
+            # Second term of the formula
+            second_term = (self.A / self.E) * (100 * self.R / self.M)
+
+            # Final PRI calculation
+            self.PRI = first_term - second_term
+    
+                
             
 
 
-       
+# calculate = Compute()

@@ -34,3 +34,11 @@ This project is currently in the development stage. However, you can still test 
    ```bash
    git clone <repository_url>
    cd financial_calculator
+
+2. **Install required Python Libraries:**  
+   ```bash
+   pip install -r requirements.txt
+
+3. **Run the application:**  
+   ```bash
+   python widget.py

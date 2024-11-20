@@ -45,7 +45,7 @@
             "1,000",
             "1.000"
         ],
-        "current_value": "US",
+        "current_value": "Eur",
         "default_value": "US"
     },
     "Calculation_method": {
@@ -58,7 +58,7 @@
             "",
             ""
         ],
-        "current_value": "Chn",
+        "current_value": "AoS",
         "default_value": "Chn"
     }
 }

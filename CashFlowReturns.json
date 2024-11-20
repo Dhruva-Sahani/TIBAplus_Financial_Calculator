@@ -8,13 +8,13 @@
     "NPV": {
         "key": "NPV",
         "type": "compute",
-        "current_value": -59.41043083900227,
+        "current_value": -30.839002267573697,
         "default_value": 0
     },
     "IRR": {
         "key": "IRR",
         "type": "compute",
-        "current_value": -19.098300562505255,
+        "current_value": -15.692966918274648,
         "default_value": 0
     }
 }

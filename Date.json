@@ -17,9 +17,9 @@
         "type": "dates",
         "key": "DT2",
         "current_value": {
-            "day": 21,
-            "month": 5,
-            "year": 2009
+            "day": 31,
+            "month": 1,
+            "year": 2001
         },
         "default_value": {
             "day": 31,
@@ -30,7 +30,7 @@
     "DayBetweenDate": {
         "type": "entercompute",
         "key": "DBD",
-        "current_value": 3010,
+        "current_value": 20.0,
         "default_value": 0.0
     },
     "Day count method": {

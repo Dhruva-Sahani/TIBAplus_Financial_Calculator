@@ -1,20 +1,20 @@
 {
-    "NominalRate":{
+    "NominalRate": {
         "type": "entercompute",
         "key": "NOM",
         "current_value": 0.0,
         "default_value": 0.0
     },
-    "EffectiveRate":{
+    "EffectiveRate": {
         "type": "entercompute",
         "key": "EFF",
         "current_value": 0.0,
         "default_value": 0.0
     },
-    "Periods":{
+    "Periods": {
         "type": "enter",
         "key": "C/Y",
-        "current_value": 0.0,
-        "default_value": 0.0
+        "current_value": 2.0,
+        "default_value": 1.0
     }
 }

@@ -1,8 +1,9 @@
 import json
+import math
 
-class Profit:
+class PercentChange:
     def __init__(self, display1, display2):
-        self.file_path = "Profit.json"
+        self.file_path = "PercentChange.json"
         self.display1 = display1
         self.display2 = display2
         self.current_index = 0
@@ -16,7 +17,7 @@ class Profit:
                 self.data = json.load(file)
                 self.keys = list(self.data.keys())
         except FileNotFoundError:
-            print("Profit worksheet file not found. Initializing with empty data.")
+            print("PercentChange worksheet file not found. Initializing with empty data.")
             self.data = {}
         except json.JSONDecodeError:
             print("Error decoding JSON. Initializing with empty data.")
@@ -24,7 +25,7 @@ class Profit:
 
     def save(self):
         """
-        Save the current Profit worksheet data to the JSON file.
+        Save the current PercentChange worksheet data to the JSON file.
         """
         try:
             with open(self.file_path, 'w') as file:
@@ -40,7 +41,6 @@ class Profit:
         self.display1.setText(str(key_data["current_value"]))
         self.display2.setText(str(key_data["key"])) 
         
-
     def move_up(self):
         """Move up to the previous bond key in a loop."""
         self.current_index = (self.current_index - 1) % len(self.keys)
@@ -57,11 +57,10 @@ class Profit:
         self.save()
         self.display_current_key()
         
-    def profit(self):
+    def percentchange(self):
         self.current_index = 0
         self.display_current_key()
         
-    
     def calculate_instant(self):
         self.computation = Compute()
         current_key = self.keys[self.current_index]
@@ -76,47 +75,45 @@ class Profit:
         self.save()
         self.display_current_key()
         
-    
+        
+        
 class Compute:
-    def __init__ (self, file_path = "Profit.json"):
+    def __init__ (self, file_path = "PercentChange.json"):
         self.file_path = file_path
         self.data = {}
-        self.CST = None
-        self.SEL = None
-        self.MAR = None
+        self.OLD = None
+        self.NEW = None
+        self.CH = None
+        self.PD = None
         self.load_and_set_variables()
-        
         
     def load_and_set_variables(self):
         try:
              with open(self.file_path, 'r') as file:
                 self.data = json.load(file)
-                self.CST = self.data['CostPrice']["current_value"]
-                self.SEL = self.data["SellingPrice"]["current_value"]
-                self.MAR = self.data["ProfitMargin"]["current_value"]
+                self.OLD = self.data['OldValue']["current_value"]
+                self.NEW = self.data["NewValue"]["current_value"]
+                self.CH = self.data["PercentChange"]["current_value"]
+                self.PD = self.data["NumberOfPeriods"]["current_value"]
                 
         except FileNotFoundError:
             print(f"File {self.file_path} not found. Starting with default values.")
         except json.JSONDecodeError:
             print("Error decoding JSON. Check file format.")
             
-    def calculate_CostPrice(self):
-        self.CST = self.SEL * (1 - self.MAR / 100)
-        return self.CST
+    def calculate_OldValue(self):
+        self.OLD = self.NEW / (1 + self.CH / 100) ** self.PD
+        return self.OLD
+        
+    def calculate_NewValue(self):
+        self.NEW = self.OLD * (1 + self.CH / 100) ** self.PD
+        return self.NEW
     
-    def calculate_SellingPrice(self):
-        self.SEL = self.CST / (1 - self.MAR / 100)
-        return self.SEL
-    
-    def calculate_ProfitMargin(self):
-        self.MAR = ((self.SEL - self.CST) / self.SEL) * 100
-        return self.MAR
+    def calculate_PercentChange(self):
+        self.CH = ((self.NEW / self.OLD) ** (1 / self.PD) - 1) * 100
+        return self.CH
         
-        
-
-        
-        
-        
-        
-        
-        
+    def calculate_NumberOfPeriods(self):
+        self.PD = math.log(self.NEW / self.OLD) / math.log(1 + self.CH / 100)
+        return self.PD
+            

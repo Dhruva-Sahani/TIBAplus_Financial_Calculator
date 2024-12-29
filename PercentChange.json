@@ -1,0 +1,26 @@
+{
+    "OldValue": {
+        "type": "entercompute",
+        "key": "OLD",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "NewValue": {
+        "type": "entercompute",
+        "key": "NEW",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "PercentChange": {
+        "type": "entercompute",
+        "key": "%CH",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "NumberOfPeriods": {
+        "type": "entercompute",
+        "key": "#PD",
+        "current_value": 0.0,
+        "default_value": 0.0
+    }
+}

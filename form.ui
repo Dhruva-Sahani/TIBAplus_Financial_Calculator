@@ -3061,6 +3061,9 @@ background-color: #706f6f;
    <property name="alignment">
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLineEdit" name="screenletter">
    <property name="geometry">
@@ -3091,6 +3094,9 @@ background-color: #706f6f;
    </property>
    <property name="text">
     <string>asd=</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLineEdit" name="screensetting">
@@ -3124,6 +3130,9 @@ background-color: #706f6f;
    </property>
    <property name="text">
     <string>12345678901234567890123456789012345678901234567890</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

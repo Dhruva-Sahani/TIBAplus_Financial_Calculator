@@ -64,10 +64,14 @@ class PercentChange:
     def calculate_instant(self):
         self.computation = Compute()
         current_key = self.keys[self.current_index]
-        calculate_function = getattr(self.computation, f"calculate_{current_key}")
-        self.data[current_key]["current_value"] = calculate_function()
-        self.save()
-        self.display_current_key()  
+        if self.data["NumberOfPeriods"]["current_value"] == 0:
+            self.display1.setText("Error 1    ")
+            self.display2.setText("")
+        else:
+            calculate_function = getattr(self.computation, f"calculate_{current_key}")
+            self.data[current_key]["current_value"] = calculate_function()
+            self.save()
+            self.display_current_key()  
         
     def clear_work(self, Null):
         for key in self.data:

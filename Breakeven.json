@@ -1,0 +1,32 @@
+{
+    "FixedCost": {
+        "type": "entercompute",
+        "key": "FC",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "VariableCostPU": {
+        "type": "entercompute",
+        "key": "VC",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "UnitPrice": {
+        "type": "entercompute",
+        "key": "P",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "Profit": {
+        "type": "entercompute",
+        "key": "PFT",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "Quantity": {
+        "type": "entercompute",
+        "key": "Q",
+        "current_value": 0.0,
+        "default_value": 0.0
+    }
+}

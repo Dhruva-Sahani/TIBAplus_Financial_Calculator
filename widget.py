@@ -20,6 +20,7 @@ from Date import Date
 from InterestConversion import InterestConversion
 from Profit import Profit
 from PercentChange import PercentChange
+from Breakeven import Breakeven
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -38,6 +39,7 @@ class Widget(QWidget):
         self.interestconversion = InterestConversion(self.ui.screennumber, self.ui.screenletter)
         self.profit = Profit(self.ui.screennumber, self.ui.screenletter)
         self.percentchange = PercentChange(self.ui.screennumber, self.ui.screenletter)
+        self.breakeven = Breakeven(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
         self.activekeyclass = None
@@ -192,7 +194,11 @@ class Widget(QWidget):
             self.display2clear()
         
     def number6_clicked(self):
-        if self.memory.recall_flag:
+        if self.secondflag:
+            self.breakeven.breakeven()
+            self.worksheetflag = self.breakeven
+            self.secondflag = False
+        elif self.memory.recall_flag:
             self.memory.recall_num(self.operator, 6)
         elif self.memory.store_flag:
             self.memory.store_num(self.operator.current_number_value, 6)

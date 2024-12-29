@@ -18,6 +18,7 @@ from Memory import Memory
 from Bond import Bond
 from Date import Date
 from InterestConversion import InterestConversion
+from Profit import Profit
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -34,6 +35,7 @@ class Widget(QWidget):
         self.bond = Bond(self.ui.screennumber, self.ui.screenletter)
         self.date = Date(self.ui.screennumber, self.ui.screenletter)
         self.interestconversion = InterestConversion(self.ui.screennumber, self.ui.screenletter)
+        self.profit = Profit(self.ui.screennumber, self.ui.screenletter)
         self.worksheetflag = None
         self.secondflag = False
         self.activekeyclass = None
@@ -59,7 +61,7 @@ class Widget(QWidget):
         self.ui.backspace.clicked.connect(lambda: self.backspace_clicked())
         #endregion
         
-        #region operator buttons routing
+        #region Operator buttons routing
         self.ui.addition.clicked.connect(lambda: self.addition_clicked())
         self.ui.subtraction.clicked.connect(lambda: self.subtraction_clicked())
         self.ui.multiplication.clicked.connect(lambda: self.multiplication_clicked())
@@ -93,7 +95,7 @@ class Widget(QWidget):
         self.ui.store.clicked.connect(lambda: self.store_clicked())
         #endregion
         
-        #region time value of money buttons routing
+        #region Time Value of Money buttons routing
         self.ui.period.clicked.connect(lambda: self.period_clicked())
         self.ui.interestrate.clicked.connect(lambda: self.interestrate_clicked())
         self.ui.presentvalue.clicked.connect(lambda: self.presentvalue_clicked())
@@ -101,7 +103,7 @@ class Widget(QWidget):
         self.ui.futurevalue.clicked.connect(lambda: self.futurevalue_clicked())
         #endregion
         
-        #region cashflow buttons routing
+        #region Cashflow buttons routing
         self.ui.cashflow.clicked.connect(lambda: self.cashflow_clicked())
         self.ui.netpresentvalue.clicked.connect(lambda: self.netpresentvalue_clicked())
         self.ui.internalratereturn.clicked.connect(lambda: self.internalratereturn_clicked())
@@ -109,7 +111,7 @@ class Widget(QWidget):
     """ Slots for all the buttons are defined below. """
     """ Functions are named and categorised according to the primary action of the buttons """
     """ Buttons without a second functions and similar funcionality may have a mutual functions."""  
-    
+            
     @Slot()
     
     #region number
@@ -153,7 +155,11 @@ class Widget(QWidget):
             self.display2clear()
         
     def number3_clicked(self):
-        if self.memory.recall_flag:
+        if self.secondflag:
+            self.profit.profit()
+            self.worksheetflag = self.profit
+            self.secondflag = False
+        elif self.memory.recall_flag:
             self.memory.recall_num(self.operator, 3)
         elif self.memory.store_flag:
             self.memory.store_num(self.operator.current_number_value, 3)

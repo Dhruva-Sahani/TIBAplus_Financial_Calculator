@@ -21,7 +21,6 @@ class Date:
             with open(self.file_path, 'r') as file:
                 self.data = json.load(file)
                 self.keys = list(self.data.keys())
-                print("Date worksheet data loaded successfully.")
         except FileNotFoundError:
             print("Date worksheet file not found. Initializing with empty data.")
             self.data = {}
@@ -36,7 +35,6 @@ class Date:
         try:
             with open(self.file_path, 'w') as file:
                 json.dump(self.data, file, indent=4)
-                print("Date worksheet data saved successfully.")
         except Exception as e:
             print(f"An error occurred while saving: {e}")
             

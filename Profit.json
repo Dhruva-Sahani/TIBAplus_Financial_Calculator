@@ -1,0 +1,20 @@
+{
+    "CostPrice": {
+        "type": "entercompute",
+        "key": "CST",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "SellingPrice": {
+        "type": "entercompute",
+        "key": "SEL",
+        "current_value": 0.0,
+        "default_value": 0.0
+    },
+    "ProfitMargin": {
+        "type": "entercompute",
+        "key": "MAR",
+        "current_value": 0.0,
+        "default_value": 0.0
+    }
+}

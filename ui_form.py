@@ -1475,6 +1475,7 @@ class Ui_Widget(object):
         font6.setFamilies([u"Digital-7 Mono"])
         font6.setBold(False)
         self.screennumber.setFont(font6)
+        self.screennumber.setFocusPolicy(Qt.StrongFocus)
         self.screennumber.setLayoutDirection(Qt.RightToLeft)
         self.screennumber.setStyleSheet(u"QLineEdit {  \n"
 "	border-right: 2px solid #f3f3e8;\n"
@@ -1487,6 +1488,7 @@ class Ui_Widget(object):
 "}")
         self.screennumber.setMaxLength(12)
         self.screennumber.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.screennumber.setReadOnly(True)
         self.screenletter = QLineEdit(Widget)
         self.screenletter.setObjectName(u"screenletter")
         self.screenletter.setGeometry(QRect(20, 69, 91, 51))
@@ -1500,6 +1502,7 @@ class Ui_Widget(object):
 "    color: #333333; \n"
 "	font-size: 40px;             \n"
 "}")
+        self.screenletter.setReadOnly(True)
         self.screensetting = QLineEdit(Widget)
         self.screensetting.setObjectName(u"screensetting")
         self.screensetting.setGeometry(QRect(20, 54, 331, 16))
@@ -1515,6 +1518,7 @@ class Ui_Widget(object):
 "    color: #333333; \n"
 "	font-size: 13px;         \n"
 "}")
+        self.screensetting.setReadOnly(True)
 
         self.retranslateUi(Widget)
 
